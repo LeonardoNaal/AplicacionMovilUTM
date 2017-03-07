@@ -37,7 +37,7 @@
             android:hint="Contraseña"
             android:textColor="#fff"
             android:ems="10"
-            android:id="@+id/editText" />
+            android:id="@+id/txtContraseña" />
 
         <Button
             android:id="@+id/btnIniciar"
