@@ -1,9 +1,11 @@
 package com.fsociety.linkutmbetty;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,7 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, PublicacionesFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,11 +81,17 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+        Fragment fragment = null;
+        Boolean fragmentSelect = false;
+
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
 
         } else if (id == R.id.nav_gallery) {
+            //Descomentar para que al hacer clic traiga el fragmento
+            //fragment = new PublicacionesFragment();
+            //fragmentSelect = true;
 
         } else if (id == R.id.nav_slideshow) {
 
@@ -96,9 +104,17 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_send) {
 
         }
+        //Sentencia para poder iniciar transición de fragments
+        //Recibe el contenedor a reemplazar y le pasa el fragment definido más arriba
+        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, fragment).commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

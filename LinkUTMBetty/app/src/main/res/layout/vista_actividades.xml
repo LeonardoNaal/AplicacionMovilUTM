@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:background="@drawable/side_nav_bar">
+
+    <TextView
+        android:id="@+id/lblNombre"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Nombre de la actividad"
+        android:layout_gravity="center"
+        android:textSize="20dp"
+        android:textColor="#fff"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/lblHoraInicio"
+            android:layout_marginLeft="30dp"
+            android:text="Hora inicio"
+            android:textStyle="italic"
+            android:textColor="#fff"
+            android:textSize="16dp"/>
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/lblHoraFin"
+            android:textStyle="italic"
+            android:layout_marginLeft="75dp"
+            android:text="Hora final"
+            android:textColor="#fff"
+            android:textSize="16dp"/>
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:id="@+id/lblContenido"
+        android:text="Descripción de la actividad"
+        android:textColor="#fff"
+        android:textSize="18dp"/>
+
+</LinearLayout>
