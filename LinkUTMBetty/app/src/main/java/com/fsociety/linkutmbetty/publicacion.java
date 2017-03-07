@@ -14,6 +14,25 @@ public class publicacion {
     protected String titulo;
     protected Bitmap photo;
     protected String data;
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    protected String fecha;
+    public String getContenido() {
+        return contenido;
+    }
+
+    public void setContenido(String contenido) {
+        this.contenido = contenido;
+    }
+
+    protected String contenido;
     public int getId() {
         return id;
     }

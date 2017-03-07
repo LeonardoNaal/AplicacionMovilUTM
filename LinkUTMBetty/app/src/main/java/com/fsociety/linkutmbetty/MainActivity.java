@@ -88,6 +88,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
+            fragment = new PublicacionesFragment();
+            fragmentSelect = true;
 
         } else if (id == R.id.nav_gallery) {
             //Descomentar para que al hacer clic traiga el fragmento

@@ -1,8 +1,10 @@
 package com.fsociety.linkutmbetty;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -68,7 +70,8 @@ public class UserMainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent intent = new Intent(UserMainActivity.this, LogInActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
@@ -79,10 +82,15 @@ public class UserMainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Fragment fragment = null;
+        Boolean fragmentSelect = false;
 
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+            fragment = new PublicacionesFragment();
+            fragmentSelect = true;
         } else if (id == R.id.nav_gallery) {
+            fragment = new ActividadesFragment();
+            fragmentSelect = true;
 
         } else if (id == R.id.nav_slideshow) {
 
@@ -93,6 +101,7 @@ public class UserMainActivity extends AppCompatActivity
         } else if (id == R.id.nav_send) {
 
         }
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_user_main, fragment).commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

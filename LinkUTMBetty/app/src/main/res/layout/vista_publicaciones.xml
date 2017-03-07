@@ -9,7 +9,6 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="140dp"
-        app:srcCompat="@drawable/usuario"
         android:layout_marginTop="10dp"
         android:id="@+id/imageView3" />
 
