@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class UserMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -22,6 +24,8 @@ public class UserMainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_main);
+        //Asignar matricula a textview
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -41,6 +45,15 @@ public class UserMainActivity extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View header =navigationView.getHeaderView(0);
+        //LayoutInflater.from(this).inflate(R.layout.nav_header_user_main, null);
+        TextView txtMatricula=(TextView)header.findViewById(R.id.txtMat);
+        Intent intent=getIntent();
+        Bundle extras =intent.getExtras();
+        if (extras != null) {//ver si contiene datos
+            String dato=(String)extras.get("Matricula");//Obtengo la matriculs
+            txtMatricula.setText(dato);
+        }
         navigationView.setNavigationItemSelectedListener(this);
     }
 

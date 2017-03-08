@@ -85,8 +85,8 @@ EditText edtUsuario,edtContraseña;
                 Log.e("salida",resultado);
                 if(Integer.parseInt(resultado)==1){
                     Toast.makeText(LogInActivity.this,"Bienvenido",Toast.LENGTH_SHORT).show();
-                    String Nombre=edtUsuario.getText().toString();
                     Intent intent = new Intent (LogInActivity.this, UserMainActivity.class);
+                    String Nombre=edtUsuario.getText().toString();
                     intent.putExtra("Matricula",Nombre);
                     startActivity(intent);
                 }
