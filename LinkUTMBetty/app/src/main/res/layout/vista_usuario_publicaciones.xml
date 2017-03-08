@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/lblTituloUsrPub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Título de la publicación"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/lblFechaPub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Fecha de publicación"
+        android:textStyle="italic"
+        android:gravity="center"/>
+
+    <ImageView
+        android:id="@+id/imgImagenPub"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/estandar2"/>
+    <TextView
+        android:id="@+id/lblContenidoPub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="Contenido de la publicación"
+        android:inputType="textMultiLine"/>
+</LinearLayout>
