@@ -26,7 +26,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LogInActivity" />
         <activity android:name=".AgregarPublicacion" />
-        <activity android:name=".GestionPublicaciones"></activity>
+        <activity android:name=".GestionPublicaciones" />
+        <activity android:name=".RegistroActivity"></activity>
     </application>
 
 </manifest>
