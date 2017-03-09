@@ -28,6 +28,7 @@
         <activity android:name=".AgregarPublicacion" />
         <activity android:name=".GestionPublicaciones" />
         <activity android:name=".ActividadPrueba"></activity>
+        <activity android:name=".RegistroActivity"></activity>
     </application>
 
 </manifest>
