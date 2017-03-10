@@ -34,9 +34,12 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
@@ -226,8 +229,8 @@ String matricula;
                     Bitmap bitmap = BitmapFactory.decodeFile(mPath);
                     int width = bitmap.getWidth();
                     int height = bitmap.getHeight();
-                    int newWidth =70;
-                    int newHeight =50;
+                    int newWidth =150;
+                    int newHeight =120;
 
                     // calculamos el escalado de la imagen destino
                     float scaleWidth = ((float) newWidth) / width;
@@ -243,12 +246,45 @@ String matricula;
                     break;
                 case SELECT_PICTURE:
                     Uri path = data.getData();
-                    imageView.setImageURI(path);
-                    break;
+                    InputStream is;
+                    try {
+                        is =getContentResolver().openInputStream(path);
+                        BufferedInputStream bis = new BufferedInputStream(is);
+                        Bitmap bit = BitmapFactory.decodeStream(bis);
 
+                        int wid = bit.getWidth();
+                        int hei = bit.getHeight();
+                        int newWi =150;
+                        int newHei =120;
+
+                        // calculamos el escalado de la imagen destino
+                        float scaleWid = ((float) newWi) / wid;
+                        float scaleHeig = ((float) newHei) / hei;
+
+                        // para poder manipular la imagen
+                        // debemos crear una matriz
+
+                        Matrix matri = new Matrix();
+                        // resize the Bitmap
+                        matri.postScale(scaleWid, scaleHeig);
+
+                        // volvemos a crear la imagen con los nuevos valores
+                        Bitmap resizedBitm = Bitmap.createBitmap(bit, 0, 0,wid, hei, matri, true);
+                        imageView.setImageBitmap(resizedBitm);
+
+                        //get the current timeStamp and strore that in the time Variable
+                        Long tsLong = System.currentTimeMillis() / 1000;
+                        timestamp = tsLong.toString();
+
+                        Toast.makeText(getApplicationContext(),timestamp,Toast.LENGTH_SHORT).show();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+            }
             }
         }
-    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
