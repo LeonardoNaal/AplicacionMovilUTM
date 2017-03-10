@@ -11,58 +11,63 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.fsociety.linkutmbetty.LogInActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="220dp"
-            app:srcCompat="@drawable/usuario"
-            android:id="@+id/imageView2" />
-
-        <EditText
-            android:id="@+id/txtMatricula"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Matrícula"
-            android:textColor="#fff"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:hint="Contraseña"
-            android:textColor="#fff"
-            android:ems="10"
-            android:id="@+id/txtContraseña" />
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btnIniciar"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="85dp"
-            android:layout_marginRight="85dp"
-            android:text="Iniciar"
-            android:textColor="#fff"
-            android:textSize="20sp"
-            android:backgroundTint="@color/colorAccent"
-            android:textAllCaps="false"/>
 
-        <Button
-            android:text="Crear cuenta"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="85dp"
-            android:layout_marginRight="85dp"
-            android:id="@+id/btnRegistro"
-            android:textAllCaps="false"
-            android:textSize="18sp"
-            android:textColor="@color/colorAccent"
-            style="@style/Widget.AppCompat.Button.Borderless" />
-    </LinearLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                app:srcCompat="@drawable/usuario"
+                android:contentDescription="@string/iniciar_Sesion"
+                android:id="@+id/imageView2" />
 
+            <EditText
+                android:id="@+id/txtMatricula"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/matricula"
+                android:textColor="@color/colorPrimary"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="@string/contraseña"
+                android:textColor="@color/colorPrimary"
+                android:ems="10"
+                android:id="@+id/txtContraseña" />
+
+            <Button
+                android:id="@+id/btnIniciar"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="85dp"
+                android:layout_marginRight="85dp"
+                android:text="@string/btn_iniciar"
+                android:textColor="#fff"
+                android:textSize="20sp"
+                android:backgroundTint="@color/colorAccent"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:text="@string/btn_cancelar"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="85dp"
+                android:layout_marginRight="85dp"
+                android:id="@+id/btnRegistro"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                android:textColor="@color/colorAccent"
+                style="@style/Widget.AppCompat.Button.Borderless" />
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

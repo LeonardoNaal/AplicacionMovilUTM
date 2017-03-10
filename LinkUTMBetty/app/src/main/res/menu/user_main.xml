@@ -4,6 +4,6 @@
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:title="Cerrar sesión"
+        android:title="@string/cerrar_Sesion"
         app:showAsAction="never" />
 </menu>

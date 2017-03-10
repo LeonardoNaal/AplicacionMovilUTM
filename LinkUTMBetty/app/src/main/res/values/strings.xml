@@ -9,4 +9,15 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Valores para los menús superiores derechos -->
+    <string name="iniciar_Sesion">Iniciar sesión</string>
+    <string name="cerrar_Sesion">Cerrar sesión</string>
+
+    <!-- Valores para la sección de LogIn -->
+    <string name="matricula">Matrícula</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="btn_iniciar">Iniciar</string>
+    <string name="btn_cancelar">Cancelar</string>
+    <string name="content_img">Iniciar sesión</string>
 </resources>
