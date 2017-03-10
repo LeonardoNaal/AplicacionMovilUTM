@@ -175,7 +175,7 @@ public class ActividadesFragment extends Fragment {
         //Referencia al listView que está en fragment_actividades
         listaAct = (ListView) view.findViewById(R.id.lsvListaAct);
         String action="TopTenActividades";
-        String Url="http://192.168.200.2:8091/WebService.asmx/";
+        String Url="http://fsociety.somee.com/WebService.asmx/";
         String UrlWeb=Url+action;
         new JSONTask().execute(UrlWeb);
         /*

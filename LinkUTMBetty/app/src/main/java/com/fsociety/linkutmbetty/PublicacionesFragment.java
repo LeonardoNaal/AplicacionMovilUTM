@@ -56,7 +56,7 @@ public class PublicacionesFragment extends Fragment {
         //Referencia al listView que está en fragmentPublicaciones
         listaPub = (ListView) view.findViewById(R.id.lsvListaPub);
         String action="TopTenPublicaciones";
-        String Url="http://192.168.200.2:8091/WebService.asmx/";
+        String Url="http://fsociety.somee.com/WebService.asmx/";
         String UrlWeb=Url+action;
         new JSONTask().execute(UrlWeb);
         return view;

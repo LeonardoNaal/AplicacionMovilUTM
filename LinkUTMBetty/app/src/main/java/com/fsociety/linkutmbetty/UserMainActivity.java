@@ -92,7 +92,7 @@ public class UserMainActivity extends AppCompatActivity
             txtMatricula.setText(dato);
         }
         String action="BuscarPublicacionUsuario";
-        String Url="http://192.168.200.2:8091/WebService.asmx/";
+        String Url="http://fsociety.somee.com/WebService.asmx/";
         String UrlWeb=Url+action+"?CodigoUsuario="+txtMatricula.getText().toString();
         new JSONTask().execute(UrlWeb);
 

@@ -63,7 +63,7 @@ public class ActividadPrueba extends AppCompatActivity  {
 
     EditText txtTitulo,txtContenido;
     public int idTipoSeleccionado;
-    public String SERVER = "http://192.168.200.2:8091/WebService.asmx/agregarPublicacion?",
+    public String SERVER = "http://fsociety.somee.com/WebService.asmx/agregarPublicacion?",
             timestamp;
     private static final String TAG = AgregarPublicacion.class.getSimpleName();
     Spinner spn1;

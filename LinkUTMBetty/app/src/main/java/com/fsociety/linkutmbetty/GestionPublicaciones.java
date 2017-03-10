@@ -69,7 +69,7 @@ public class GestionPublicaciones extends AppCompatActivity {
             public void onClick(View v) {
                 //Al finalizar este método debe regresar a UserMainActivity
                 String action="BuscarPublicacionUsuario";
-                String Url="http://192.168.200.2:8091/WebService.asmx/";
+                String Url="http://fsociety.somee.com/WebService.asmx/";
                 String UrlWeb=Url+action+"?idPublicacion="+idPublicacion+"&codUser="+codUser+"&tit="+txtTitulo.getText().toString()+"&contenido="+txtContenido.getText().toString();
                 new JSONTask().execute(UrlWeb);
             }
@@ -81,7 +81,7 @@ public class GestionPublicaciones extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String action="EliminarPublicaciones";
-                String Url="http://192.168.200.2:8091/WebService.asmx/";
+                String Url="http://fsociety.somee.com/WebService.asmx/";
                 String UrlWeb=Url+action+"?idPublicacion="+idPublicacion;
                 new JSONTask().execute(UrlWeb);
                 //Al finalizar este método debe regresar a UserMainActivity
