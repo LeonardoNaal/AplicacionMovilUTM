@@ -8,9 +8,11 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -20,18 +22,27 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
@@ -46,24 +57,65 @@ public class ActividadPrueba extends AppCompatActivity  {
     private final int PHOTO_CODE = 200;
     private final int SELECT_PICTURE = 300;
     private String mPath;
+
+    EditText txtTitulo,txtContenido;
+    public int idTipoSeleccionado;
+    public String SERVER = "http://192.168.200.2:8091/WebService.asmx/agregarPublicacion?",
+            timestamp;
+    private static final String TAG = AgregarPublicacion.class.getSimpleName();
+    Spinner spn1;
+    String[] Tipos={"Seleccionar...","Publicidad","Aviso","Reporte","Otra"};
+String matricula;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actividad_prueba);
         mRlView = (RelativeLayout) findViewById(R.id.rlative);
         imageView=(ImageView)findViewById(R.id.imageView5);
+        txtTitulo=(EditText)findViewById(R.id.txtTitulo);
+        txtContenido=(EditText)findViewById(R.id.txtContenido);
+        spn1=(Spinner)findViewById(R.id.spinner2);
+        ArrayAdapter<String> adaptador=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,Tipos);
+        spn1.setAdapter(adaptador);
+        Intent intent=getIntent();
+        Bundle extras =intent.getExtras();
+        if (extras != null) {//ver si contiene datos
+            matricula=(String)extras.get("Matricula");//Obtengo la matriculs
+        }
+        spn1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position){
+                    case 1:
+                        idTipoSeleccionado=1;
+                        break;
+                    case 2:
+                        idTipoSeleccionado=2;
+                        break;
+                    case 3:
+                        idTipoSeleccionado=3;
+                        break;
+                    case 4:
+                        idTipoSeleccionado=4;
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         //Referencia al botón Iniciar
         btnIniciar = (Button) findViewById(R.id.btnPublicar);
         btnIniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Código para publicar los datos
-                Bitmap mapaBits=((BitmapDrawable)imageView.getDrawable()).getBitmap();
-                ByteArrayOutputStream stream=new ByteArrayOutputStream();
-                mapaBits.compress(Bitmap.CompressFormat.PNG,100,stream);
-                byte[] byteArray=stream.toByteArray();
-
-
+                //Código para publicar los datos
+                Bitmap image = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+                //execute the async task and upload the image to server
+                new Upload(image,txtTitulo.getText().toString(),txtContenido.getText().toString(),idTipoSeleccionado,matricula).execute();
             }
         });
         btnAbrirGaleria=(Button)findViewById(R.id.btnAbrir);
@@ -98,7 +150,6 @@ public class ActividadPrueba extends AppCompatActivity  {
 
         return false;
     }
-
     private void showOptions() {
         final CharSequence[] option = {"Tomar foto", "Elegir de galeria", "Cancelar"};
         final AlertDialog.Builder builder = new AlertDialog.Builder(ActividadPrueba.this);
@@ -172,10 +223,23 @@ public class ActividadPrueba extends AppCompatActivity  {
                                     Log.i("ExternalStorage", "-> Uri = " + uri);
                                 }
                             });
-
-
                     Bitmap bitmap = BitmapFactory.decodeFile(mPath);
-                    imageView.setImageBitmap(bitmap);
+                    int width = bitmap.getWidth();
+                    int height = bitmap.getHeight();
+                    int newWidth =70;
+                    int newHeight =50;
+
+                    // calculamos el escalado de la imagen destino
+                    float scaleWidth = ((float) newWidth) / width;
+                    float scaleHeight = ((float) newHeight) / height;
+                    // para poder manipular la imagen
+                    // debemos crear una matriz
+                    Matrix matrix = new Matrix();
+                    // resize the Bitmap
+                    matrix.postScale(scaleWidth, scaleHeight);
+                    // volvemos a crear la imagen con los nuevos valores
+                    Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0,width, height, matrix, true);
+                    imageView.setImageBitmap(resizedBitmap);
                     break;
                 case SELECT_PICTURE:
                     Uri path = data.getData();
@@ -223,6 +287,77 @@ public class ActividadPrueba extends AppCompatActivity  {
         });
 
         builder.show();
+    }
+
+    private String hashMapToUrl(HashMap< String,String> params) throws UnsupportedEncodingException {
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+        for(Map.Entry<String,String> entry : params.entrySet()){
+            if (first)
+                first = false;
+            else
+                result.append("&");
+
+            result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+            result.append("=");
+            StringBuilder append = result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+        }
+
+        return result.toString();
+    }
+    //async task to upload image
+
+    private class Upload extends AsyncTask<Void,Void,String> {
+        private Bitmap image;
+        private String titulo;
+        private String contenido;
+        private int tipoPub;
+        private String CodUsuario;
+        public Upload(Bitmap image,String titulo,String contenido,int Tipo,String CodUsuario){
+            this.image = image;
+            this.titulo = titulo;
+            this.contenido=contenido;
+            this.tipoPub=Tipo;
+            this.CodUsuario=CodUsuario;
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            //compress the image to jpg format
+            image.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
+            /*
+            * encode image to base64 so that it can be picked by saveImage.php file
+            * */
+            String encodeImage = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
+            String tip=String.valueOf(tipoPub);
+            //generate hashMap to store encodedImage and the name
+            HashMap<String,String> detail = new HashMap<>();
+            detail.put("tit", titulo);
+            detail.put("imagen", encodeImage);
+            detail.put("contenido",contenido);
+            detail.put("tipo",tip);
+            detail.put("codUser",CodUsuario);
+            try{
+                //convert this HashMap to encodedUrl to send to php file
+                String dataToSend = hashMapToUrl(detail);
+                //make a Http request and send data to saveImage.php file
+                String response = Request.post(SERVER,dataToSend);
+
+                //return the response
+                return response;
+
+            }catch (Exception e){
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            //show image uploaded
+            Toast.makeText(getApplicationContext(),"Image Uploaded", Toast.LENGTH_SHORT).show();
+        }
     }
 }
 

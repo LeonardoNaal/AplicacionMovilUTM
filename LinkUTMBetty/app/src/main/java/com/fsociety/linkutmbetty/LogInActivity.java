@@ -20,6 +20,7 @@ import java.net.URL;
 
 public class LogInActivity extends AppCompatActivity {
 EditText edtUsuario,edtContraseña;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +37,14 @@ EditText edtUsuario,edtContraseña;
                 String Url="http://192.168.200.2:8091/WebService.asmx/";
                 String UrlWeb=Url+action+"?user="+user+"&contraseña="+contraseña;
                 new JSONTask().execute(UrlWeb);
+            }
+        });
+        Button btnRegistro=(Button)findViewById(R.id.btnRegistro);
+        btnRegistro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(LogInActivity.this,RegistroActivity.class);
+                startActivity(intent);
             }
         });
     }

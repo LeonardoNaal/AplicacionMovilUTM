@@ -98,7 +98,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:inputType="textPassword"
             android:hint="Elige una contraseña"
             android:textColorHint="#fff"
             android:textColor="#fff"/>
@@ -115,7 +114,7 @@
             android:id="@+id/txtConfirmPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
+            android:textSize="16sp"
             android:hint="Confirma tu contraseña"
             android:textColorHint="#fff"
             android:textColor="#fff"/>

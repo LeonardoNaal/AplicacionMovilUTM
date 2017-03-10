@@ -3,6 +3,7 @@ package com.fsociety.linkutmbetty;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -45,12 +47,15 @@ import java.util.ArrayList;
 public class UserMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, PublicacionesFragment.OnFragmentInteractionListener, ActividadesFragment.OnFragmentInteractionListener {
     ListView listaUsuario;
-TextView txtMatricula;
-
+    TextView txtMatricula;
+    ArrayList<publicacion> image;
+    public String dato;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.content_user_main);
         setContentView(R.layout.activity_user_main);
+
         //Asignar matricula a textview
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -64,13 +69,10 @@ TextView txtMatricula;
             public void onClick(View view) {
                 //Este código será reemplazado por un intent para llevar a otra actividad (AgregarPublicación)
                 Intent intent = new Intent(UserMainActivity.this, ActividadPrueba.class);
+                intent.putExtra("Matricula",dato);
                 startActivity(intent);
             }
         });
-
-
-        //Referencia al listView
-        listaUsuario = (ListView) findViewById(R.id.lsvUsuarioPub);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -86,14 +88,38 @@ TextView txtMatricula;
         Intent intent=getIntent();
         Bundle extras =intent.getExtras();
         if (extras != null) {//ver si contiene datos
-            String dato=(String)extras.get("Matricula");//Obtengo la matriculs
+            dato=(String)extras.get("Matricula");//Obtengo la matriculs
             txtMatricula.setText(dato);
         }
         String action="BuscarPublicacionUsuario";
         String Url="http://192.168.200.2:8091/WebService.asmx/";
         String UrlWeb=Url+action+"?CodigoUsuario="+txtMatricula.getText().toString();
         new JSONTask().execute(UrlWeb);
-        navigationView.setNavigationItemSelectedListener(this);
+
+        //Referencia al listView
+        listaUsuario = (ListView) findViewById(R.id.lsvUsuarioPub);
+
+        listaUsuario.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                publicacion elegido = (publicacion) parent.getItemAtPosition(position);
+                Intent intent = new Intent(UserMainActivity.this,GestionPublicaciones.class);
+                String auxtitulo = elegido.getTitulo();
+                String auxfecha = elegido.getFecha();
+                Bitmap auxphoto = elegido.getPhoto();
+                String contenido=elegido.getContenido();
+                int auxid = elegido.getId();
+
+                intent.putExtra("id",auxid);
+                intent.putExtra("titulo",auxtitulo);
+                intent.putExtra("fecha",auxfecha);
+                intent.putExtra("imagen",auxphoto);
+                intent.putExtra("contenido",contenido);
+                intent.putExtra("codUser",dato);
+                startActivity(intent);
+            }
+        });
+       //navigationView.setNavigationItemSelectedListener(this);
     }
     public class  JSONTask extends AsyncTask<String ,String, String> {
         @Override
@@ -142,7 +168,7 @@ TextView txtMatricula;
                 Log.e("salida",resultado);
 
 
-                ArrayList<publicacion> image=new ArrayList<publicacion>();
+                image=new ArrayList<publicacion>();
                 // ArrayList list=new ArrayList();
                 JSONArray ResultadoArray=null;
                 try{

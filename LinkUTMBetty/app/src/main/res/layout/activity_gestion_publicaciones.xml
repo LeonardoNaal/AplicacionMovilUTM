@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_gestion_publicaciones"
     android:layout_width="match_parent"
@@ -72,5 +73,11 @@
             android:textColor="#fff"
             android:backgroundTint="@color/colorAccent"/>
     </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="176dp"
+        app:srcCompat="@drawable/estandar2"
+        android:id="@+id/imageView6" />
 
 </LinearLayout>
