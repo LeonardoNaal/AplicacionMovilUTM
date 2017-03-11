@@ -106,6 +106,7 @@ public class UserMainActivity extends AppCompatActivity
         }
         String action="BuscarPublicacionUsuario";
         String Url="http://fsociety.somee.com/WebService.asmx/";
+        //String Url="http://192.168.200.2:8091/WebService.asmx/";
         String UrlWeb=Url+action+"?CodigoUsuario="+txtMatricula.getText().toString();
         new JSONTask().execute(UrlWeb);
 
@@ -121,6 +122,7 @@ public class UserMainActivity extends AppCompatActivity
                 String auxfecha = elegido.getFecha();
                 Bitmap auxphoto = elegido.getPhoto();
                 String contenido=elegido.getContenido();
+                int TipoPub=elegido.getTipo();
                 int auxid = elegido.getId();
 
                 intent.putExtra("id",auxid);
@@ -129,6 +131,7 @@ public class UserMainActivity extends AppCompatActivity
                 intent.putExtra("imagen",auxphoto);
                 intent.putExtra("contenido",contenido);
                 intent.putExtra("codUser",dato);
+                intent.putExtra("IDTipo",TipoPub);
                 startActivity(intent);
             }
         });
@@ -155,6 +158,7 @@ public class UserMainActivity extends AppCompatActivity
         //Aqui ejecutamos el codigo necesario para refrescar nuestra interfaz grafica.
         String action="BuscarPublicacionUsuario";
         String Url="http://fsociety.somee.com/WebService.asmx/";
+        //String Url="http://192.168.200.2:8091/WebService.asmx/";
         String UrlWeb=Url+action+"?CodigoUsuario="+txtMatricula.getText().toString();
         new JSONTask().execute(UrlWeb);
         //Antes de ejecutarlo, indicamos al swipe layout que muestre la barra indeterminada de progreso.
@@ -231,6 +235,7 @@ public class UserMainActivity extends AppCompatActivity
                         pub.setData(objeto.getString("Image"));
                         pub.setContenido(objeto.getString("Contenido"));
                         pub.setFecha(objeto.getString("Fecha"));
+                        pub.setTipo(objeto.getInt("IDTipo"));
                         image.add(pub);
                     }
                 }

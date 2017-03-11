@@ -46,6 +46,7 @@ EditText txtNombre,txtMatricula,txtAPaterno,txtAMaterno,txtContraseña,txtContra
                 //Código para registrar al usuario
                 String action="Registrarse";
                 String Url="http://fsociety.somee.com/WebService.asmx/";
+                //String Url="http://192.168.200.2:8091/WebService.asmx/";
 
                     String UrlWeb=Url+action+"?codUser="+txtMatricula.getText().toString()+"&nombre="+txtNombre.getText().toString()+"&apPaterno="+txtAPaterno.getText().toString()+"&apMaterno="+txtAMaterno.getText().toString()+"&contraseña="+txtContraseña.getText().toString()+"&TipoUser="+1;
                     new JSONTask().execute(UrlWeb);

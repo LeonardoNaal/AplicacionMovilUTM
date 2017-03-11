@@ -1,14 +1,21 @@
 package com.fsociety.linkutmbetty;
 
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -16,23 +23,34 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GestionPublicaciones extends AppCompatActivity {
     Button btnModificar;
+    Spinner spn1;
     Button btnEliminar;
     EditText txtTitulo;
     EditText txtContenido;
     public int idPublicacion;
     public String codUser;
     ImageView img1;
-    public Bitmap bmp1;
+    public Bitmap bmp1,image;
+    public String SERVER = "http://fsociety.somee.com/WebService.asmx/ModificarPublicacion?",     timestamp;
+    //public String SERVER = "192.168.200.2:8091/WebService.asmx/ModificarPublicacion?",timestamp;
+
+    public int TipoPub,idTipoSeleccionado=0;
+    String[] Tipos={"Seleccionar...","Publicidad","Aviso","Reporte","Otra"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +61,9 @@ public class GestionPublicaciones extends AppCompatActivity {
         //La actividad incluye dos botones
         //Un botón para guardar los cambios que después de guardar regresa a UserMainActivity
         //Otro botón para eliminar que después de eliminar regresa a UserMainActivity
+        spn1=(Spinner)findViewById(R.id.spinner2);
+        ArrayAdapter<String> adaptador=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,Tipos);
+        spn1.setAdapter(adaptador);
         img1=(ImageView)findViewById(R.id.imageView6);
         //Referencia al EditText Título
         txtTitulo = (EditText) findViewById(R.id.txtTitulo);
@@ -56,22 +77,75 @@ public class GestionPublicaciones extends AppCompatActivity {
             idPublicacion = (int) extras.getInt("id");
             String fecha=(String) extras.get("fecha");
             codUser=(String) extras.get("codUser");
+            TipoPub=(int)extras.getInt("IDTipo");
             bmp1=image;
             txtContenido.setText(datocontenido);
             txtTitulo.setText(datotitulo);
             img1.setImageBitmap(image);
         }
+        spn1.setSelection(TipoPub);
+        spn1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position){
+                    case 1:
+                        idTipoSeleccionado=1;
+                        break;
+                    case 2:
+                        idTipoSeleccionado=2;
+                        break;
+                    case 3:
+                        idTipoSeleccionado=3;
+                        break;
+                    case 4:
+                        idTipoSeleccionado=4;
+                        break;
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         //Referencia y evento al botón Guardar
         btnModificar = (Button) findViewById(R.id.btnModificar);
         btnModificar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Al finalizar este método debe regresar a UserMainActivity
-                String action="BuscarPublicacionUsuario";
-                String Url="http://fsociety.somee.com/WebService.asmx/";
-                String UrlWeb=Url+action+"?idPublicacion="+idPublicacion+"&codUser="+codUser+"&tit="+txtTitulo.getText().toString()+"&contenido="+txtContenido.getText().toString();
-                new JSONTask().execute(UrlWeb);
+                if(((BitmapDrawable) img1.getDrawable()).getBitmap()==null){
+                    Drawable drawable=getResources().getDrawable(R.drawable.estandar2);
+
+                    img1.setImageDrawable(drawable);
+
+                    int width = img1.getWidth();
+                    int height = img1.getHeight();
+                    int newWidth =180;
+                    int newHeight =150;
+
+                    // calculamos el escalado de la imagen destino
+                    float scaleWidth = ((float) newWidth) / width;
+                    float scaleHeight = ((float) newHeight) / height;
+                    // para poder manipular la imagen
+                    // debemos crear una matriz
+                    Matrix matrix = new Matrix();
+                    // resize the Bitmap
+                    matrix.postScale(scaleWidth, scaleHeight);
+                    // volvemos a crear la imagen con los nuevos valores
+                    Bitmap resizedBitmap = Bitmap.createBitmap(((BitmapDrawable) img1.getDrawable()).getBitmap(), 0, 0,width, height, matrix, true);
+                    img1.setImageBitmap(resizedBitmap);
+                    image = resizedBitmap;
+                }
+                else{
+                     image = ((BitmapDrawable) img1.getDrawable()).getBitmap();
+                }
+
+                //execute the async task and upload the image to server
+                if(idTipoSeleccionado==0){
+                    idTipoSeleccionado=TipoPub;
+                }
+                new Upload(image,txtTitulo.getText().toString(),txtContenido.getText().toString(),idTipoSeleccionado,codUser,idPublicacion).execute();
             }
         });
 
@@ -82,12 +156,14 @@ public class GestionPublicaciones extends AppCompatActivity {
             public void onClick(View v) {
                 String action="EliminarPublicaciones";
                 String Url="http://fsociety.somee.com/WebService.asmx/";
+                //String Url="http://192.168.200.2:8091/WebService.asmx/";
                 String UrlWeb=Url+action+"?idPublicacion="+idPublicacion;
                 new JSONTask().execute(UrlWeb);
                 //Al finalizar este método debe regresar a UserMainActivity
             }
         });
     }
+
     public class  JSONTask extends AsyncTask<String ,String, String> {
         @Override
         protected  String doInBackground(String... parametros){
@@ -145,6 +221,78 @@ public class GestionPublicaciones extends AppCompatActivity {
                 Log.e("Falla",t.toString());
 
             }
+        }
+    }
+    private String hashMapToUrl(HashMap< String,String> params) throws UnsupportedEncodingException {
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+        for(Map.Entry<String,String> entry : params.entrySet()){
+            if (first)
+                first = false;
+            else
+                result.append("&");
+
+            result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+            result.append("=");
+            StringBuilder append = result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+        }
+
+        return result.toString();
+    }
+    private class Upload extends AsyncTask<Void,Void,String> {
+        private Bitmap image;
+        private String titulo;
+        private String contenido;
+        private int tipoPub;
+        private String CodUsuario;
+        private int idPublicacion;
+        public Upload(Bitmap image,String titulo,String contenido,int Tipo,String CodUsuario,int idPublicacion){
+            this.image = image;
+            this.titulo = titulo;
+            this.contenido=contenido;
+            this.tipoPub=Tipo;
+            this.CodUsuario=CodUsuario;
+            this.idPublicacion=idPublicacion;
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            //compress the image to jpg format
+            image.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
+            /*
+            * encode image to base64 so that it can be picked by saveImage.php file
+            * */
+            String encodeImage = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
+            String idpub=String.valueOf(idPublicacion);
+            String tip=String.valueOf(tipoPub);
+            //generate hashMap to store encodedImage and the name
+            HashMap<String,String> detail = new HashMap<>();
+            detail.put("idPublicacion",idpub);
+            detail.put("tit", titulo);
+            detail.put("imagen", encodeImage);
+            detail.put("contenido",contenido);
+            detail.put("tipo",tip);
+            detail.put("codUser",CodUsuario);
+            try{
+                //convert this HashMap to encodedUrl to send to php file
+                String dataToSend = hashMapToUrl(detail);
+                //make a Http request and send data to saveImage.php file
+                String response = Request.post(SERVER,dataToSend);
+
+                //return the response
+                return response;
+
+            }catch (Exception e){
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            //show image uploaded
+            Toast.makeText(getApplicationContext(),"Datos modificados correctamente", Toast.LENGTH_SHORT).show();
         }
     }
 }

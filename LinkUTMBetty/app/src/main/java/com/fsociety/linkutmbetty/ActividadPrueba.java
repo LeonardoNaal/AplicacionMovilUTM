@@ -63,8 +63,8 @@ public class ActividadPrueba extends AppCompatActivity  {
 
     EditText txtTitulo,txtContenido;
     public int idTipoSeleccionado;
-    public String SERVER = "http://fsociety.somee.com/WebService.asmx/agregarPublicacion?",
-            timestamp;
+    public String SERVER = "http://fsociety.somee.com/WebService.asmx/agregarPublicacion?", timestamp;
+   // public String SERVER = "http://192.168.200.2:8091/WebService.asmx/agregarPublicacion?", timestamp;
     private static final String TAG = AgregarPublicacion.class.getSimpleName();
     Spinner spn1;
     String[] Tipos={"Seleccionar...","Publicidad","Aviso","Reporte","Otra"};
@@ -115,7 +115,6 @@ String matricula;
             @Override
             public void onClick(View v) {
                 //Código para publicar los datos
-                //Código para publicar los datos
                 Bitmap image = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
                 //execute the async task and upload the image to server
                 new Upload(image,txtTitulo.getText().toString(),txtContenido.getText().toString(),idTipoSeleccionado,matricula).execute();
@@ -156,7 +155,7 @@ String matricula;
     private void showOptions() {
         final CharSequence[] option = {"Tomar foto", "Elegir de galeria", "Cancelar"};
         final AlertDialog.Builder builder = new AlertDialog.Builder(ActividadPrueba.this);
-        builder.setTitle("Eleige una opción");
+        builder.setTitle("Elige una opción");
         builder.setItems(option, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

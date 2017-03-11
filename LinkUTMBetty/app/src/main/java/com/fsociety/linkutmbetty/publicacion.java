@@ -15,6 +15,15 @@ public class publicacion {
     protected Bitmap photo;
     protected String data;
 
+    public int getTipo() {
+        return Tipo;
+    }
+
+    public void setTipo(int tipo) {
+        Tipo = tipo;
+    }
+
+    protected int Tipo;
     public String getFecha() {
         return fecha;
     }
