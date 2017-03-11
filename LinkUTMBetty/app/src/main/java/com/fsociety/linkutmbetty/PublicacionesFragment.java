@@ -6,11 +6,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -38,7 +41,7 @@ import java.util.ArrayList;
  * {@link PublicacionesFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class PublicacionesFragment extends Fragment {
+public class PublicacionesFragment extends Fragment  implements SwipeRefreshLayout.OnRefreshListener {
     ListView listaPub;
 
     private OnFragmentInteractionListener mListener;
@@ -47,7 +50,7 @@ public class PublicacionesFragment extends Fragment {
         // Required empty public constructor
     }
 
-
+    private SwipeRefreshLayout swipeLayout;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -55,12 +58,58 @@ public class PublicacionesFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_publicaciones, container, false);
         //Referencia al listView que está en fragmentPublicaciones
         listaPub = (ListView) view.findViewById(R.id.lsvListaPub);
+        //Obtenemos una referencia al viewgroup SwipeLayout
+        swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
+
+        //Indicamos que listener recogerá la retrollamada (callback), en este caso, será el metodo OnRefresh de esta clase.
+
+        swipeLayout.setOnRefreshListener(this);
+        //Podemos espeficar si queremos, un patron de colores diferente al patrón por defecto.
+        swipeLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+        listaPub.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                int filaSuperior = (
+                        listaPub == null//Si la lista esta vacía ó
+                                || listaPub.getChildCount() == 0) ? 0 : listaPub.getChildAt(0).getTop();//Estamos en el elemento superior
+                swipeLayout.setEnabled(filaSuperior >= 0);
+            }
+        });
         String action="TopTenPublicaciones";
         String Url="http://fsociety.somee.com/WebService.asmx/";
         String UrlWeb=Url+action;
         new JSONTask().execute(UrlWeb);
         return view;
     }
+
+    @Override
+    public void onRefresh() {
+        //Codigo para traer todas las publicaciones
+        String action="TopTenPublicaciones";
+        String Url="http://fsociety.somee.com/WebService.asmx/";
+        String UrlWeb=Url+action;
+        new JSONTask().execute(UrlWeb);
+        //Antes de ejecutarlo, indicamos al swipe layout que muestre la barra indeterminada de progreso.
+        swipeLayout.setRefreshing(true);
+
+        //Vamos a simular un refresco con un handle.
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                //Se supone que aqui hemos realizado las tareas necesarias de refresco, y que ya podemos ocultar la barra de progreso
+                swipeLayout.setRefreshing(false);
+            }
+        }, 3000);
+    }
+
     public class  JSONTask extends AsyncTask<String ,String, String> {
         @Override
         protected  String doInBackground(String... parametros){

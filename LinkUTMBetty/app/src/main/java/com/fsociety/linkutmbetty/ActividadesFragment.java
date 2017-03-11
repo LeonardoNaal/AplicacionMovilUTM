@@ -6,12 +6,15 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -40,12 +43,12 @@ import java.util.zip.Inflater;
  * Use the {@link ActividadesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ActividadesFragment extends Fragment {
+public class ActividadesFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private SwipeRefreshLayout swipeLayout;
     ListView listaAct;
 
     // TODO: Rename and change types of parameters
@@ -85,6 +88,25 @@ public class ActividadesFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+    }
+
+    @Override
+    public void onRefresh() {
+        String action="TopTenActividades";
+        String Url="http://fsociety.somee.com/WebService.asmx/";
+        String UrlWeb=Url+action;
+        new JSONTask().execute(UrlWeb);
+        //Antes de ejecutarlo, indicamos al swipe layout que muestre la barra indeterminada de progreso.
+        swipeLayout.setRefreshing(true);
+
+        //Vamos a simular un refresco con un handle.
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                //Se supone que aqui hemos realizado las tareas necesarias de refresco, y que ya podemos ocultar la barra de progreso
+                swipeLayout.setRefreshing(false);
+            }
+        }, 3000);
     }
 
     public class  JSONTask extends AsyncTask<String ,String, String> {
@@ -174,24 +196,35 @@ public class ActividadesFragment extends Fragment {
 
         //Referencia al listView que está en fragment_actividades
         listaAct = (ListView) view.findViewById(R.id.lsvListaAct);
+        //Obtenemos una referencia al viewgroup SwipeLayout
+        swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
+
+        //Indicamos que listener recogerá la retrollamada (callback), en este caso, será el metodo OnRefresh de esta clase.
+
+        swipeLayout.setOnRefreshListener(this);
+        //Podemos espeficar si queremos, un patron de colores diferente al patrón por defecto.
+        swipeLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+        listaAct.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                int filaSuperior = (
+                        listaAct == null//Si la lista esta vacía ó
+                                || listaAct.getChildCount() == 0) ? 0 : listaAct.getChildAt(0).getTop();//Estamos en el elemento superior
+                swipeLayout.setEnabled(filaSuperior >= 0);
+            }
+        });
         String action="TopTenActividades";
         String Url="http://fsociety.somee.com/WebService.asmx/";
         String UrlWeb=Url+action;
         new JSONTask().execute(UrlWeb);
-        /*
-        ArrayAdapter<String> adaptador;
-        adaptador=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,list);
-        ListaElementos.setAdapter(adaptador);
-         */
-
-                /*
-                if(Integer.parseInt(resultado)==1){
-                    Toast.makeText(MainActivity.this,"Bienvenido al nuevo mundo",Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Toast.makeText(MainActivity.this,"Hasta nunca, adios",Toast.LENGTH_SHORT).show();
-                }
-                 */
         return view;
     }
     public class ImagenAdapter extends BaseAdapter{

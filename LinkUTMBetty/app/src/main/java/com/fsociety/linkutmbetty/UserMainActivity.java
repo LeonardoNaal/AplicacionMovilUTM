@@ -7,9 +7,11 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -45,11 +48,12 @@ import java.util.ArrayList;
 
 
 public class UserMainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, PublicacionesFragment.OnFragmentInteractionListener, ActividadesFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, PublicacionesFragment.OnFragmentInteractionListener, ActividadesFragment.OnFragmentInteractionListener,SwipeRefreshLayout.OnRefreshListener {
     ListView listaUsuario;
     TextView txtMatricula;
     ArrayList<publicacion> image;
     public String dato;
+    private SwipeRefreshLayout swipeLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,10 +61,19 @@ public class UserMainActivity extends AppCompatActivity
         setContentView(R.layout.activity_user_main);
 
         //Asignar matricula a textview
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+//Obtenemos una referencia al viewgroup SwipeLayout
+        swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
 
+        //Indicamos que listener recogerá la retrollamada (callback), en este caso, será el metodo OnRefresh de esta clase.
+
+        swipeLayout.setOnRefreshListener(this);
+        //Podemos espeficar si queremos, un patron de colores diferente al patrón por defecto.
+        swipeLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
 
 //Referencia al botón redondo
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
@@ -119,8 +132,44 @@ public class UserMainActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
+        listaUsuario.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                int filaSuperior = (
+                        listaUsuario == null//Si la lista esta vacía ó
+                                || listaUsuario.getChildCount() == 0) ? 0 : listaUsuario.getChildAt(0).getTop();//Estamos en el elemento superior
+                swipeLayout.setEnabled(filaSuperior >= 0);
+            }
+        });
        //navigationView.setNavigationItemSelectedListener(this);
     }
+
+
+    @Override
+    public void onRefresh() {
+        //Aqui ejecutamos el codigo necesario para refrescar nuestra interfaz grafica.
+        String action="BuscarPublicacionUsuario";
+        String Url="http://fsociety.somee.com/WebService.asmx/";
+        String UrlWeb=Url+action+"?CodigoUsuario="+txtMatricula.getText().toString();
+        new JSONTask().execute(UrlWeb);
+        //Antes de ejecutarlo, indicamos al swipe layout que muestre la barra indeterminada de progreso.
+        swipeLayout.setRefreshing(true);
+
+        //Vamos a simular un refresco con un handle.
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                //Se supone que aqui hemos realizado las tareas necesarias de refresco, y que ya podemos ocultar la barra de progreso
+                swipeLayout.setRefreshing(false);
+            }
+        }, 3000);
+    }
+
     public class  JSONTask extends AsyncTask<String ,String, String> {
         @Override
         protected  String doInBackground(String... parametros){
@@ -318,4 +367,5 @@ public class UserMainActivity extends AppCompatActivity
     public void onFragmentInteraction(Uri uri) {
 
     }
+
 }
