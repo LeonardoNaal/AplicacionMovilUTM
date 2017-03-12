@@ -1,5 +1,6 @@
 package com.fsociety.linkutmbetty;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -61,6 +62,8 @@ EditText txtNombre,txtMatricula,txtAPaterno,txtAMaterno,txtContraseña,txtContra
             @Override
             public void onClick(View v) {
                 //Código que envía a MainActivity
+                Intent intent = new Intent(RegistroActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LinkUTMBetty</string>
+    <string name="app_name">LinkUTM v.alpha</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -18,6 +18,10 @@
     <string name="matricula">Matrícula</string>
     <string name="contraseña">Contraseña</string>
     <string name="btn_iniciar">Iniciar</string>
-    <string name="btn_cancelar">Cancelar</string>
+    <string name="btn_cancelar">Crear una cuenta</string>
     <string name="content_img">Iniciar sesión</string>
+
+    <!-- Valores para la sección de Registro -->
+    <string name="btn_canelar1">Cancelar</string>
+    <string name="btn_registro">Registrarse</string>
 </resources>
