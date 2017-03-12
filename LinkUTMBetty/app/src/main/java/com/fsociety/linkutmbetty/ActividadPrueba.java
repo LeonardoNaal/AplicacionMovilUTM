@@ -1,5 +1,6 @@
 package com.fsociety.linkutmbetty;
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -59,6 +60,8 @@ public class ActividadPrueba extends AppCompatActivity  {
     private final int MY_PERMISSIONS = 100;
     private final int PHOTO_CODE = 200;
     private final int SELECT_PICTURE = 300;
+
+    private static final int REQUEST_CODE_ASK_PERMISSIONS = 123;
     private String mPath;
 Bitmap bnp;
     EditText txtTitulo,txtContenido;
@@ -152,6 +155,47 @@ String matricula;
 
         return false;
     }
+    private void checkPermission() {
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+
+            Toast.makeText(this, "This version is not android 6 or later " + Build.VERSION.SDK_INT, Toast.LENGTH_LONG).show();
+
+        } else {
+
+            int hasWriteContactsPermission = checkSelfPermission(Manifest.permission.CAMERA);
+
+            if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
+
+                requestPermissions(new String[] {Manifest.permission.CAMERA},
+                        REQUEST_CODE_ASK_PERMISSIONS);
+
+                Toast.makeText(this, "Requesting permissions", Toast.LENGTH_LONG).show();
+
+            }else if (hasWriteContactsPermission == PackageManager.PERMISSION_GRANTED){
+
+                Toast.makeText(this, "The permissions are already granted ", Toast.LENGTH_LONG).show();
+                openCamera();
+
+            }
+
+        }
+
+        return;
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestsCode,String [] permissions, int[] grantResults){
+        if(REQUEST_CODE_ASK_PERMISSIONS == requestsCode) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "OK Permissions granted ! " + Build.VERSION.SDK_INT, Toast.LENGTH_LONG).show();
+                openCamera();
+            } else {
+                Toast.makeText(this, "Permissions are not granted " + Build.VERSION.SDK_INT, Toast.LENGTH_LONG).show();
+            }
+        }else{
+            super.onRequestPermissionsResult(requestsCode, permissions, grantResults);
+        }
+    }
     private void showOptions() {
         final CharSequence[] option = {"Tomar foto", "Elegir de galeria", "Cancelar"};
         final AlertDialog.Builder builder = new AlertDialog.Builder(ActividadPrueba.this);
@@ -160,7 +204,7 @@ String matricula;
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if(option[which] == "Tomar foto"){
-                    openCamera();
+                    checkPermission();
                 }else if(option[which] == "Elegir de galeria"){
                     Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     intent.setType("image/*");
@@ -264,21 +308,6 @@ String matricula;
             }
             }
         }
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if(requestCode == MY_PERMISSIONS){
-            if(grantResults.length == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED){
-                Toast.makeText(ActividadPrueba.this, "Permisos aceptados", Toast.LENGTH_SHORT).show();
-                btnAbrirGaleria.setEnabled(true);
-            }
-        }else{
-            showExplanation();
-        }
-    }
 
     private void showExplanation() {
         AlertDialog.Builder builder = new AlertDialog.Builder(ActividadPrueba.this);
