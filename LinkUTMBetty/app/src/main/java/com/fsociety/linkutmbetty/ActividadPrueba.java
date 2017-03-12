@@ -60,7 +60,7 @@ public class ActividadPrueba extends AppCompatActivity  {
     private final int PHOTO_CODE = 200;
     private final int SELECT_PICTURE = 300;
     private String mPath;
-
+Bitmap bnp;
     EditText txtTitulo,txtContenido;
     public int idTipoSeleccionado;
     public String SERVER = "http://fsociety.somee.com/WebService.asmx/agregarPublicacion?", timestamp;
@@ -175,24 +175,12 @@ String matricula;
     }
 
     private void openCamera() {
-        File file = new File(Environment.getExternalStorageDirectory(), MEDIA_DIRECTORY);
-        boolean isDirectoryCreated = file.exists();
-
-        if(!isDirectoryCreated)
-            isDirectoryCreated = file.mkdirs();
-
-        if(isDirectoryCreated){
-            Long timestamp = System.currentTimeMillis() / 1000;
-            String imageName = timestamp.toString() + ".jpg";
-
-            mPath = Environment.getExternalStorageDirectory() + File.separator + MEDIA_DIRECTORY
-                    + File.separator + imageName;
-
-            File newFile = new File(mPath);
-
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(newFile));
+        try{
+            Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, PHOTO_CODE);
+        }
+        catch (Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -216,18 +204,11 @@ String matricula;
         if(resultCode == RESULT_OK){
             switch (requestCode){
                 case PHOTO_CODE:
-                    MediaScannerConnection.scanFile(this,
-                            new String[]{mPath}, null,
-                            new MediaScannerConnection.OnScanCompletedListener() {
-                                @Override
-                                public void onScanCompleted(String path, Uri uri) {
-                                    Log.i("ExternalStorage", "Scanned " + path + ":");
-                                    Log.i("ExternalStorage", "-> Uri = " + uri);
-                                }
-                            });
-                    Bitmap bitmap = BitmapFactory.decodeFile(mPath);
-                    int width = bitmap.getWidth();
-                    int height = bitmap.getHeight();
+                   Bundle ext=data.getExtras();
+                    bnp=(Bitmap)ext.get("data");
+
+                    int width = bnp.getWidth();
+                    int height = bnp.getHeight();
                     int newWidth =150;
                     int newHeight =120;
 
@@ -240,7 +221,7 @@ String matricula;
                     // resize the Bitmap
                     matrix.postScale(scaleWidth, scaleHeight);
                     // volvemos a crear la imagen con los nuevos valores
-                    Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0,width, height, matrix, true);
+                    Bitmap resizedBitmap = Bitmap.createBitmap(bnp, 0, 0,width, height, matrix, true);
                     imageView.setImageBitmap(resizedBitmap);
                     break;
                 case SELECT_PICTURE:
