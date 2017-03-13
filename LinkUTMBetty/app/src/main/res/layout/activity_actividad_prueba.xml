@@ -65,7 +65,7 @@
             android:layout_marginTop="10dp">
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/imageView5"
                 android:layout_width="210dp"
                 android:layout_height="110dp"
                 app:srcCompat="@drawable/estandar2" />
@@ -98,7 +98,12 @@
             android:textColor="#fff"
             android:textSize="18sp" />
 
-    </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/rlative"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </RelativeLayout>
 
+    </LinearLayout>
 
 </ScrollView>
