@@ -97,14 +97,7 @@
             android:textAllCaps="false"
             android:textColor="#fff"
             android:textSize="18sp" />
-<<<<<<< HEAD
-<RelativeLayout
-    android:id="@+id/rlative"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-</RelativeLayout>
-    </LinearLayout>
-=======
+
 
         <RelativeLayout
             android:id="@+id/rlative"
@@ -114,5 +107,4 @@
 
     </LinearLayout>
 
->>>>>>> origin/master
 </ScrollView>
