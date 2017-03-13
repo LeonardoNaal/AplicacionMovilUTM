@@ -77,7 +77,7 @@ String matricula;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actividad_prueba);
         mRlView = (RelativeLayout) findViewById(R.id.rlative);
-        imageView=(ImageView)findViewById(R.id.imageView5);
+        imageView=(ImageView)findViewById(R.id.imageView4);
         txtTitulo=(EditText)findViewById(R.id.txtTitulo);
         txtContenido=(EditText)findViewById(R.id.txtContenido);
         spn1=(Spinner)findViewById(R.id.spinner2);

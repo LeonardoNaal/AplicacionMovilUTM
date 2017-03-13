@@ -230,6 +230,7 @@ public class ActividadesFragment extends Fragment implements SwipeRefreshLayout.
         new JSONTask().execute(UrlWeb);
         return view;
     }
+
     public class ImagenAdapter extends BaseAdapter{
 
         protected ArrayList<Actividades> array;
