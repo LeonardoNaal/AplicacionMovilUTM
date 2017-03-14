@@ -402,7 +402,9 @@ String matricula;
         @Override
         protected void onPostExecute(String s) {
             //show image uploaded
-            Toast.makeText(getApplicationContext(),"Image Uploaded", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Datos agregados correctamente", Toast.LENGTH_SHORT).show();
+            Intent intent=new Intent(ActividadPrueba.this,UserMainActivity.class);
+            startActivity(intent);
         }
     }
 }
