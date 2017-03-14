@@ -13,7 +13,7 @@
         android:weightSum="1">
 
         <TextView
-            android:text="TextView"
+            android:text="Estoy en:"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView2" />
@@ -24,8 +24,17 @@
             android:id="@+id/spnOrigen"
             android:spinnerMode="dialog" />
 
+        <CheckBox
+            android:text="No se donde estoy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkBox"
+            android:textAlignment="viewEnd"
+            android:layout_weight="0.14"
+            android:layout_gravity="right" />
+
         <TextView
-            android:text="TextView"
+            android:text="Mi destino es:"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView3" />
@@ -37,11 +46,10 @@
             android:spinnerMode="dialog" />
 
         <Button
-            android:text="Buscar"
+            android:text="Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button2"
-            />
+            android:id="@+id/button2"/>
 
         <ImageView
             android:layout_width="wrap_content"

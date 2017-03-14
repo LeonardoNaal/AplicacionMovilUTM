@@ -329,7 +329,7 @@ public class UserMainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent intent = new Intent(UserMainActivity.this, LogInActivity.class);
+            Intent intent = new Intent(UserMainActivity.this, MainActivity.class);
             startActivity(intent);
         }
 

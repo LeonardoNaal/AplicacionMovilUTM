@@ -112,6 +112,7 @@ String matricula;
 
             }
         });
+
         //Referencia al botón Iniciar
         btnIniciar = (Button) findViewById(R.id.btnPublicar);
         btnIniciar.setOnClickListener(new View.OnClickListener() {
@@ -381,6 +382,11 @@ String matricula;
         protected void onPostExecute(String s) {
             //show image uploaded
             Toast.makeText(getApplicationContext(),"Datos agregados correctamente", Toast.LENGTH_SHORT).show();
+<<<<<<< HEAD
+=======
+            Intent intent=new Intent(ActividadPrueba.this,UserMainActivity.class);
+            startActivity(intent);
+>>>>>>> origin/master
         }
     }
 }
