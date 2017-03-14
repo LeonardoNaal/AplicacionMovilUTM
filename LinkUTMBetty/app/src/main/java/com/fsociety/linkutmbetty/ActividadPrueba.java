@@ -112,6 +112,7 @@ String matricula;
 
             }
         });
+
         //Referencia al botón Iniciar
         btnIniciar = (Button) findViewById(R.id.btnPublicar);
         btnIniciar.setOnClickListener(new View.OnClickListener() {

@@ -54,7 +54,9 @@
             android:layout_height="150dp"
             android:layout_marginTop="10dp"
             android:hint="Describe tu publicación"
-            android:gravity="center"
+            android:gravity="top|start"
+            android:lines="10"
+            android:padding="16dp"
             android:inputType="textMultiLine"
             android:background="@drawable/borde_edit_text"/>
 
@@ -72,10 +74,10 @@
 
             <Button
                 android:id="@+id/btnAbrir"
-                android:layout_width="140dp"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:layout_marginTop="25dp"
                 android:backgroundTint="@color/colorAccent"
                 android:text="Seleccionar"
@@ -89,9 +91,9 @@
             android:id="@+id/btnPublicar"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="150dp"
-            android:layout_marginStart="150dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginLeft="170dp"
+            android:layout_marginStart="170dp"
+            android:layout_marginTop="20dp"
             android:backgroundTint="@color/colorAccent"
             android:text="Publicar"
             android:textAllCaps="false"
