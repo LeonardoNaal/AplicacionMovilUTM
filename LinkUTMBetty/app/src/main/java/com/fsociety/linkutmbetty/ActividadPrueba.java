@@ -66,8 +66,8 @@ public class ActividadPrueba extends AppCompatActivity  {
 Bitmap bnp;
     EditText txtTitulo,txtContenido;
     public int idTipoSeleccionado;
-    public String SERVER = "http://fsociety.somee.com/WebService.asmx/agregarPublicacion?", timestamp;
-   // public String SERVER = "http://192.168.200.2:8091/WebService.asmx/agregarPublicacion?", timestamp;
+    //public String SERVER = "http://fsociety.somee.com/WebService.asmx/agregarPublicacion?", timestamp;
+   public String SERVER = "http://169.254.3.130:8091/WebService.asmx/agregarPublicacion?", timestamp;
     private static final String TAG = AgregarPublicacion.class.getSimpleName();
     Spinner spn1;
     String[] Tipos={"Seleccionar...","Publicidad","Aviso","Reporte","Otra"};
@@ -119,8 +119,23 @@ String matricula;
             public void onClick(View v) {
                 //Código para publicar los datos
                 Bitmap image = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+                int width = image.getWidth();
+                int height = image.getHeight();
+                int newWidth =150;
+                int newHeight =120;
+
+                // calculamos el escalado de la imagen destino
+                float scaleWidth = ((float) newWidth) / width;
+                float scaleHeight = ((float) newHeight) / height;
+                // para poder manipular la imagen
+                // debemos crear una matriz
+                Matrix matrix = new Matrix();
+                // resize the Bitmap
+                matrix.postScale(scaleWidth, scaleHeight);
+                // volvemos a crear la imagen con los nuevos valores
+                Bitmap resizedBitmap = Bitmap.createBitmap(bnp, 0, 0,width, height, matrix, true);
                 //execute the async task and upload the image to server
-                new Upload(image,txtTitulo.getText().toString(),txtContenido.getText().toString(),idTipoSeleccionado,matricula).execute();
+                new Upload(resizedBitmap,txtTitulo.getText().toString(),txtContenido.getText().toString(),idTipoSeleccionado,matricula).execute();
             }
         });
         btnAbrirGaleria=(Button)findViewById(R.id.btnAbrir);
@@ -250,23 +265,7 @@ String matricula;
                 case PHOTO_CODE:
                    Bundle ext=data.getExtras();
                     bnp=(Bitmap)ext.get("data");
-
-                    int width = bnp.getWidth();
-                    int height = bnp.getHeight();
-                    int newWidth =150;
-                    int newHeight =120;
-
-                    // calculamos el escalado de la imagen destino
-                    float scaleWidth = ((float) newWidth) / width;
-                    float scaleHeight = ((float) newHeight) / height;
-                    // para poder manipular la imagen
-                    // debemos crear una matriz
-                    Matrix matrix = new Matrix();
-                    // resize the Bitmap
-                    matrix.postScale(scaleWidth, scaleHeight);
-                    // volvemos a crear la imagen con los nuevos valores
-                    Bitmap resizedBitmap = Bitmap.createBitmap(bnp, 0, 0,width, height, matrix, true);
-                    imageView.setImageBitmap(resizedBitmap);
+                    imageView.setImageBitmap(bnp);
                     break;
                 case SELECT_PICTURE:
                     Uri path = data.getData();
@@ -275,27 +274,7 @@ String matricula;
                         is =getContentResolver().openInputStream(path);
                         BufferedInputStream bis = new BufferedInputStream(is);
                         Bitmap bit = BitmapFactory.decodeStream(bis);
-
-                        int wid = bit.getWidth();
-                        int hei = bit.getHeight();
-                        int newWi =150;
-                        int newHei =120;
-
-                        // calculamos el escalado de la imagen destino
-                        float scaleWid = ((float) newWi) / wid;
-                        float scaleHeig = ((float) newHei) / hei;
-
-                        // para poder manipular la imagen
-                        // debemos crear una matriz
-
-                        Matrix matri = new Matrix();
-                        // resize the Bitmap
-                        matri.postScale(scaleWid, scaleHeig);
-
-                        // volvemos a crear la imagen con los nuevos valores
-                        Bitmap resizedBitm = Bitmap.createBitmap(bit, 0, 0,wid, hei, matri, true);
-                        imageView.setImageBitmap(resizedBitm);
-
+                        imageView.setImageBitmap(bit);
                         //get the current timeStamp and strore that in the time Variable
                         Long tsLong = System.currentTimeMillis() / 1000;
                         timestamp = tsLong.toString();
@@ -401,7 +380,7 @@ String matricula;
         @Override
         protected void onPostExecute(String s) {
             //show image uploaded
-            Toast.makeText(getApplicationContext(),"Image Uploaded", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Datos agregados correctamente", Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -105,8 +105,8 @@ public class UserMainActivity extends AppCompatActivity
             txtMatricula.setText(dato);
         }
         String action="BuscarPublicacionUsuario";
-        String Url="http://fsociety.somee.com/WebService.asmx/";
-        //String Url="http://192.168.200.2:8091/WebService.asmx/";
+        //String Url="http://fsociety.somee.com/WebService.asmx/";
+        String Url="http://169.254.3.130:8091/WebService.asmx/";
         String UrlWeb=Url+action+"?CodigoUsuario="+txtMatricula.getText().toString();
         new JSONTask().execute(UrlWeb);
 
@@ -157,8 +157,8 @@ public class UserMainActivity extends AppCompatActivity
     public void onRefresh() {
         //Aqui ejecutamos el codigo necesario para refrescar nuestra interfaz grafica.
         String action="BuscarPublicacionUsuario";
-        String Url="http://fsociety.somee.com/WebService.asmx/";
-        //String Url="http://192.168.200.2:8091/WebService.asmx/";
+        //String Url="http://fsociety.somee.com/WebService.asmx/";
+        String Url="http://169.254.3.130:8091/WebService.asmx/";
         String UrlWeb=Url+action+"?CodigoUsuario="+txtMatricula.getText().toString();
         new JSONTask().execute(UrlWeb);
         //Antes de ejecutarlo, indicamos al swipe layout que muestre la barra indeterminada de progreso.
@@ -353,7 +353,8 @@ public class UserMainActivity extends AppCompatActivity
             fragmentSelect = true;
 
         } else if (id == R.id.nav_slideshow) {
-
+            fragment=new SitiosFragment();
+            fragmentSelect=true;
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {

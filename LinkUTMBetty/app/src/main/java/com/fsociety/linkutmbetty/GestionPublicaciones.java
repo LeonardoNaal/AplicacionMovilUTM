@@ -46,8 +46,8 @@ public class GestionPublicaciones extends AppCompatActivity {
     public String codUser;
     ImageView img1;
     public Bitmap bmp1,image;
-    public String SERVER = "http://fsociety.somee.com/WebService.asmx/ModificarPublicacion?",     timestamp;
-    //public String SERVER = "192.168.200.2:8091/WebService.asmx/ModificarPublicacion?",timestamp;
+    //public String SERVER = "http://fsociety.somee.com/WebService.asmx/ModificarPublicacion?",     timestamp;
+    public String SERVER = "http://169.254.3.130:8091/WebService.asmx/ModificarPublicacion?",timestamp;
 
     public int TipoPub,idTipoSeleccionado=0;
     String[] Tipos={"Seleccionar...","Publicidad","Aviso","Reporte","Otra"};
@@ -155,8 +155,8 @@ public class GestionPublicaciones extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String action="EliminarPublicaciones";
-                String Url="http://fsociety.somee.com/WebService.asmx/";
-                //String Url="http://192.168.200.2:8091/WebService.asmx/";
+                //String Url="http://fsociety.somee.com/WebService.asmx/";
+                String Url="http://169.254.3.130:8091/WebService.asmx/";
                 String UrlWeb=Url+action+"?idPublicacion="+idPublicacion;
                 new JSONTask().execute(UrlWeb);
                 //Al finalizar este método debe regresar a UserMainActivity
@@ -210,7 +210,7 @@ public class GestionPublicaciones extends AppCompatActivity {
             try{
                 Log.e("salida",resultado);
         if(Integer.parseInt(resultado)==1){
-            Toast.makeText(GestionPublicaciones.this, "Exito", Toast.LENGTH_SHORT).show();
+            Toast.makeText(GestionPublicaciones.this, "Datos eliminados correctamente", Toast.LENGTH_SHORT).show();
         }
                 else{
             Toast.makeText(GestionPublicaciones.this, "Error", Toast.LENGTH_SHORT).show();
