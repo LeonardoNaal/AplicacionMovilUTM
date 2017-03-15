@@ -107,13 +107,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
+    Boolean fragmentSelect = false;
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        Fragment fragment = null;
-        Boolean fragmentSelect = false;
-
         int id = item.getItemId();
+        Fragment fragment = null;
 
         if (id == R.id.nav_camera) {
             fragment = new PublicacionesFragment();
@@ -125,7 +124,8 @@ public class MainActivity extends AppCompatActivity
             fragmentSelect = true;
 
         } else if (id == R.id.nav_slideshow) {
-
+            fragment=new SitiosFragment();
+            fragmentSelect=true;
 
         } else if (id == R.id.nav_manage) {
 

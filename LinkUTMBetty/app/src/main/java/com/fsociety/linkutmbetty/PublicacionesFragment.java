@@ -84,8 +84,8 @@ public class PublicacionesFragment extends Fragment  implements SwipeRefreshLayo
             }
         });
         String action="TopTenPublicaciones";
-        //String Url="http://fsociety.somee.com/WebService.asmx/";
-        String Url="http://169.254.3.130:8091/WebService.asmx/";
+        String Url="http://fsociety.somee.com/WebService.asmx/";
+        //String Url="http://169.254.3.130:8091/WebService.asmx/";
         String UrlWeb=Url+action;
         new JSONTask().execute(UrlWeb);
         return view;
@@ -95,8 +95,8 @@ public class PublicacionesFragment extends Fragment  implements SwipeRefreshLayo
     public void onRefresh() {
         //Codigo para traer todas las publicaciones
         String action="TopTenPublicaciones";
-        //String Url="http://fsociety.somee.com/WebService.asmx/";
-        String Url="http://169.254.3.130:8091/WebService.asmx/";
+        String Url="http://fsociety.somee.com/WebService.asmx/";
+        //String Url="http://169.254.3.130:8091/WebService.asmx/";
         String UrlWeb=Url+action;
         new JSONTask().execute(UrlWeb);
         //Antes de ejecutarlo, indicamos al swipe layout que muestre la barra indeterminada de progreso.

@@ -66,8 +66,8 @@ public class ActividadPrueba extends AppCompatActivity  {
 Bitmap bnp;
     EditText txtTitulo,txtContenido;
     public int idTipoSeleccionado;
-    //public String SERVER = "http://fsociety.somee.com/WebService.asmx/agregarPublicacion?", timestamp;
-   public String SERVER = "http://169.254.3.130:8091/WebService.asmx/agregarPublicacion?", timestamp;
+    public String SERVER = "http://fsociety.somee.com/WebService.asmx/agregarPublicacion?", timestamp;
+   //public String SERVER = "http://169.254.3.130:8091/WebService.asmx/agregarPublicacion?", timestamp;
     private static final String TAG = AgregarPublicacion.class.getSimpleName();
     Spinner spn1;
     String[] Tipos={"Seleccionar...","Publicidad","Aviso","Reporte","Otra"};
