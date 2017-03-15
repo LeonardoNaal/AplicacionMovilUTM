@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -49,6 +50,7 @@ public class SitiosFragment extends Fragment {
     Bitmap tempBitmap;
     CheckBox checkBox;
     Button btnBuscar;
+    TextView txtResultado;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -351,7 +353,8 @@ public class SitiosFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Context context=getActivity().getApplicationContext();
-
+                txtResultado = (TextView) view.findViewById(R.id.txtResultado);
+                txtResultado.setText("Esta es la mejor ruta!");
                 icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
                 tempBitmap = Bitmap.createBitmap(icon.getWidth(), icon.getHeight(), Bitmap.Config.RGB_565);
                 tempCanvas = new Canvas(tempBitmap);
@@ -384,8 +387,8 @@ public class SitiosFragment extends Fragment {
                             x = 1;
                         } else {
                             trazo2 = listaPuntos.get((int) asd.caminosFinal.charAt(i) - 65);
-                            int width = tempBitmap.getWidth() / 1000;
-                            int height = tempBitmap.getHeight() / 655;
+                            int width = tempBitmap.getWidth() / 1200;
+                            int height = tempBitmap.getHeight() / 755;
                             tempCanvas.drawLine(trazo1.x * width, trazo1.y * height, trazo2.x * width, trazo2.y * height, paint);
                             trazo1 = trazo2;
                         }
