@@ -78,7 +78,7 @@ String matricula;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actividad_prueba);
         mRlView = (RelativeLayout) findViewById(R.id.rlative);
-        imageView=(ImageView)findViewById(R.id.imageView4);
+        imageView=(ImageView)findViewById(R.id.imageView5);
         txtTitulo=(EditText)findViewById(R.id.txtTitulo);
         txtContenido=(EditText)findViewById(R.id.txtContenido);
         spn1=(Spinner)findViewById(R.id.spinner2);
@@ -135,7 +135,7 @@ String matricula;
                 // resize the Bitmap
                 matrix.postScale(scaleWidth, scaleHeight);
                 // volvemos a crear la imagen con los nuevos valores
-                Bitmap resizedBitmap = Bitmap.createBitmap(bnp, 0, 0,width, height, matrix, true);
+                Bitmap resizedBitmap = Bitmap.createBitmap(image, 0, 0,width, height, matrix, true);
                 //execute the async task and upload the image to server
                 new Upload(resizedBitmap,txtTitulo.getText().toString(),txtContenido.getText().toString(),idTipoSeleccionado,matricula).execute();
             }
@@ -212,7 +212,15 @@ String matricula;
         }else{
             super.onRequestPermissionsResult(requestsCode, permissions, grantResults);
         }
-    }
+        if(requestsCode == MY_PERMISSIONS){
+            if(grantResults.length == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(ActividadPrueba.this, "Permisos aceptados", Toast.LENGTH_SHORT).show();
+                btnAbrirGaleria.setEnabled(true);
+            }
+        }else{
+            showExplanation();
+        }
+        }
     private void showOptions() {
         final CharSequence[] option = {"Tomar foto", "Elegir de galeria", "Cancelar"};
         final AlertDialog.Builder builder = new AlertDialog.Builder(ActividadPrueba.this);
