@@ -47,7 +47,8 @@ public class GestionPublicaciones extends AppCompatActivity {
     ImageView img1;
     public Bitmap bmp1,image;
     //public String SERVER = "http://fsociety.somee.com/WebService.asmx/ModificarPublicacion?",     timestamp;
-    public String SERVER = "http://169.254.3.130:8091/WebService.asmx/ModificarPublicacion?",timestamp;
+    //public String SERVER = "http://169.254.3.130:8091/WebService.asmx/ModificarPublicacion?",timestamp;
+    public String SERVER = "http://davisaac19-001-site1.atempurl.com//WebService.asmx/ModificarPublicacion?",timestamp;
 
     public int TipoPub,idTipoSeleccionado=0;
     String[] Tipos={"Seleccionar...","Publicidad","Aviso","Reporte","Otra"};

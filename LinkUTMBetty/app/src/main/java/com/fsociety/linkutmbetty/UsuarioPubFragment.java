@@ -123,7 +123,8 @@ public class UsuarioPubFragment extends Fragment implements SwipeRefreshLayout.O
 
         String action="BuscarPublicacionUsuario";
         //String Url="http://fsociety.somee.com/WebService.asmx/";
-        String Url="http://169.254.3.130:8091/WebService.asmx/";
+        //String Url="http://169.254.3.130:8091/WebService.asmx/";
+        String Url="http://davisaac19-001-site1.atempurl.com//WebService.asmx/";
         String UrlWeb=Url+action+"?CodigoUsuario="+dato;
         new JSONTask().execute(UrlWeb);
         //Referencia al listView
@@ -325,7 +326,8 @@ public class UsuarioPubFragment extends Fragment implements SwipeRefreshLayout.O
         //Aqui ejecutamos el codigo necesario para refrescar nuestra interfaz grafica.
         String action="BuscarPublicacionUsuario";
         //String Url="http://fsociety.somee.com/WebService.asmx/";
-        String Url="http://169.254.3.130:8091/WebService.asmx/";
+        //String Url="http://169.254.3.130:8091/WebService.asmx/";
+        String Url="http://davisaac19-001-site1.atempurl.com//WebService.asmx/";
         String UrlWeb=Url+action+"?CodigoUsuario="+dato;
         new JSONTask().execute(UrlWeb);
         //Antes de ejecutarlo, indicamos al swipe layout que muestre la barra indeterminada de progreso.

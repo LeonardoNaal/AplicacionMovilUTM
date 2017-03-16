@@ -42,15 +42,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -117,6 +108,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             fragment = new PublicacionesFragment();
             fragmentSelect = true;
+            item.isChecked();
 
         } else if (id == R.id.nav_gallery) {
             //Descomentar para que al hacer clic traiga el fragmento
@@ -127,8 +119,6 @@ public class MainActivity extends AppCompatActivity
             fragment=new SitiosFragment();
             fragmentSelect=true;
 
-        } else if (id == R.id.nav_manage) {
-
         } else if (id == R.id.nav_share) {
 
 
@@ -138,9 +128,10 @@ public class MainActivity extends AppCompatActivity
         //Sentencia para poder iniciar transición de fragments
         //Recibe el contenedor a reemplazar y le pasa el fragment definido más arriba
         getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, fragment).commit();
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+        //Obtiene y ajusta el título al que tiene el fragmento
+        getSupportActionBar().setTitle(item.getTitle());
         return true;
     }
 

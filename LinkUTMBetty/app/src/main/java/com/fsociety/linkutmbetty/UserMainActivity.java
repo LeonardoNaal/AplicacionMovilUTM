@@ -49,7 +49,7 @@ import java.util.ArrayList;
 
 
 public class UserMainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, PublicacionesFragment.OnFragmentInteractionListener, ActividadesFragment.OnFragmentInteractionListener, UsuarioPubFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, PublicacionesFragment.OnFragmentInteractionListener, ActividadesFragment.OnFragmentInteractionListener, UsuarioPubFragment.OnFragmentInteractionListener, SitiosFragment.OnFragmentInteractionListener {
     ListView listaUsuario;
     TextView txtMatricula;
     ArrayList<publicacion> image;
@@ -153,6 +153,7 @@ public class UserMainActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             fragment = new PublicacionesFragment();
             fragmentSelect = true;
+
         } else if (id == R.id.nav_gallery) {
             fragment = new ActividadesFragment();
             fragmentSelect = true;
@@ -160,6 +161,7 @@ public class UserMainActivity extends AppCompatActivity
         } else if (id == R.id.nav_slideshow) {
             fragment=new SitiosFragment();
             fragmentSelect=true;
+
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
@@ -171,6 +173,7 @@ public class UserMainActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+        getSupportActionBar().setTitle(item.getTitle());
         return true;
     }
 

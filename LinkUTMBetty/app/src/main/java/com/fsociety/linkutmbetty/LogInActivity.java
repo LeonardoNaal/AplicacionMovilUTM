@@ -37,7 +37,8 @@ EditText edtUsuario,edtContraseña;
                 String contraseña=edtContraseña.getText().toString();
                 String action="Loguin";
                 //String Url="http://fsociety.somee.com/WebService.asmx/";
-                String Url="http://169.254.3.130:8091/WebService.asmx/";
+                //String Url="http://169.254.3.130:8091/WebService.asmx/";
+                String Url="http://davisaac19-001-site1.atempurl.com//WebService.asmx/";
                 String UrlWeb=Url+action+"?user="+user+"&contraseña="+contraseña;
                 new JSONTask().execute(UrlWeb);
             }
