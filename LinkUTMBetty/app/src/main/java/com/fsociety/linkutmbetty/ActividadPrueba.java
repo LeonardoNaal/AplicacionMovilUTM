@@ -23,6 +23,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -137,7 +138,17 @@ String matricula;
                 // volvemos a crear la imagen con los nuevos valores
                 Bitmap resizedBitmap = Bitmap.createBitmap(image, 0, 0,width, height, matrix, true);
                 //execute the async task and upload the image to server
-                new Upload(resizedBitmap,txtTitulo.getText().toString(),txtContenido.getText().toString(),idTipoSeleccionado,matricula).execute();
+                String strTitulo = txtTitulo.getText().toString();
+                String strContenido = txtContenido.getText().toString();
+
+                     if(TextUtils.isEmpty(strTitulo)||TextUtils.isEmpty(strContenido)||spn1.getSelectedItem()==0)
+                     {
+                         Toast.makeText(ActividadPrueba.this, "Verifica tus datos ", Toast.LENGTH_SHORT).show();
+                         return;
+                     }
+                else{
+                         new Upload(resizedBitmap,txtTitulo.getText().toString(),txtContenido.getText().toString(),idTipoSeleccionado,matricula).execute();
+                     }
             }
         });
         btnAbrirGaleria=(Button)findViewById(R.id.btnAbrir);
@@ -391,8 +402,8 @@ String matricula;
         protected void onPostExecute(String s) {
             //show image uploaded
             Toast.makeText(getApplicationContext(),"Datos agregados correctamente", Toast.LENGTH_SHORT).show();
-
             Intent intent=new Intent(ActividadPrueba.this,UserMainActivity.class);
+            intent.putExtra("Matricula",matricula);
             startActivity(intent);
         }
     }

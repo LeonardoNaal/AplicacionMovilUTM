@@ -1,5 +1,6 @@
 package com.fsociety.linkutmbetty;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
@@ -294,6 +295,8 @@ public class GestionPublicaciones extends AppCompatActivity {
         protected void onPostExecute(String s) {
             //show image uploaded
             Toast.makeText(getApplicationContext(),"Datos modificados correctamente", Toast.LENGTH_SHORT).show();
+            Intent intent=new Intent(GestionPublicaciones.this,UserMainActivity.class);
+            startActivity(intent);
         }
     }
 }
