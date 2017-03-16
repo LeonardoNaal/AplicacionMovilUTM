@@ -42,8 +42,8 @@ public class AgregarPublicacion extends AppCompatActivity {
     EditText txtTitulo,txtContenido;
     ImageView imageView;
     public int idTipoSeleccionado;
-    public String SERVER = "http://fsociety.somee.com/WebService.asmx/agregarPublicacion?",
-            timestamp;
+    //public String SERVER = "http://fsociety.somee.com/WebService.asmx/agregarPublicacion?", timestamp;
+    public String SERVER = "http://fsociety.somee.com/WebService.asmx/agregarPublicacion?", timestamp;
     private static final String TAG = AgregarPublicacion.class.getSimpleName();
     Spinner spn1;
 private static  final int RESULT_CODE=1;

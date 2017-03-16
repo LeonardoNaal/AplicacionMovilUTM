@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -45,18 +46,27 @@ EditText txtNombre,txtMatricula,txtAPaterno,txtAMaterno,txtContraseña,txtContra
             @Override
             public void onClick(View v) {
                 //Código para registrar al usuario
-                String action="Registrarse";
-                //String Url="http://fsociety.somee.com/WebService.asmx/";
-                String Url="http://169.254.3.130:8091/WebService.asmx/";
-
+                String strMatricula = txtMatricula.getText().toString();
+                String strNombre = txtNombre.getText().toString();
+                String strApPaterno = txtAPaterno.getText().toString();
+                String strContraseña1 = txtContraseña.getText().toString();
+                String strContraseña2 = txtContraseña2.getText().toString();
+                if(TextUtils.isEmpty(strMatricula) || TextUtils.isEmpty(strNombre)||TextUtils.isEmpty(strApPaterno)||strContraseña1!=strContraseña2) {
+                    Toast.makeText(RegistroActivity.this, "Verifica tus datos ", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else {
+                    String action="Registrarse";
+                    //String Url="http://fsociety.somee.com/WebService.asmx/";
+                    String Url="http://169.254.3.130:8091/WebService.asmx/";
                     String UrlWeb=Url+action+"?codUser="+txtMatricula.getText().toString()+"&nombre="+txtNombre.getText().toString()+"&apPaterno="+txtAPaterno.getText().toString()+"&apMaterno="+txtAMaterno.getText().toString()+"&contraseña="+txtContraseña.getText().toString()+"&TipoUser="+1;
                     new JSONTask().execute(UrlWeb);
-
+                }
                 //    Toast.makeText(RegistroActivity.this,"Favor de verificar sus datos",Toast.LENGTH_SHORT).show();
 
             }
         });
-
+        //boton que permite regresar al menu principal
         btnCancelar = (Button) findViewById(R.id.btnCancelar);
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override

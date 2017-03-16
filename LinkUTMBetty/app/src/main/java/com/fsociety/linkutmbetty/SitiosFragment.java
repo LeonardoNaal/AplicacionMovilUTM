@@ -387,8 +387,8 @@ public class SitiosFragment extends Fragment {
                             x = 1;
                         } else {
                             trazo2 = listaPuntos.get((int) asd.caminosFinal.charAt(i) - 65);
-                            int width = tempBitmap.getWidth() / 1200;
-                            int height = tempBitmap.getHeight() / 755;
+                            int width = tempBitmap.getWidth() / 1000;
+                            int height = tempBitmap.getHeight() / 655;
                             tempCanvas.drawLine(trazo1.x * width, trazo1.y * height, trazo2.x * width, trazo2.y * height, paint);
                             trazo1 = trazo2;
                         }

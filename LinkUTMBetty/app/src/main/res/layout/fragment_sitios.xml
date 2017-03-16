@@ -114,14 +114,13 @@
 
                 <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="wrap_content"
+                    android:layout_width="298dp"
                     android:layout_height="195dp"
                     android:layout_marginTop="35dp"
                     android:background="@drawable/mapautm"
                     android:contentDescription="@string/content_img"
-                    app:srcCompat="?android:attr/fastScrollTrackDrawable" />
-
-
+                    app:srcCompat="?android:attr/fastScrollTrackDrawable"
+                    android:layout_gravity="center_horizontal" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

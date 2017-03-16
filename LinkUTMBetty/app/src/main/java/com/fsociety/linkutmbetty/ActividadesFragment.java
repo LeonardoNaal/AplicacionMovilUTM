@@ -93,8 +93,8 @@ public class ActividadesFragment extends Fragment implements SwipeRefreshLayout.
     @Override
     public void onRefresh() {
         String action="TopTenActividades";
-        String Url="http://fsociety.somee.com/WebService.asmx/";
-        //String Url="http://169.254.3.130:8091/WebService.asmx/";
+        //String Url="http://fsociety.somee.com/WebService.asmx/";
+        String Url="http://169.254.3.130:8091/WebService.asmx/";
         String UrlWeb=Url+action;
         new JSONTask().execute(UrlWeb);
         //Antes de ejecutarlo, indicamos al swipe layout que muestre la barra indeterminada de progreso.
@@ -224,8 +224,8 @@ public class ActividadesFragment extends Fragment implements SwipeRefreshLayout.
         });
         String action="TopTenActividades";
 
-        String Url="http://fsociety.somee.com/WebService.asmx/";
-        //String Url="http://169.254.3.130:8091/WebService.asmx/";
+        //String Url="http://fsociety.somee.com/WebService.asmx/";
+        String Url="http://169.254.3.130:8091/WebService.asmx/";
         String UrlWeb=Url+action;
         new JSONTask().execute(UrlWeb);
         return view;
