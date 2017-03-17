@@ -122,6 +122,31 @@
                     app:srcCompat="?android:attr/fastScrollTrackDrawable"
                     android:layout_gravity="center_horizontal" />
             </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lblNombreDestino" />
+
+                <ImageView
+                    android:layout_width="298dp"
+                    android:layout_height="195dp"
+                    app:srcCompat="@drawable/borde_edit_text"
+                    android:id="@+id/imgFotoDestino"
+                    android:layout_gravity="center_horizontal" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lblDescripcionDestino" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </FrameLayout>

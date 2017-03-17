@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -43,14 +44,14 @@ public class SitiosFragment extends Fragment {
     int[][] matrizAdyacencia = new int[53][53];
     Spinner spinnerOrigen;
     Spinner spinnerDestino;
-    Bitmap icon;
+    Bitmap icon,imagenEdificio;
     Canvas tempCanvas;
     Paint paint = new Paint();
-    ImageView imageView;
+    ImageView imageView,imEdi;
     Bitmap tempBitmap;
     CheckBox checkBox;
     Button btnBuscar;
-    TextView txtResultado;
+    TextView txtResultado,lblnomEd,lbldesEd;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -89,14 +90,153 @@ public class SitiosFragment extends Fragment {
         }
 
     }
-
+    //Cambia la imagen y los labels que estan debajo del mapa;
+    private void llenarDatosEdificio(int destino){
+        Context context=getActivity().getApplicationContext();
+        imEdi.setVisibility(View.VISIBLE);
+        lblnomEd.setVisibility(View.VISIBLE);
+        lbldesEd.setVisibility(View.VISIBLE);
+        switch (destino){
+            case 0:
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificioa);
+                imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
+                lblnomEd.setText("Edificio A");
+                lbldesEd.setText("Soy un edificio");
+                break;
+            case 1:
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificiob);
+                imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
+                lblnomEd.setText("");
+                lbldesEd.setText("");
+                break;
+            case 2:
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificioc);
+                imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
+                lblnomEd.setText("");
+                lbldesEd.setText("");
+                break;
+            case 3:
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
+                imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
+                lblnomEd.setText("");
+                lbldesEd.setText("");
+                break;
+            case 4:
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificiof);
+                imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
+                lblnomEd.setText("");
+                lbldesEd.setText("");
+                break;
+            case 5:
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificiog);
+                imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
+                lblnomEd.setText("");
+                lbldesEd.setText("");
+                break;
+            case 6:
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
+                imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
+                lblnomEd.setText("");
+                lbldesEd.setText("");
+                break;
+            case 7:
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificioi);
+                imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
+                lblnomEd.setText("");
+                lbldesEd.setText("");
+                break;
+            case 8:
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificioj);
+                imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
+                lblnomEd.setText("");
+                lbldesEd.setText("");
+                break;
+            case 9:
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificiok);
+                imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
+                lblnomEd.setText("");
+                lbldesEd.setText("");
+                break;
+            case 10:
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificiom);
+                imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
+                lblnomEd.setText("");
+                lbldesEd.setText("");
+                break;
+            case 11:
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificion);
+                imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
+                lblnomEd.setText("");
+                lbldesEd.setText("");
+                break;
+            case 12:
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificioq);
+                imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
+                lblnomEd.setText("");
+                lbldesEd.setText("");
+                break;
+            case 13:
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificior);
+                imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
+                lblnomEd.setText("");
+                lbldesEd.setText("");
+                break;
+            case 14:
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificiot);
+                imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
+                lblnomEd.setText("");
+                lbldesEd.setText("");
+                break;
+            case 15:
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
+                imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
+                lblnomEd.setText("");
+                lbldesEd.setText("");
+                break;
+            case 16:
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
+                imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
+                lblnomEd.setText("");
+                lbldesEd.setText("");
+                break;
+            case 17:
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
+                imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
+                lblnomEd.setText("");
+                lbldesEd.setText("");
+                break;
+            case 18:
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
+                imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
+                lblnomEd.setText("");
+                lbldesEd.setText("");
+                break;
+            case 19:
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
+                imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
+                lblnomEd.setText("");
+                lbldesEd.setText("");
+                break;
+            case 20:
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
+                imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
+                lblnomEd.setText("");
+                lbldesEd.setText("");
+                break;
+        }
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
         final View view = inflater.inflate(R.layout.fragment_sitios, container, false);
-
+        imEdi = (ImageView) view.findViewById(R.id.imgFotoDestino);
+        lblnomEd = (TextView) view.findViewById(R.id.lblNombreDestino);;
+        lbldesEd = (TextView) view.findViewById(R.id.lblDescripcionDestino);;
+        imEdi.setVisibility(View.INVISIBLE);
+        lblnomEd.setVisibility(View.INVISIBLE);
+        lbldesEd.setVisibility(View.INVISIBLE);
         //Codigo para la localizacion de los sitios
         for(int i = 0;i<53;i++){
             for(int j = 0;j<53;j++){
@@ -310,7 +450,7 @@ public class SitiosFragment extends Fragment {
         adapter.add("Edificio A");
         adapter.add("Edificio B");
         adapter.add("Edificio C");
-        adapter.add("Edificio E");
+        adapter.add("Edificio E (Cafeteria)");
         adapter.add("Edificio F");
         adapter.add("Edificio G");
         adapter.add("Edificio H");
@@ -332,7 +472,7 @@ public class SitiosFragment extends Fragment {
         spinnerDestino.setAdapter(adapter);
         spinnerOrigen.setAdapter(adapter);
         //endregion
-        paint.setColor(Color.BLACK);
+        paint.setColor(Color.RED);
         paint.setStrokeWidth(15);
 
         checkBox = (CheckBox) view.findViewById(R.id.checkBox);
@@ -363,6 +503,7 @@ public class SitiosFragment extends Fragment {
                 int origen;
                 origen = (int)spinnerOrigen.getSelectedItemId();
                 destino = (int)spinnerDestino.getSelectedItemId();
+                llenarDatosEdificio(destino);
                 if(origen == 17){origen = 19;}
                 else if(origen == 18){origen = 48;}
                 else if(origen == 19){origen = 28;}
