@@ -6,4 +6,11 @@
         android:orderInCategory="100"
         android:title="@string/iniciar_Sesion"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_Horario"
+        android:orderInCategory="100"
+        android:title="@string/iniciar_Horario"
+        app:showAsAction="never" />
+
 </menu>

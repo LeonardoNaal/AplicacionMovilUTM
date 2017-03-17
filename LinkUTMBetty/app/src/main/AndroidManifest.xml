@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.fsociety.linkutmbetty">
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera" android:required="true" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,7 +19,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Splashscreen"
+        <activity
+            android:name=".Splashscreen"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,8 +45,12 @@
         <activity android:name=".LogInActivity" />
         <activity android:name=".AgregarPublicacion" />
         <activity android:name=".GestionPublicaciones" />
-        <activity android:name=".ActividadPrueba"></activity>
-        <activity android:name=".RegistroActivity"></activity>
+        <activity android:name=".ActividadPrueba" />
+        <activity android:name=".RegistroActivity" />
+        <activity android:name=".Horario" />
+        <activity android:name=".VistaHorario" />
+        <activity android:name=".ListaHorario" />
+        <activity android:name=".GestionHorario"></activity>
     </application>
 
 </manifest>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LinkUTM v.alpha</string>
+    <string name="app_name">LinkUTM</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -24,4 +24,6 @@
     <!-- Valores para la sección de Registro -->
     <string name="btn_canelar1">Cancelar</string>
     <string name="btn_registro">Registrarse</string>
+
+    <string name="iniciar_Horario">Iniciar horario</string>
 </resources>

@@ -13,11 +13,11 @@ import java.util.ArrayList;
  */
 
 public abstract class Lista_adaptador extends BaseAdapter {
-    private ArrayList<publicacion> entradas;
+    private ArrayList<?> entradas;
     private int R_layout_IdView;
     private Context contexto;
 
-    public Lista_adaptador(Context contexto, int R_layout_IdView, ArrayList<publicacion> entradas) {
+    public Lista_adaptador(Context contexto, int R_layout_IdView, ArrayList<?> entradas) {
         super();
         this.contexto = contexto;
         this.entradas = entradas;
@@ -48,5 +48,6 @@ public abstract class Lista_adaptador extends BaseAdapter {
     public long getItemId(int posicion) {
         return posicion;
     }
+
     public abstract void onEntrada(Object entrada, View view);
 }
