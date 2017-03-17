@@ -227,7 +227,7 @@ public class UsuarioPubFragment extends Fragment implements SwipeRefreshLayout.O
                         publicacion pub=new publicacion(objeto.getInt("IDPublicacion"),objeto.getString("Titulo"));
                         pub.setData(objeto.getString("Image"));
                         pub.setContenido(objeto.getString("Contenido"));
-                        pub.setFecha(objeto.getString("Fecha"));
+                        pub.setFecha(objeto.getString("Fecha").substring(0,10));
                         pub.setTipo(objeto.getInt("IDTipo"));
                         image.add(pub);
                     }

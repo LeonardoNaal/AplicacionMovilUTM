@@ -1,7 +1,9 @@
 package com.fsociety.linkutmbetty;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -116,13 +118,12 @@ public class GestionPublicaciones extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Al finalizar este método debe regresar a UserMainActivity
-                if(((BitmapDrawable) img1.getDrawable()).getBitmap()==null){
-                    Drawable drawable=getResources().getDrawable(R.drawable.estandar2);
+                if(img1.getDrawable()==null){
+                    Resources resources = getResources();
+                    Bitmap source = BitmapFactory.decodeResource(resources,R.drawable.estandar2);
 
-                    img1.setImageDrawable(drawable);
-
-                    int width = img1.getWidth();
-                    int height = img1.getHeight();
+                    int width = source.getWidth();
+                    int height = source.getHeight();
                     int newWidth =180;
                     int newHeight =150;
 
@@ -135,14 +136,13 @@ public class GestionPublicaciones extends AppCompatActivity {
                     // resize the Bitmap
                     matrix.postScale(scaleWidth, scaleHeight);
                     // volvemos a crear la imagen con los nuevos valores
-                    Bitmap resizedBitmap = Bitmap.createBitmap(((BitmapDrawable) img1.getDrawable()).getBitmap(), 0, 0,width, height, matrix, true);
+                    Bitmap resizedBitmap = Bitmap.createBitmap(source, 0, 0,width, height, matrix, true);
                     img1.setImageBitmap(resizedBitmap);
                     image = resizedBitmap;
                 }
                 else{
                      image = ((BitmapDrawable) img1.getDrawable()).getBitmap();
                 }
-
                 //execute the async task and upload the image to server
                 if(idTipoSeleccionado==0){
                     idTipoSeleccionado=TipoPub;
@@ -158,7 +158,8 @@ public class GestionPublicaciones extends AppCompatActivity {
             public void onClick(View v) {
                 String action="EliminarPublicaciones";
                 //String Url="http://fsociety.somee.com/WebService.asmx/";
-                String Url="http://169.254.3.130:8091/WebService.asmx/";
+                //String Url="http://169.254.3.130:8091/WebService.asmx/";
+                String Url="http://davisaac19-001-site1.atempurl.com//WebService.asmx/";
                 String UrlWeb=Url+action+"?idPublicacion="+idPublicacion;
                 new JSONTask().execute(UrlWeb);
                 //Al finalizar este método debe regresar a UserMainActivity
@@ -213,6 +214,9 @@ public class GestionPublicaciones extends AppCompatActivity {
                 Log.e("salida",resultado);
         if(Integer.parseInt(resultado)==1){
             Toast.makeText(GestionPublicaciones.this, "Datos eliminados correctamente", Toast.LENGTH_SHORT).show();
+            Intent intent=new Intent(GestionPublicaciones.this,UserMainActivity.class);
+            intent.putExtra("Matricula",codUser);
+            startActivity(intent);
         }
                 else{
             Toast.makeText(GestionPublicaciones.this, "Error", Toast.LENGTH_SHORT).show();
@@ -296,6 +300,7 @@ public class GestionPublicaciones extends AppCompatActivity {
             //show image uploaded
             Toast.makeText(getApplicationContext(),"Datos modificados correctamente", Toast.LENGTH_SHORT).show();
             Intent intent=new Intent(GestionPublicaciones.this,UserMainActivity.class);
+            intent.putExtra("Matricula",codUser);
             startActivity(intent);
         }
     }

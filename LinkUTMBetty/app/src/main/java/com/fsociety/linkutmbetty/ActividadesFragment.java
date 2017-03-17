@@ -169,8 +169,8 @@ public class ActividadesFragment extends Fragment implements SwipeRefreshLayout.
                         act.setId(objeto.getInt("IDActividad"));
                         act.setHFin(objeto.getString("HoraFin"));
                         act.setHInicio(objeto.getString("HoraInicio"));
-                        act.setFFin(objeto.getString("FechaFin"));
-                        act.setFInicio(objeto.getString("FechaIni"));
+                        act.setFFin(objeto.getString("FechaFin").substring(0,10));
+                        act.setFInicio(objeto.getString("FechaIni").substring(0,10));
                         act.setContenido(objeto.getString("Descripcion"));
                         Actividad.add(act);
                     }

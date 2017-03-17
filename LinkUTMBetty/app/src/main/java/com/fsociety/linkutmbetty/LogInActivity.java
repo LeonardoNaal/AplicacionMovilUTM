@@ -22,12 +22,25 @@ import java.net.URL;
 
 public class LogInActivity extends AppCompatActivity {
 EditText edtUsuario,edtContraseña;
-
+boolean verificar=true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
         edtUsuario=(EditText)findViewById(R.id.txtMatricula);
+        edtUsuario.addTextChangedListener(new TextValidator(edtUsuario) {
+            @Override
+            public void validate(EditText editText, String text) {
+                if( text.length() < 8 ){
+                    edtUsuario.setError( "La matricula es muy corta" );
+                    verificar=false;
+                }
+                else{
+                    verificar=true;
+                }
+                }
+
+        });
         edtContraseña=(EditText)findViewById(R.id.txtContraseña);
         Button btnIniciar = (Button) findViewById(R.id.btnIniciar);
         btnIniciar.setOnClickListener(new View.OnClickListener() {
@@ -35,12 +48,14 @@ EditText edtUsuario,edtContraseña;
             public void onClick(View v) {
                 String user=edtUsuario.getText().toString();
                 String contraseña=edtContraseña.getText().toString();
-                String action="Loguin";
-                //String Url="http://fsociety.somee.com/WebService.asmx/";
-                //String Url="http://169.254.3.130:8091/WebService.asmx/";
-                String Url="http://davisaac19-001-site1.atempurl.com//WebService.asmx/";
-                String UrlWeb=Url+action+"?user="+user+"&contraseña="+contraseña;
-                new JSONTask().execute(UrlWeb);
+                if(verificar==true){
+                    String action="Loguin";
+                    //String Url="http://fsociety.somee.com/WebService.asmx/";
+                    //String Url="http://169.254.3.130:8091/WebService.asmx/";
+                    String Url="http://davisaac19-001-site1.atempurl.com//WebService.asmx/";
+                    String UrlWeb=Url+action+"?user="+user+"&contraseña="+contraseña;
+                    new JSONTask().execute(UrlWeb);
+                }
             }
         });
         Button btnRegistro=(Button)findViewById(R.id.btnRegistro);

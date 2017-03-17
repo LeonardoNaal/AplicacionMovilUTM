@@ -174,7 +174,7 @@ public class PublicacionesFragment extends Fragment  implements SwipeRefreshLayo
                         publicacion pub=new publicacion(objeto.getInt("IDPublicacion"),objeto.getString("Titulo"));
                         pub.setData(objeto.getString("image"));
                         pub.setContenido(objeto.getString("Contenido"));
-                        pub.setFecha(objeto.getString("Fecha"));
+                        pub.setFecha(objeto.getString("Fecha").substring(0,10));
                         image.add(pub);
                     }
                 }

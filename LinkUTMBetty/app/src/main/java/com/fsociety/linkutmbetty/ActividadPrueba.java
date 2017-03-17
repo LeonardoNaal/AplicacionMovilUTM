@@ -6,11 +6,13 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -115,40 +117,85 @@ String matricula;
             }
         });
 
+        final String[] MalasPalabras=new String[]{"PUTO","PENDEJO","MARICÓN","PINCHE","CHINGADERA","PENDEJETE","PUTA","CHINGADA","PUÑETAS","HIJO DE LA CHINGADA","MIERDA","MARRANO","VERGA","MAMES","MAMADA","MAMÓN","MAMONA","MADRAZO","CABRÓN","REPENDEJO","PENDEJA","PUTAZO","VERGAZO"};
         //Referencia al botón Iniciar
         btnIniciar = (Button) findViewById(R.id.btnPublicar);
         btnIniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Código para publicar los datos
-                Bitmap image = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-                int width = image.getWidth();
-                int height = image.getHeight();
-                int newWidth =150;
-                int newHeight =120;
+                boolean comprobar=true;
+                boolean ValTitulo=true,ValContenido=true;
+                String strTitulo = txtTitulo.getText().toString().toUpperCase();
+                String strContenido = txtContenido.getText().toString().toUpperCase();
+                for (String d : MalasPalabras)
+                {
+                    if(strTitulo.contains(d)){
+                        comprobar=false;
+                    }
+                    if(strContenido.contains(d)){
+                        comprobar=false;
+                    }
+                }
+                if (comprobar==false){
+                    Toast.makeText(ActividadPrueba.this,"Contenido inapropiado",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    if(TextUtils.isEmpty(strTitulo))
+                    {txtTitulo.setError("Dato obligatorio");
+                        ValTitulo=false;
+                    }
+                    if(TextUtils.isEmpty(strContenido)){
+                        txtContenido.setError("Dato obligatorio");
+                        ValContenido=false;
+                    }
+                    if(ValContenido==true && ValTitulo==true){
+                        if(imageView.getDrawable()==null){
 
-                // calculamos el escalado de la imagen destino
-                float scaleWidth = ((float) newWidth) / width;
-                float scaleHeight = ((float) newHeight) / height;
-                // para poder manipular la imagen
-                // debemos crear una matriz
-                Matrix matrix = new Matrix();
-                // resize the Bitmap
-                matrix.postScale(scaleWidth, scaleHeight);
-                // volvemos a crear la imagen con los nuevos valores
-                Bitmap resizedBitmap = Bitmap.createBitmap(image, 0, 0,width, height, matrix, true);
-                //execute the async task and upload the image to server
-                String strTitulo = txtTitulo.getText().toString();
-                String strContenido = txtContenido.getText().toString();
+                            Resources resources = getResources();
+                            Bitmap source = BitmapFactory.decodeResource(resources,R.drawable.estandar2);
 
-                     if(TextUtils.isEmpty(strTitulo)||TextUtils.isEmpty(strContenido)||spn1.getSelectedItem()==0)
-                     {
-                         Toast.makeText(ActividadPrueba.this, "Verifica tus datos ", Toast.LENGTH_SHORT).show();
-                         return;
-                     }
-                else{
-                         new Upload(resizedBitmap,txtTitulo.getText().toString(),txtContenido.getText().toString(),idTipoSeleccionado,matricula).execute();
-                     }
+                            int width = source.getWidth();
+                            int height = source.getHeight();
+                            int newWidth =180;
+                            int newHeight =150;
+
+                            // calculamos el escalado de la imagen destino
+                            float scaleWidth = ((float) newWidth) / width;
+                            float scaleHeight = ((float) newHeight) / height;
+                            // para poder manipular la imagen
+                            // debemos crear una matriz
+                            Matrix matrix = new Matrix();
+                            // resize the Bitmap
+                            matrix.postScale(scaleWidth, scaleHeight);
+                            // volvemos a crear la imagen con los nuevos valores
+                            Bitmap resizedBitmap = Bitmap.createBitmap(source, 0, 0,width, height, matrix, true);
+                            imageView.setImageBitmap(resizedBitmap);
+                            new Upload(resizedBitmap,txtTitulo.getText().toString(),txtContenido.getText().toString(),idTipoSeleccionado,matricula).execute();
+                        }
+                        else{
+                            //Código para publicar los datos
+                            Bitmap image = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+                            int width = image.getWidth();
+                            int height = image.getHeight();
+                            int newWidth =150;
+                            int newHeight =120;
+
+                            // calculamos el escalado de la imagen destino
+                            float scaleWidth = ((float) newWidth) / width;
+                            float scaleHeight = ((float) newHeight) / height;
+                            // para poder manipular la imagen
+                            // debemos crear una matriz
+                            Matrix matrix = new Matrix();
+                            // resize the Bitmap
+                            matrix.postScale(scaleWidth, scaleHeight);
+                            // volvemos a crear la imagen con los nuevos valores
+                            Bitmap resizedBitmap = Bitmap.createBitmap(image, 0, 0,width, height, matrix, true);
+                            //execute the async task and upload the image to serve
+                            new Upload(resizedBitmap,txtTitulo.getText().toString(),txtContenido.getText().toString(),idTipoSeleccionado,matricula).execute();
+                        }
+                    }
+                }
+
             }
         });
         btnAbrirGaleria=(Button)findViewById(R.id.btnAbrir);

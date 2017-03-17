@@ -27,7 +27,8 @@ import java.util.ArrayList;
 public class RegistroActivity extends AppCompatActivity {
     Button btnGuardar;
     Button btnCancelar;
-EditText txtNombre,txtMatricula,txtAPaterno,txtAMaterno,txtContraseña,txtContraseña2;
+    boolean ValNombre,ValMatricula,ValApaterno,ValContraseña,verificar;
+    EditText txtNombre,txtMatricula,txtAPaterno,txtAMaterno,txtContraseña,txtContraseña2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +41,19 @@ EditText txtNombre,txtMatricula,txtAPaterno,txtAMaterno,txtContraseña,txtContra
         txtAPaterno=(EditText)findViewById(R.id.txtApellidoPaterno);
         txtContraseña=(EditText)findViewById(R.id.txtContraseña);
         txtContraseña2=(EditText)findViewById(R.id.txtConfirmPass);
+        txtMatricula.addTextChangedListener(new TextValidator(txtMatricula) {
+            @Override
+            public void validate(EditText editText, String text) {
+                if( text.length() < 8 ){
+                    txtMatricula.setError( "La matricula es muy corta" );
+                    verificar=false;
+                }
+                else{
+                    verificar=true;
+                }
+            }
+
+        });
 
         btnGuardar = (Button) findViewById(R.id.btnGuardar);
         btnGuardar.setOnClickListener(new View.OnClickListener() {
@@ -51,11 +65,35 @@ EditText txtNombre,txtMatricula,txtAPaterno,txtAMaterno,txtContraseña,txtContra
                 String strApPaterno = txtAPaterno.getText().toString();
                 String strContraseña1 = txtContraseña.getText().toString();
                 String strContraseña2 = txtContraseña2.getText().toString();
-                if(TextUtils.isEmpty(strMatricula) || TextUtils.isEmpty(strNombre)||TextUtils.isEmpty(strApPaterno)||strContraseña1!=strContraseña2) {
-                    Toast.makeText(RegistroActivity.this, "Verifica tus datos ", Toast.LENGTH_SHORT).show();
-                    return;
+                if(TextUtils.isEmpty(strMatricula)){
+                    txtMatricula.setError("Dato obligatorio");
+                    ValMatricula=false;
                 }
-                else {
+                else{
+                    ValMatricula=true;
+                }
+                if(TextUtils.isEmpty(strNombre)){
+                    txtNombre.setError("Dato obligatorio");
+                    ValNombre=false;
+                }else{
+                 ValNombre=true;
+                }
+                if(TextUtils.isEmpty(strApPaterno)){
+                    txtAPaterno.setError("Dato obligatorio");
+                    ValApaterno=false;
+                }
+                else{
+                    ValApaterno=true;
+                }
+                if(strContraseña1==strContraseña2){
+                    ValContraseña=true;
+                }
+                else{
+                    txtContraseña.setError("Las contraseñas no coinciden");
+                    ValContraseña=false;
+                }
+
+                if(ValNombre==true && ValContraseña==true && ValApaterno==true && ValMatricula==true && verificar==true) {
                     String action="Registrarse";
                     //String Url="http://fsociety.somee.com/WebService.asmx/";
                     //String Url="http://169.254.3.130:8091/WebService.asmx/";
@@ -127,6 +165,11 @@ EditText txtNombre,txtMatricula,txtAPaterno,txtAMaterno,txtContraseña,txtContra
                 try{
                  if(Integer.parseInt(resultado)==1){
                  Toast.makeText(RegistroActivity.this,"Datos agregados correctamente",Toast.LENGTH_SHORT).show();
+                     Intent intent=new Intent(RegistroActivity.this,UserMainActivity.class);
+                     intent.putExtra("Matricula",txtMatricula.getText().toString());
+                     startActivity(intent);
+
+
                  }
                  else {
                      Toast.makeText(RegistroActivity.this,"Error, Matrícula Existente",Toast.LENGTH_SHORT).show();
