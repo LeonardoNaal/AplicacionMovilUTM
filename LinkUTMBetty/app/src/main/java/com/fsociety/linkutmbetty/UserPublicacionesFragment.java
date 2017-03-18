@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -35,105 +34,55 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-import static com.fsociety.linkutmbetty.R.layout.activity_user_main;
-
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link UsuarioPubFragment.OnFragmentInteractionListener} interface
+ * {@link UserPublicacionesFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link UsuarioPubFragment#newInstance} factory method to
- * create an instance of this fragment.
  */
-public class UsuarioPubFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class UserPublicacionesFragment extends Fragment  implements SwipeRefreshLayout.OnRefreshListener {
+    ListView listaPub;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-    Activity activity;
-    ListView list;
     private OnFragmentInteractionListener mListener;
 
-    public UsuarioPubFragment() {
+    public UserPublicacionesFragment() {
         // Required empty public constructor
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment UsuarioPubFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static UsuarioPubFragment newInstance(String param1, String param2) {
-        UsuarioPubFragment fragment = new UsuarioPubFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+String dato;
     private SwipeRefreshLayout swipeLayout;
-    TextView txtMatricula;
-    ArrayList<publicacion> image;
-    public String dato;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final Bundle bdl = getArguments();
         try
         {
-            dato = bdl.getString("id");
+            dato = bdl.getString("idUser");
         }
         catch(final Exception e)
         {
             e.printStackTrace();
         }
         // Inflate the layout for this fragment
-        activity = getActivity();
-        final View view = inflater.inflate(R.layout.fragment_usuario_pub, container, false);
-
-        list = (ListView) view.findViewById(R.id.lsvUsuarioPub);
+        final View view = inflater.inflate(R.layout.fragment_publicaciones_user, container, false);
+        //Referencia al listView que está en fragmentPublicaciones
+        listaPub = (ListView) view.findViewById(R.id.lsvListaPub);
+        //Obtenemos una referencia al viewgroup SwipeLayout
         swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
+
+        //Indicamos que listener recogerá la retrollamada (callback), en este caso, será el metodo OnRefresh de esta clase.
+
         swipeLayout.setOnRefreshListener(this);
+        //Podemos espeficar si queremos, un patron de colores diferente al patrón por defecto.
         swipeLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
-
-
-        String action="BuscarPublicacionUsuario";
-        //String Url="http://fsociety.somee.com/WebService.asmx/";
-        //String Url="http://169.254.3.130:8091/WebService.asmx/";
-        String Url="http://davisaac19-001-site1.atempurl.com//WebService.asmx/";
-        String UrlWeb=Url+action+"?CodigoUsuario="+dato;
-        new JSONTask().execute(UrlWeb);
-        //Referencia al listView
-
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listaPub.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 publicacion elegido = (publicacion) parent.getItemAtPosition(position);
-                Intent intent = new Intent(getActivity(),GestionPublicaciones.class);
+                Intent intent = new Intent(getActivity(),AgregarComentario.class);
                 String auxtitulo = elegido.getTitulo();
                 String auxfecha = elegido.getFecha();
                 Bitmap auxphoto = elegido.getPhoto();
@@ -151,7 +100,7 @@ public class UsuarioPubFragment extends Fragment implements SwipeRefreshLayout.O
                 startActivity(intent);
             }
         });
-        list.setOnScrollListener(new AbsListView.OnScrollListener() {
+        listaPub.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
 
@@ -160,13 +109,42 @@ public class UsuarioPubFragment extends Fragment implements SwipeRefreshLayout.O
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 int filaSuperior = (
-                        list == null//Si la lista esta vacía ó
-                                || list.getChildCount() == 0) ? 0 : list.getChildAt(0).getTop();//Estamos en el elemento superior
+                        listaPub == null//Si la lista esta vacía ó
+                                || listaPub.getChildCount() == 0) ? 0 : listaPub.getChildAt(0).getTop();//Estamos en el elemento superior
                 swipeLayout.setEnabled(filaSuperior >= 0);
             }
         });
+        String action="TopTenPublicaciones";
+        //String Url="http://fsociety.somee.com/WebService.asmx/";
+        //String Url="http://169.254.3.130:8091/WebService.asmx/";
+        String Url="http://davisaac19-001-site1.atempurl.com/WebService.asmx/";
+        String UrlWeb=Url+action;
+        new JSONTask().execute(UrlWeb);
         return view;
     }
+
+    @Override
+    public void onRefresh() {
+        //Codigo para traer todas las publicaciones
+        String action="TopTenPublicaciones";
+        //String Url="http://fsociety.somee.com/WebService.asmx/";
+        //String Url="http://169.254.3.130:8091/WebService.asmx/";
+        String Url="http://davisaac19-001-site1.atempurl.com//WebService.asmx/";
+        String UrlWeb=Url+action;
+        new JSONTask().execute(UrlWeb);
+        //Antes de ejecutarlo, indicamos al swipe layout que muestre la barra indeterminada de progreso.
+        swipeLayout.setRefreshing(true);
+
+        //Vamos a simular un refresco con un handle.
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                //Se supone que aqui hemos realizado las tareas necesarias de refresco, y que ya podemos ocultar la barra de progreso
+                swipeLayout.setRefreshing(false);
+            }
+        }, 3000);
+    }
+
     public class  JSONTask extends AsyncTask<String ,String, String> {
         @Override
         protected  String doInBackground(String... parametros){
@@ -214,7 +192,7 @@ public class UsuarioPubFragment extends Fragment implements SwipeRefreshLayout.O
                 Log.e("salida",resultado);
 
 
-                image=new ArrayList<publicacion>();
+                ArrayList<publicacion> image=new ArrayList<publicacion>();
                 // ArrayList list=new ArrayList();
                 JSONArray ResultadoArray=null;
                 try{
@@ -225,10 +203,9 @@ public class UsuarioPubFragment extends Fragment implements SwipeRefreshLayout.O
                         JSONObject objeto=Jarray.getJSONObject(i);
                         //list.add(objeto.getString("Titulo"));
                         publicacion pub=new publicacion(objeto.getInt("IDPublicacion"),objeto.getString("Titulo"));
-                        pub.setData(objeto.getString("Image"));
+                        pub.setData(objeto.getString("image"));
                         pub.setContenido(objeto.getString("Contenido"));
                         pub.setFecha(objeto.getString("Fecha").substring(0,10));
-                        pub.setTipo(objeto.getInt("IDTipo"));
                         image.add(pub);
                     }
                 }
@@ -236,7 +213,7 @@ public class UsuarioPubFragment extends Fragment implements SwipeRefreshLayout.O
                     e.printStackTrace();
                 }
                 ImagenAdapter obj=new ImagenAdapter(getActivity(),image);
-                list.setAdapter(obj);
+                listaPub.setAdapter(obj);
 
                 // ArrayList list=new ArrayList();
             }
@@ -244,6 +221,12 @@ public class UsuarioPubFragment extends Fragment implements SwipeRefreshLayout.O
                 Log.e("Falla",t.toString());
 
             }
+        }
+    }
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
         }
     }
     public class ImagenAdapter extends BaseAdapter {
@@ -276,34 +259,26 @@ public class UsuarioPubFragment extends Fragment implements SwipeRefreshLayout.O
 
             if(convertView == null) {
                 LayoutInflater inflater = (LayoutInflater)act.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                vi = inflater.inflate(R.layout.vista_usuario_publicaciones, null);
+                vi = inflater.inflate(R.layout.vista_publicaciones, null);
             }
 
             publicacion pub = array.get(position);
 
-            ImageView image = (ImageView) vi.findViewById(R.id.imgImagenPub);
+            ImageView image = (ImageView) vi.findViewById(R.id.imageView3);
             image.setImageBitmap(pub.getPhoto());
 
-            TextView titulo = (TextView) vi.findViewById(R.id.lblTituloUsrPub);
+            TextView titulo = (TextView) vi.findViewById(R.id.lblTitulo);
             titulo.setText(pub.getTitulo());
 
-            TextView fecha =(TextView)vi.findViewById(R.id.lblFechaPub);
+            TextView fecha =(TextView)vi.findViewById(R.id.lblFecha);
             fecha.setText(pub.getFecha());
 
-            TextView Contenido =(TextView)vi.findViewById(R.id.lblContenidoPub);
+            TextView Contenido =(TextView)vi.findViewById(R.id.lblContenido);
             Contenido.setText(pub.getContenido());
 
             return vi;
         }
     }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -319,28 +294,6 @@ public class UsuarioPubFragment extends Fragment implements SwipeRefreshLayout.O
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    @Override
-    public void onRefresh() {
-        //Aqui ejecutamos el codigo necesario para refrescar nuestra interfaz grafica.
-        String action="BuscarPublicacionUsuario";
-        //String Url="http://fsociety.somee.com/WebService.asmx/";
-        //String Url="http://169.254.3.130:8091/WebService.asmx/";
-        String Url="http://davisaac19-001-site1.atempurl.com/WebService.asmx/";
-        String UrlWeb=Url+action+"?CodigoUsuario="+dato;
-        new JSONTask().execute(UrlWeb);
-        //Antes de ejecutarlo, indicamos al swipe layout que muestre la barra indeterminada de progreso.
-        swipeLayout.setRefreshing(true);
-
-        //Vamos a simular un refresco con un handle.
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                //Se supone que aqui hemos realizado las tareas necesarias de refresco, y que ya podemos ocultar la barra de progreso
-                swipeLayout.setRefreshing(false);
-            }
-        }, 3000);
     }
 
     /**

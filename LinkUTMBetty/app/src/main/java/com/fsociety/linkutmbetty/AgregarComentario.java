@@ -4,20 +4,18 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -28,40 +26,34 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link PublicacionesFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- */
-public class PublicacionesFragment extends Fragment  implements SwipeRefreshLayout.OnRefreshListener {
-    ListView listaPub;
-
-    private OnFragmentInteractionListener mListener;
-
-    public PublicacionesFragment() {
-        // Required empty public constructor
-    }
-
+public class AgregarComentario extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
+TextView lblTitulo;
+    String codUser;
+    int codPublicacion;
+    ListView lsvComents2;
+    public String SERVER = "http://davisaac19-001-site1.atempurl.com/WebService.asmx/AgregarComentarios?",timestamp;
     private SwipeRefreshLayout swipeLayout;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        final View view = inflater.inflate(R.layout.fragment_publicaciones, container, false);
-        //Referencia al listView que está en fragmentPublicaciones
-        listaPub = (ListView) view.findViewById(R.id.lsvListaPub);
-        //Obtenemos una referencia al viewgroup SwipeLayout
-        swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_agregar_comentario);
+        setTitle("Comenta");
+        lblTitulo=(TextView)findViewById(R.id.lblTitulo1);
+        lsvComents2=(ListView)findViewById(R.id.lsvComents2);
+        swipeLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_container);
 
         //Indicamos que listener recogerá la retrollamada (callback), en este caso, será el metodo OnRefresh de esta clase.
 
@@ -71,22 +63,7 @@ public class PublicacionesFragment extends Fragment  implements SwipeRefreshLayo
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
-        listaPub.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                publicacion elegido = (publicacion) parent.getItemAtPosition(position);
-                Intent intent = new Intent(getActivity(),VerComentarios.class);
-                String auxtitulo = elegido.getTitulo();
-                String contenido=elegido.getContenido();
-                int auxid = elegido.getId();
-
-                intent.putExtra("id",auxid);
-                intent.putExtra("titulo",auxtitulo);
-                intent.putExtra("contenido",contenido);
-                startActivity(intent);
-            }
-        });
-        listaPub.setOnScrollListener(new AbsListView.OnScrollListener() {
+        lsvComents2.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
 
@@ -95,28 +72,34 @@ public class PublicacionesFragment extends Fragment  implements SwipeRefreshLayo
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 int filaSuperior = (
-                        listaPub == null//Si la lista esta vacía ó
-                                || listaPub.getChildCount() == 0) ? 0 : listaPub.getChildAt(0).getTop();//Estamos en el elemento superior
+                        lsvComents2 == null//Si la lista esta vacía ó
+                                || lsvComents2.getChildCount() == 0) ? 0 : lsvComents2.getChildAt(0).getTop();//Estamos en el elemento superior
                 swipeLayout.setEnabled(filaSuperior >= 0);
             }
         });
-        String action="TopTenPublicaciones";
+
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+            String datotitulo = (String) extras.get("titulo");
+            codPublicacion = (int) extras.getInt("id");
+            codUser=(String) extras.get("codUser");
+            lblTitulo.setText(datotitulo);
+        }
+        String action="VerComentarios";
         //String Url="http://fsociety.somee.com/WebService.asmx/";
         //String Url="http://192.168.1.71:8091/WebService.asmx/";
         String Url="http://davisaac19-001-site1.atempurl.com/WebService.asmx/";
-        String UrlWeb=Url+action;
+        String UrlWeb=Url+action+"?CodPublicacion="+codPublicacion;
         new JSONTask().execute(UrlWeb);
-        return view;
     }
-
     @Override
     public void onRefresh() {
         //Codigo para traer todas las publicaciones
-        String action="TopTenPublicaciones";
+        String action="VerComentarios";
         //String Url="http://fsociety.somee.com/WebService.asmx/";
-        //String Url="http://192.168.1.71:8091/WebService.asmx/";
-        String Url="http://davisaac19-001-site1.atempurl.com/WebService.asmx/";
-        String UrlWeb=Url+action;
+        String Url="http://192.168.1.71:8091/WebService.asmx/";
+        //String Url="http://davisaac19-001-site1.atempurl.com//WebService.asmx/";
+        String UrlWeb=Url+action+"?CodPublicacion="+codPublicacion;
         new JSONTask().execute(UrlWeb);
         //Antes de ejecutarlo, indicamos al swipe layout que muestre la barra indeterminada de progreso.
         swipeLayout.setRefreshing(true);
@@ -130,7 +113,6 @@ public class PublicacionesFragment extends Fragment  implements SwipeRefreshLayo
             }
         }, 3000);
     }
-
     public class  JSONTask extends AsyncTask<String ,String, String> {
         @Override
         protected  String doInBackground(String... parametros){
@@ -173,10 +155,9 @@ public class PublicacionesFragment extends Fragment  implements SwipeRefreshLayo
         @Override
         protected  void onPostExecute(String resultado){
             super.onPostExecute(resultado);
-
             try{
                 Log.e("salida",resultado);
-                ArrayList<publicacion> image=new ArrayList<publicacion>();
+                ArrayList<Comentario> image=new ArrayList<Comentario>();
                 // ArrayList list=new ArrayList();
                 JSONArray ResultadoArray=null;
                 try{
@@ -186,38 +167,30 @@ public class PublicacionesFragment extends Fragment  implements SwipeRefreshLayo
                         ;
                         JSONObject objeto=Jarray.getJSONObject(i);
                         //list.add(objeto.getString("Titulo"));
-                        publicacion pub=new publicacion(objeto.getInt("IDPublicacion"),objeto.getString("Titulo"));
-                        pub.setData(objeto.getString("image"));
-                        pub.setContenido(objeto.getString("Contenido"));
-                        pub.setFecha(objeto.getString("Fecha").substring(0,10));
-                        image.add(pub);
+                        Comentario comentario=new Comentario();
+                        comentario.setIdComentario(objeto.getInt("Id"));
+                        comentario.setApellido(objeto.getString("ApePat"));
+                        comentario.setNombreUsuario(objeto.getString("Nombres"));
+                        comentario.setComentario(objeto.getString("contenido"));
+                        image.add(comentario);
                     }
                 }
                 catch (JSONException e){
                     e.printStackTrace();
                 }
-                ImagenAdapter obj=new ImagenAdapter(getActivity(),image);
-                listaPub.setAdapter(obj);
-
-                // ArrayList list=new ArrayList();
+                AdaptadorComentarios obj=new AdaptadorComentarios(AgregarComentario.this,image);
+                lsvComents2.setAdapter(obj);
             }
             catch (Throwable t){
                 Log.e("Falla",t.toString());
-
             }
         }
     }
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-    public class ImagenAdapter extends BaseAdapter {
+    public class AdaptadorComentarios extends BaseAdapter {
         protected Activity act;
-        protected ArrayList<publicacion> array;
+        protected ArrayList<Comentario> array;
 
-        public ImagenAdapter(Activity ac,ArrayList<publicacion> arr) {
+        public AdaptadorComentarios(Activity ac,ArrayList<Comentario> arr) {
             this.act=ac;
             this.array=arr;
         }
@@ -234,7 +207,7 @@ public class PublicacionesFragment extends Fragment  implements SwipeRefreshLayo
 
         @Override
         public long getItemId(int position) {
-            return array.get(position).getId();
+            return array.get(position).getIdComentario();
         }
 
         @Override
@@ -243,55 +216,73 @@ public class PublicacionesFragment extends Fragment  implements SwipeRefreshLayo
 
             if(convertView == null) {
                 LayoutInflater inflater = (LayoutInflater)act.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                vi = inflater.inflate(R.layout.vista_publicaciones, null);
+                vi = inflater.inflate(R.layout.vista_comentarios, null);
             }
+            Comentario comentario=array.get(position);
+            TextView contenido=(TextView)vi.findViewById(R.id.lblComentario);
+            contenido.setText(comentario.getComentario());
 
-            publicacion pub = array.get(position);
-
-            ImageView image = (ImageView) vi.findViewById(R.id.imageView3);
-            image.setImageBitmap(pub.getPhoto());
-
-            TextView titulo = (TextView) vi.findViewById(R.id.lblTitulo);
-            titulo.setText(pub.getTitulo());
-
-            TextView fecha =(TextView)vi.findViewById(R.id.lblFecha);
-            fecha.setText(pub.getFecha());
-
-            TextView Contenido =(TextView)vi.findViewById(R.id.lblContenido);
-            Contenido.setText(pub.getContenido());
-
+            TextView Nombre=(TextView)vi.findViewById(R.id.lblNombre);
+            Nombre.setText(comentario.getNombreUsuario()+" "+comentario.getApellido());
             return vi;
         }
     }
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+    private String hashMapToUrl(HashMap< String,String> params) throws UnsupportedEncodingException {
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+        for(Map.Entry<String,String> entry : params.entrySet()){
+            if (first)
+                first = false;
+            else
+                result.append("&");
+
+            result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+            result.append("=");
+            StringBuilder append = result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
         }
-    }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+        return result.toString();
     }
+    //async task to upload image
+    private class Upload extends AsyncTask<Void,Void,String> {
+        private String codUsuario;
+        private int codPublicacion;
+        private String Contenido;
+        public Upload(String codUsuario,int Codpublicacion,String contenido){
+            this.codUsuario=codUsuario;
+            this.codPublicacion=codPublicacion;
+            this.Contenido=contenido;
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+
+            String cod=String.valueOf(codPublicacion);
+            //generate hashMap to store encodedImage and the name
+            HashMap<String,String> detail = new HashMap<>();
+            detail.put("CodPublicacion",cod );
+            detail.put("codUsuario", codUsuario);
+            detail.put("contenido",Contenido);
+            try{
+                //convert this HashMap to encodedUrl to send to php file
+                String dataToSend = hashMapToUrl(detail);
+                //make a Http request and send data to saveImage.php file
+                String response = Request.post(SERVER,dataToSend);
+
+                //return the response
+                return response;
+
+            }catch (Exception e){
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            //show image uploaded
+            Toast.makeText(getApplicationContext(),"Datos agregados correctamente", Toast.LENGTH_SHORT).show();
+        }
     }
 }

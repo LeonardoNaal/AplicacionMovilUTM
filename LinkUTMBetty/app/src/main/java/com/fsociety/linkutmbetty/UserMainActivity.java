@@ -49,7 +49,7 @@ import java.util.ArrayList;
 
 
 public class UserMainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, PublicacionesFragment.OnFragmentInteractionListener, ActividadesFragment.OnFragmentInteractionListener, UsuarioPubFragment.OnFragmentInteractionListener, SitiosFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, PublicacionesFragment.OnFragmentInteractionListener, ActividadesFragment.OnFragmentInteractionListener, UsuarioPubFragment.OnFragmentInteractionListener, SitiosFragment.OnFragmentInteractionListener, UserPublicacionesFragment.OnFragmentInteractionListener {
     ListView listaUsuario;
     TextView txtMatricula;
     ArrayList<publicacion> image;
@@ -92,6 +92,17 @@ public class UserMainActivity extends AppCompatActivity
       //LayoutInflater.from(this).inflate(R.layout.nav_header_user_main, null);
         txtMatricula=(TextView)header.findViewById(R.id.txtMat);
         txtMatricula.setText(dato);
+        Fragment FragmentPub=null;
+        Class fragmentClassPub=UserPublicacionesFragment.class;
+        try{
+            final Bundle argument = new Bundle();
+            argument.putString("idUser", dato);
+            FragmentPub = (Fragment)fragmentClassPub.newInstance();
+            FragmentPub.setArguments(argument);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         Fragment fragment = null;
         Class fragmentClass=UsuarioPubFragment.class;
         try{
@@ -151,7 +162,7 @@ public class UserMainActivity extends AppCompatActivity
         Fragment fragment = null;
 
         if (id == R.id.nav_camera) {
-            fragment = new PublicacionesFragment();
+            fragment = new UserPublicacionesFragment();
             fragmentSelect = true;
 
         } else if (id == R.id.nav_gallery) {

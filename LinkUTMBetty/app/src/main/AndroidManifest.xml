@@ -43,14 +43,15 @@
             android:label="@string/title_activity_user_main"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LogInActivity" />
-        <activity android:name=".AgregarPublicacion" />
         <activity android:name=".GestionPublicaciones" />
         <activity android:name=".ActividadPrueba" />
         <activity android:name=".RegistroActivity" />
         <activity android:name=".Horario" />
         <activity android:name=".VistaHorario" />
         <activity android:name=".ListaHorario" />
-        <activity android:name=".GestionHorario"></activity>
+        <activity android:name=".GestionHorario" />
+        <activity android:name=".VerComentarios" />
+        <activity android:name=".AgregarComentario"></activity>
     </application>
 
 </manifest>
