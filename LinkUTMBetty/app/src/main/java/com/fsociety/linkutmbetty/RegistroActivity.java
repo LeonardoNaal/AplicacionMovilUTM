@@ -98,7 +98,7 @@ public class RegistroActivity extends AppCompatActivity {
                     //String Url="http://fsociety.somee.com/WebService.asmx/";
                     //String Url="http://169.254.3.130:8091/WebService.asmx/";
                     String Url="http://davisaac19-001-site1.atempurl.com/WebService.asmx/";
-                    String UrlWeb=Url+action+"?codUser="+txtMatricula.getText().toString()+"&nombre="+txtNombre.getText().toString()+"&apPaterno="+txtAPaterno.getText().toString()+"&apMaterno="+txtAMaterno.getText().toString()+"&contraseña="+txtContraseña.getText().toString()+"&TipoUser="+1;
+                    String UrlWeb=Url+action+"?codUser="+txtMatricula.getText().toString()+"&nombre="+txtNombre.getText().toString()+"&apPaterno="+txtAPaterno.getText().toString()+"&apMaterno="+txtAMaterno.getText().toString()+"&contra="+txtContraseña.getText().toString()+"&TipoUser="+1;
                     new JSONTask().execute(UrlWeb);
                 }
                 //    Toast.makeText(RegistroActivity.this,"Favor de verificar sus datos",Toast.LENGTH_SHORT).show();
