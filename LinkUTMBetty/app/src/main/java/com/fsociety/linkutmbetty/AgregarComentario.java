@@ -168,7 +168,7 @@ TextView lblTitulo;
                         JSONObject objeto=Jarray.getJSONObject(i);
                         //list.add(objeto.getString("Titulo"));
                         Comentario comentario=new Comentario();
-                        comentario.setIdComentario(objeto.getInt("Id"));
+                        comentario.setIdComentario(objeto.getInt("CodComentario"));
                         comentario.setApellido(objeto.getString("ApePat"));
                         comentario.setNombreUsuario(objeto.getString("Nombres"));
                         comentario.setComentario(objeto.getString("contenido"));
