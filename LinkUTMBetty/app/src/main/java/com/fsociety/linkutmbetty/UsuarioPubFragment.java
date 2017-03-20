@@ -93,7 +93,6 @@ public class UsuarioPubFragment extends Fragment implements SwipeRefreshLayout.O
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
     @Override
@@ -124,7 +123,7 @@ public class UsuarioPubFragment extends Fragment implements SwipeRefreshLayout.O
         String action="BuscarPublicacionUsuario";
         //String Url="http://fsociety.somee.com/WebService.asmx/";
         //String Url="http://169.254.3.130:8091/WebService.asmx/";
-        String Url="http://davisaac19-001-site1.atempurl.com//WebService.asmx/";
+        String Url="http://davisaac19-001-site1.atempurl.com/WebService.asmx/";
         String UrlWeb=Url+action+"?CodigoUsuario="+dato;
         new JSONTask().execute(UrlWeb);
         //Referencia al listView
@@ -156,7 +155,6 @@ public class UsuarioPubFragment extends Fragment implements SwipeRefreshLayout.O
             public void onScrollStateChanged(AbsListView view, int scrollState) {
 
             }
-
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 int filaSuperior = (
@@ -167,6 +165,7 @@ public class UsuarioPubFragment extends Fragment implements SwipeRefreshLayout.O
         });
         return view;
     }
+
     public class  JSONTask extends AsyncTask<String ,String, String> {
         @Override
         protected  String doInBackground(String... parametros){

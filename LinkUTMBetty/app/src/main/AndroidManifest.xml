@@ -41,6 +41,7 @@
         <activity
             android:name=".UserMainActivity"
             android:label="@string/title_activity_user_main"
+            android:parentActivityName=".UserMainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LogInActivity" />
         <activity android:name=".GestionPublicaciones" />
