@@ -94,12 +94,6 @@ public class UserMainActivity extends AppCompatActivity
         txtMatricula = (TextView) header.findViewById(R.id.txtMat);
         txtMatricula.setText(dato);
 
-        try {
-
-        } catch (Exception e) {
-
-        }
-
         Fragment fragment = null;
         Class fragmentClass = UsuarioPubFragment.class;
         try {
@@ -146,6 +140,11 @@ public class UserMainActivity extends AppCompatActivity
             Intent intent = new Intent(UserMainActivity.this, MainActivity.class);
             startActivity(intent);
         }
+        if (id == R.id.action_Horario) {
+            Intent intent = new Intent(UserMainActivity.this, Horario.class);
+            startActivity(intent);
+        }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -181,6 +180,11 @@ public class UserMainActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().replace(R.id.content_user_main, fragment).commit();
             getSupportActionBar().setTitle(item.getTitle());
 
+        } else if (id == R.id.nav_slideshow) {
+            fragment = new SitiosFragment();
+            fragmentSelect = true;
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_user_main, fragment).commit();
+            getSupportActionBar().setTitle(item.getTitle());
 
         } else if (id == R.id.nav_manage) {
             //Horarios
@@ -192,8 +196,12 @@ public class UserMainActivity extends AppCompatActivity
             Intent intent = new Intent(UserMainActivity.this, MainActivity.class);
             startActivity(intent);
         }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+        if (getSupportActionBar()!=null) {
+            getSupportActionBar().setTitle(item.getTitle());
+        }
         return true;
     }
 

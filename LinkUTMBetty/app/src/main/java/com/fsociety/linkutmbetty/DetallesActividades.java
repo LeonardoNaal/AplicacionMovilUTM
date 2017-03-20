@@ -1,5 +1,6 @@
 package com.fsociety.linkutmbetty;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -24,15 +25,6 @@ public class DetallesActividades extends AppCompatActivity {
         lblHoraIni = (TextView) findViewById(R.id.horaini);
         lblHoraFin = (TextView) findViewById(R.id.horafin);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         Bundle extras = getIntent().getExtras();
         if (extras!=null){
             String datoTitulo = (String) extras.get("nombre");
@@ -49,5 +41,20 @@ public class DetallesActividades extends AppCompatActivity {
             lblContenido.setText(datoContenido);
             //setTitle(datoTitulo);
         }
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Botón compartir funcionando", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                Intent intent = new Intent (Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TEXT, lblContenido.getText());
+                startActivity(Intent.createChooser(intent, "Share with"));
+            }
+        });
+
+
     }
 }
