@@ -129,6 +129,7 @@ public class AgregarComentario extends AppCompatActivity implements SwipeRefresh
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home: //hago un case por si en un futuro agrego mas opciones
+                //NavUtils.navigateUpFromSameTask(this);
                 Intent intent = NavUtils.getParentActivityIntent(this);
                 intent.putExtra("Matricula", codUser);
                 NavUtils.navigateUpTo(AgregarComentario.this,intent);

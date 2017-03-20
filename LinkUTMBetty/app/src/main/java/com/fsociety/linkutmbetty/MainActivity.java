@@ -92,10 +92,6 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(MainActivity.this, LogInActivity.class);
             startActivity(intent);
         }
-        if (id == R.id.action_Horario) {
-            Intent intent = new Intent(MainActivity.this, Horario.class);
-            startActivity(intent);
-        }
 
         return super.onOptionsItemSelected(item);
     }

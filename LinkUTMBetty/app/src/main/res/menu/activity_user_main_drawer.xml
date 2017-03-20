@@ -7,6 +7,10 @@
             android:icon="@drawable/publicaciones"
             android:title="Publicaciones" />
         <item
+            android:id="@+id/mis_pub"
+            android:icon="@drawable/publicaciones"
+            android:title="Mis publicaciones" />
+        <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/event"
             android:title="Actividades" />

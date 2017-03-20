@@ -115,6 +115,7 @@ public class UserMainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+            System.exit(0);
         } else {
             System.exit(0);
         }
@@ -140,7 +141,7 @@ public class UserMainActivity extends AppCompatActivity
             Intent intent = new Intent(UserMainActivity.this, MainActivity.class);
             startActivity(intent);
         }
-        if (id == R.id.action_Horario) {
+        if (id == R.id.action_horarios) {
             Intent intent = new Intent(UserMainActivity.this, Horario.class);
             startActivity(intent);
         }
@@ -168,7 +169,23 @@ public class UserMainActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().replace(R.id.content_user_main, fragment).commit();
             getSupportActionBar().setTitle(item.getTitle());
 
-        } else if (id == R.id.nav_gallery) {
+        }else if(id == R.id.mis_pub){
+            fragment = null;
+            Class fragmentClass = UsuarioPubFragment.class;
+            try {
+                final Bundle arguments = new Bundle();
+                arguments.putString("id", dato);
+                fragment = (Fragment) fragmentClass.newInstance();
+                fragment.setArguments(arguments);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_user_main, fragment).commit();
+
+        }
+
+        else if (id == R.id.nav_gallery) {
             fragment = new ActividadesFragment();
             fragmentSelect = true;
             getSupportFragmentManager().beginTransaction().replace(R.id.content_user_main, fragment).commit();
