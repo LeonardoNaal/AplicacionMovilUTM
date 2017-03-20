@@ -22,10 +22,11 @@
 
             <TextView
                 android:id="@+id/lblNombre"
-                android:layout_width="240dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
+                android:gravity="center"
                 android:text="Nombre de la actividad"
                 android:textColor="@color/colorPrimary"
                 android:textSize="20sp"
@@ -38,27 +39,76 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:text="Empieza el:"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="65dp"
+                    android:layout_marginStart="65dp"
+                    android:text="Termina el:"
+                    android:textColor="#d32f2f"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:orientation="horizontal">
+
+                <TextView
                     android:id="@+id/FechaInicio"
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
                     android:layout_marginStart="30dp"
                     android:text="Fecha inicio"
-                    android:textColor="#0a0909"
-                    android:textSize="16sp"
-                    android:textStyle="italic" />
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/FechaFin"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="75dp"
-                    android:layout_marginStart="75dp"
+                    android:layout_marginLeft="65dp"
+                    android:layout_marginStart="65dp"
                     android:text="Fecha final"
-                    android:textColor="#121111"
-                    android:textSize="16sp"
-                    android:textStyle="italic" />
+                    android:textColor="#d32f2f"
+                    android:textSize="16sp" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:text="Apartir de:"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="65dp"
+                    android:layout_marginStart="65dp"
+                    android:text="Hasta:"
+                    android:textColor="#d32f2f"
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -74,33 +124,36 @@
                     android:layout_marginLeft="30dp"
                     android:layout_marginStart="30dp"
                     android:text="Hora inicio"
-                    android:textColor="#0a0909"
-                    android:textSize="16sp"
-                    android:textStyle="italic" />
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/lblHoraFin"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="75dp"
-                    android:layout_marginStart="75dp"
+                    android:layout_marginLeft="65dp"
+                    android:layout_marginStart="65dp"
                     android:text="Hora final"
-                    android:textColor="#0d0d0d"
-                    android:textSize="16sp"
-                    android:textStyle="italic" />
+                    android:textColor="#d32f2f"
+                    android:textSize="16sp" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/lblContenido"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="20dp"
-                android:text="Descripción de la actividad"
-                android:textColor="#0a0909"
-                android:textSize="17sp" />
+                android:layout_height="wrap_content">
 
+                <TextView
+                    android:id="@+id/lblContenido"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="15dp"
+                    android:lines="5"
+                    android:text="Descripción de la actividad"
+                    android:textColor="#0a0909"
+                    android:textSize="17sp" />
+            </LinearLayout>
         </LinearLayout>
 
     </android.support.v7.widget.CardView>

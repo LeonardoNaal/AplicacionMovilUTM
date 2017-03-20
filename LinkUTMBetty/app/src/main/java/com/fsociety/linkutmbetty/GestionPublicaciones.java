@@ -118,7 +118,7 @@ public class GestionPublicaciones extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Al finalizar este método debe regresar a UserMainActivity
-                if(img1.getDrawable()==null){
+                if(((BitmapDrawable) img1.getDrawable()).getBitmap()==null){
                     Resources resources = getResources();
                     Bitmap source = BitmapFactory.decodeResource(resources,R.drawable.estandar2);
 
@@ -246,14 +246,14 @@ public class GestionPublicaciones extends AppCompatActivity {
         return result.toString();
     }
     private class Upload extends AsyncTask<Void,Void,String> {
-        private Bitmap image;
+        private Bitmap imagen;
         private String titulo;
         private String contenido;
         private int tipoPub;
         private String CodUsuario;
         private int idPublicacion;
-        public Upload(Bitmap image,String titulo,String contenido,int Tipo,String CodUsuario,int idPublicacion){
-            this.image = image;
+        public Upload(Bitmap imagen,String titulo,String contenido,int Tipo,String CodUsuario,int idPublicacion){
+            this.imagen = imagen;
             this.titulo = titulo;
             this.contenido=contenido;
             this.tipoPub=Tipo;
@@ -265,7 +265,7 @@ public class GestionPublicaciones extends AppCompatActivity {
         protected String doInBackground(Void... params) {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             //compress the image to jpg format
-            image.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
+            imagen.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
             /*
             * encode image to base64 so that it can be picked by saveImage.php file
             * */
