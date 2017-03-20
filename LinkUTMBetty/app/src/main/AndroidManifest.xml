@@ -40,11 +40,16 @@
         </activity>
         <activity
             android:name=".UserMainActivity"
-            android:label="@string/title_activity_user_main"
+            android:label="Bienvenido"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LogInActivity" />
         <activity android:name=".GestionPublicaciones" />
-        <activity android:name=".ActividadPrueba" />
+        <activity android:name=".ActividadPrueba">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".UserMainActivity">
+            </meta-data>
+        </activity>
         <activity android:name=".RegistroActivity" />
         <activity android:name=".Horario" />
         <activity android:name=".VistaHorario" />
@@ -53,17 +58,22 @@
         <activity android:name=".VerComentarios">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"></meta-data>
+                android:value=".MainActivity">
+
+            </meta-data>
         </activity>
         <activity android:name=".AgregarComentario">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".UserMainActivity"></meta-data>
+                android:value=".UserMainActivity">
+            </meta-data>
         </activity>
         <activity
             android:name=".DetallesActividades"
             android:label="@string/title_activity_detalles_actividades"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>
