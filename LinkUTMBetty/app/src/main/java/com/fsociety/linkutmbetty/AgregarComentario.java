@@ -10,6 +10,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -46,23 +49,49 @@ public class AgregarComentario extends AppCompatActivity implements SwipeRefresh
     String codUser;
     int codPublicacion;
     ListView lsvComents2;
+    EditText edtContenido;
     public String SERVER = "http://davisaac19-001-site1.atempurl.com/WebService.asmx/AgregarComentarios?", timestamp;
     private SwipeRefreshLayout swipeLayout;
-
+    Button btnAgregar;
+    boolean validar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_comentario);
         setTitle("Escribe un comentario");
-
+        lblTitulo = (TextView) findViewById(R.id.lblTitulo1);
+        lsvComents2 = (ListView) findViewById(R.id.lsvComents2);
+        swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String datotitulo = (String) extras.get("titulo");
+            codPublicacion = (int) extras.getInt("id");
+            codUser = (String) extras.get("codUser");
+            lblTitulo.setText(datotitulo);
+        }
         //Se ajusta un botón de atrás al título de la actividad
         if(getSupportActionBar()!=null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+        edtContenido=(EditText)findViewById(R.id.txtComentario);
+        btnAgregar=(Button)findViewById(R.id.btnComentar);
+        btnAgregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String contenido=edtContenido.getText().toString();
+                if(TextUtils.isEmpty(contenido)){
+                    edtContenido.setError("Dato obligatorio");
+                   validar=false;
+                }else{
+                    validar=true;
+                }
+                if (validar==true)
+                    {
+                        new Upload(codUser,codPublicacion,edtContenido.getText().toString()).execute();
+                    }
+            }
+        });
 
-        lblTitulo = (TextView) findViewById(R.id.lblTitulo1);
-        lsvComents2 = (ListView) findViewById(R.id.lsvComents2);
-        swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
 
         //Indicamos que listener recogerá la retrollamada (callback), en este caso, será el metodo OnRefresh de esta clase.
 
@@ -87,13 +116,7 @@ public class AgregarComentario extends AppCompatActivity implements SwipeRefresh
             }
         });
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            String datotitulo = (String) extras.get("titulo");
-            codPublicacion = (int) extras.getInt("id");
-            codUser = (String) extras.get("codUser");
-            lblTitulo.setText(datotitulo);
-        }
+
         String action = "VerComentarios";
         //String Url="http://fsociety.somee.com/WebService.asmx/";
         //String Url="http://192.168.1.71:8091/WebService.asmx/";
@@ -106,7 +129,9 @@ public class AgregarComentario extends AppCompatActivity implements SwipeRefresh
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home: //hago un case por si en un futuro agrego mas opciones
-                NavUtils.navigateUpFromSameTask(this);
+                Intent intent = NavUtils.getParentActivityIntent(this);
+                intent.putExtra("Matricula", codUser);
+                NavUtils.navigateUpTo(AgregarComentario.this,intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -118,7 +143,7 @@ public class AgregarComentario extends AppCompatActivity implements SwipeRefresh
         //Codigo para traer todas las publicaciones
         String action = "VerComentarios";
         //String Url="http://fsociety.somee.com/WebService.asmx/";
-        String Url = "http://192.168.1.71:8091/WebService.asmx/";
+        String Url = "http://davisaac19-001-site1.atempurl.com/WebService.asmx/";
         //String Url="http://davisaac19-001-site1.atempurl.com//WebService.asmx/";
         String UrlWeb = Url + action + "?CodPublicacion=" + codPublicacion;
         new JSONTask().execute(UrlWeb);
@@ -272,7 +297,7 @@ public class AgregarComentario extends AppCompatActivity implements SwipeRefresh
 
         public Upload(String codUsuario, int Codpublicacion, String contenido) {
             this.codUsuario = codUsuario;
-            this.codPublicacion = codPublicacion;
+            this.codPublicacion = Codpublicacion;
             this.Contenido = contenido;
 
         }

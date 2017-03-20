@@ -93,15 +93,11 @@ public class UserMainActivity extends AppCompatActivity
         //LayoutInflater.from(this).inflate(R.layout.nav_header_user_main, null);
         txtMatricula = (TextView) header.findViewById(R.id.txtMat);
         txtMatricula.setText(dato);
-        Fragment FragmentPub = null;
-        Class fragmentClassPub = UserPublicacionesFragment.class;
+
         try {
-            final Bundle argument = new Bundle();
-            argument.putString("idUser", dato);
-            FragmentPub = (Fragment) fragmentClassPub.newInstance();
-            FragmentPub.setArguments(argument);
+
         } catch (Exception e) {
-            e.printStackTrace();
+
         }
 
         Fragment fragment = null;
@@ -166,6 +162,9 @@ public class UserMainActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             fragment = new UserPublicacionesFragment();
+            final Bundle argument = new Bundle();
+            argument.putString("idUser", dato);
+            fragment.setArguments(argument);
             fragmentSelect = true;
             getSupportFragmentManager().beginTransaction().replace(R.id.content_user_main, fragment).commit();
             getSupportActionBar().setTitle(item.getTitle());
@@ -176,10 +175,9 @@ public class UserMainActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().replace(R.id.content_user_main, fragment).commit();
             getSupportActionBar().setTitle(item.getTitle());
 
-
         } else if (id == R.id.nav_slideshow) {
             fragment = new SitiosFragment();
-            fragmentSelect = true;
+            fragmentSelect = true;;
             getSupportFragmentManager().beginTransaction().replace(R.id.content_user_main, fragment).commit();
             getSupportActionBar().setTitle(item.getTitle());
 
@@ -194,7 +192,6 @@ public class UserMainActivity extends AppCompatActivity
             Intent intent = new Intent(UserMainActivity.this, MainActivity.class);
             startActivity(intent);
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

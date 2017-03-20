@@ -43,13 +43,12 @@ import java.util.ArrayList;
  */
 public class UserPublicacionesFragment extends Fragment  implements SwipeRefreshLayout.OnRefreshListener {
     ListView listaPub;
-
+    public String dato;
     private OnFragmentInteractionListener mListener;
 
     public UserPublicacionesFragment() {
         // Required empty public constructor
     }
-String dato;
     private SwipeRefreshLayout swipeLayout;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,19 +83,11 @@ String dato;
                 publicacion elegido = (publicacion) parent.getItemAtPosition(position);
                 Intent intent = new Intent(getActivity(),AgregarComentario.class);
                 String auxtitulo = elegido.getTitulo();
-                String auxfecha = elegido.getFecha();
-                Bitmap auxphoto = elegido.getPhoto();
-                String contenido=elegido.getContenido();
-                int TipoPub=elegido.getTipo();
                 int auxid = elegido.getId();
 
                 intent.putExtra("id",auxid);
                 intent.putExtra("titulo",auxtitulo);
-                intent.putExtra("fecha",auxfecha);
-                intent.putExtra("imagen",auxphoto);
-                intent.putExtra("contenido",contenido);
                 intent.putExtra("codUser",dato);
-                intent.putExtra("IDTipo",TipoPub);
                 startActivity(intent);
             }
         });
