@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -209,6 +210,33 @@ public class ActividadesFragment extends Fragment implements SwipeRefreshLayout.
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
+
+        listaAct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Actividades elegida = (Actividades) parent.getItemAtPosition(position);
+                Intent intent = new Intent (getActivity(), DetallesActividades.class);
+                String auxTitulo = elegida.getNombre();
+                String auxFechaIni = elegida.getFInicio();
+                String auxFinFecha = elegida.getFFin();
+                String auxHoraini = elegida.getHInicio();
+                String auxHoraFin = elegida.getHFin();
+                String auxContenido = elegida.getContenido();
+                int auxid = elegida.getId();
+
+                intent.putExtra("nombre", auxTitulo);
+                intent.putExtra("fechaini", auxFechaIni);
+                intent.putExtra("finfecha", auxFinFecha);
+                intent.putExtra("horaini", auxHoraini);
+                intent.putExtra("horafin", auxHoraFin);
+                intent.putExtra("contenido", auxContenido);
+                intent.putExtra("id", auxid);
+                startActivity(intent);
+            }
+        });
+
+
+
         listaAct.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {

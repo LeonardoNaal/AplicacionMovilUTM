@@ -53,15 +53,17 @@
         <activity android:name=".VerComentarios">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity">
-            </meta-data>
+                android:value=".MainActivity"></meta-data>
         </activity>
         <activity android:name=".AgregarComentario">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".UserMainActivity">
-            </meta-data>
+                android:value=".UserMainActivity"></meta-data>
         </activity>
+        <activity
+            android:name=".DetallesActividades"
+            android:label="@string/title_activity_detalles_actividades"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
