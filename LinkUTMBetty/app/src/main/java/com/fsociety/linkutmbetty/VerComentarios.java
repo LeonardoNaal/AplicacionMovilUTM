@@ -3,11 +3,13 @@ package com.fsociety.linkutmbetty;
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v4.app.NavUtils;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -38,6 +40,12 @@ public class VerComentarios extends AppCompatActivity implements SwipeRefreshLay
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_comentarios);
         setTitle("Comentarios");
+
+        //Se ajusta un botón de atrás al título de la actividad
+        if(getSupportActionBar()!=null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         list=(ListView)findViewById(R.id.lsvComents);
         swipeLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_container);
 
@@ -76,6 +84,17 @@ public class VerComentarios extends AppCompatActivity implements SwipeRefreshLay
         //String Url="http://davisaac19-001-site1.atempurl.com//WebService.asmx/";
         String UrlWeb=Url+action+"?CodPublicacion="+codPublicacion;
         new JSONTask().execute(UrlWeb);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: //hago un case por si en un futuro agrego mas opciones
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
     public class  JSONTask extends AsyncTask<String ,String, String> {
         @Override

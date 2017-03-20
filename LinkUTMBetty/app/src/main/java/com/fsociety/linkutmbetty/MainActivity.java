@@ -50,16 +50,15 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        Fragment fragment=null;
-        Class fragmentClass=SitiosFragment.class;
-        try{
-            fragment=(Fragment)fragmentClass.newInstance();
-        }
-        catch(Exception e){
+        Fragment fragment = null;
+        Class fragmentClass = SitiosFragment.class;
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        FragmentManager fragmentManager=getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.contenedor,fragment).commit();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.contenedor, fragment).commit();
 
     }
 
@@ -90,11 +89,11 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent intent = new Intent (MainActivity.this, LogInActivity.class);
+            Intent intent = new Intent(MainActivity.this, LogInActivity.class);
             startActivity(intent);
         }
         if (id == R.id.action_Horario) {
-            Intent intent = new Intent (MainActivity.this, Horario.class);
+            Intent intent = new Intent(MainActivity.this, Horario.class);
             startActivity(intent);
         }
 
@@ -103,6 +102,7 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     Boolean fragmentSelect = false;
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -113,29 +113,37 @@ public class MainActivity extends AppCompatActivity
             fragment = new PublicacionesFragment();
             fragmentSelect = true;
             item.isChecked();
+            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, fragment).commit();
+            //Obtiene y ajusta el título al que tiene el fragmento
+            getSupportActionBar().setTitle(item.getTitle());
 
         } else if (id == R.id.nav_gallery) {
             //Descomentar para que al hacer clic traiga el fragmento
             fragment = new ActividadesFragment();
             fragmentSelect = true;
+            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, fragment).commit();
+            //Obtiene y ajusta el título al que tiene el fragmento
+            getSupportActionBar().setTitle(item.getTitle());
 
         } else if (id == R.id.nav_slideshow) {
-            fragment=new SitiosFragment();
-            fragmentSelect=true;
+            fragment = new SitiosFragment();
+            fragmentSelect = true;
+            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, fragment).commit();
+            //Obtiene y ajusta el título al que tiene el fragmento
+            getSupportActionBar().setTitle(item.getTitle());
 
         } else if (id == R.id.nav_share) {
-
+            Intent intent = new Intent(MainActivity.this, LogInActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_send) {
+            Intent intent = new Intent(MainActivity.this, RegistroActivity.class);
+            startActivity(intent);
 
         }
-        //Sentencia para poder iniciar transición de fragments
-        //Recibe el contenedor a reemplazar y le pasa el fragment definido más arriba
-        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, fragment).commit();
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        //Obtiene y ajusta el título al que tiene el fragmento
-        getSupportActionBar().setTitle(item.getTitle());
         return true;
     }
 

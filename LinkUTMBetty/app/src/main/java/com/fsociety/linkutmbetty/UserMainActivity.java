@@ -55,27 +55,28 @@ public class UserMainActivity extends AppCompatActivity
     ArrayList<publicacion> image;
     public String dato;
     private SwipeRefreshLayout swipeLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_main);
-        Intent intent=getIntent();
-        Bundle extras =intent.getExtras();
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
         if (extras != null) {//ver si contiene datos
-            dato=(String)extras.get("Matricula");//Obtengo la matriculs
+            dato = (String) extras.get("Matricula");//Obtengo la matriculs
         }
 
         //Asignar matricula a textview
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //Referencia al botón redondo
-        FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Este código será reemplazado por un intent para llevar a otra actividad (AgregarPublicación)
                 Intent intent = new Intent(UserMainActivity.this, ActividadPrueba.class);
-                intent.putExtra("Matricula",dato);
+                intent.putExtra("Matricula", dato);
                 startActivity(intent);
             }
         });
@@ -88,32 +89,32 @@ public class UserMainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         //navigationView.setNavigationItemSelectedListener(this);
-        View header =navigationView.getHeaderView(0);
-      //LayoutInflater.from(this).inflate(R.layout.nav_header_user_main, null);
-        txtMatricula=(TextView)header.findViewById(R.id.txtMat);
+        View header = navigationView.getHeaderView(0);
+        //LayoutInflater.from(this).inflate(R.layout.nav_header_user_main, null);
+        txtMatricula = (TextView) header.findViewById(R.id.txtMat);
         txtMatricula.setText(dato);
-        Fragment FragmentPub=null;
-        Class fragmentClassPub=UserPublicacionesFragment.class;
-        try{
+        Fragment FragmentPub = null;
+        Class fragmentClassPub = UserPublicacionesFragment.class;
+        try {
             final Bundle argument = new Bundle();
             argument.putString("idUser", dato);
-            FragmentPub = (Fragment)fragmentClassPub.newInstance();
+            FragmentPub = (Fragment) fragmentClassPub.newInstance();
             FragmentPub.setArguments(argument);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         Fragment fragment = null;
-        Class fragmentClass=UsuarioPubFragment.class;
-        try{
-           final Bundle arguments = new Bundle();
+        Class fragmentClass = UsuarioPubFragment.class;
+        try {
+            final Bundle arguments = new Bundle();
             arguments.putString("id", dato);
-            fragment = (Fragment)fragmentClass.newInstance();
+            fragment = (Fragment) fragmentClass.newInstance();
             fragment.setArguments(arguments);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        FragmentManager fragmentManager=getSupportFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_user_main, fragment).commit();
 
 
@@ -125,8 +126,9 @@ public class UserMainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            System.exit(0);
         }
+
     }
 
     @Override
@@ -155,6 +157,7 @@ public class UserMainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
 
     Boolean fragmentSelect = false;
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -164,27 +167,36 @@ public class UserMainActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             fragment = new UserPublicacionesFragment();
             fragmentSelect = true;
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_user_main, fragment).commit();
+            getSupportActionBar().setTitle(item.getTitle());
 
         } else if (id == R.id.nav_gallery) {
             fragment = new ActividadesFragment();
             fragmentSelect = true;
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_user_main, fragment).commit();
+            getSupportActionBar().setTitle(item.getTitle());
+
 
         } else if (id == R.id.nav_slideshow) {
-            fragment=new SitiosFragment();
-            fragmentSelect=true;
+            fragment = new SitiosFragment();
+            fragmentSelect = true;
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_user_main, fragment).commit();
+            getSupportActionBar().setTitle(item.getTitle());
+
 
         } else if (id == R.id.nav_manage) {
+            //Horarios
+            Intent intent = new Intent(UserMainActivity.this, Horario.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            //Cerrar sesión
+            Intent intent = new Intent(UserMainActivity.this, MainActivity.class);
+            startActivity(intent);
         }
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_user_main, fragment).commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        getSupportActionBar().setTitle(item.getTitle());
         return true;
     }
 

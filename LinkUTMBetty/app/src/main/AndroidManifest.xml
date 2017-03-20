@@ -50,8 +50,18 @@
         <activity android:name=".VistaHorario" />
         <activity android:name=".ListaHorario" />
         <activity android:name=".GestionHorario" />
-        <activity android:name=".VerComentarios" />
-        <activity android:name=".AgregarComentario"></activity>
+        <activity android:name=".VerComentarios">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity">
+            </meta-data>
+        </activity>
+        <activity android:name=".AgregarComentario">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".UserMainActivity">
+            </meta-data>
+        </activity>
     </application>
 
 </manifest>

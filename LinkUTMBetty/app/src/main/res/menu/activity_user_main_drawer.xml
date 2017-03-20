@@ -25,7 +25,7 @@
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Botón por asignar" />
+                android:title="Cerrar sesion" />
         </menu>
     </item>
 
