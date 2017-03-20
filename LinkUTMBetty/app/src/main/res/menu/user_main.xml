@@ -6,4 +6,9 @@
         android:orderInCategory="100"
         android:title="@string/cerrar_Sesion"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_horarios"
+        android:orderInCategory="100"
+        android:title="Ir a horarios"
+        app:showAsAction="never" />
 </menu>

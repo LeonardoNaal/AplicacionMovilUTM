@@ -150,6 +150,11 @@ public class UserMainActivity extends AppCompatActivity
             Intent intent = new Intent(UserMainActivity.this, MainActivity.class);
             startActivity(intent);
         }
+        if (id == R.id.action_Horario) {
+            Intent intent = new Intent(UserMainActivity.this, Horario.class);
+            startActivity(intent);
+        }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -167,36 +172,31 @@ public class UserMainActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             fragment = new UserPublicacionesFragment();
             fragmentSelect = true;
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_user_main, fragment).commit();
-            getSupportActionBar().setTitle(item.getTitle());
 
         } else if (id == R.id.nav_gallery) {
             fragment = new ActividadesFragment();
             fragmentSelect = true;
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_user_main, fragment).commit();
-            getSupportActionBar().setTitle(item.getTitle());
-
 
         } else if (id == R.id.nav_slideshow) {
             fragment = new SitiosFragment();
             fragmentSelect = true;
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_user_main, fragment).commit();
-            getSupportActionBar().setTitle(item.getTitle());
-
 
         } else if (id == R.id.nav_manage) {
             //Horarios
-            Intent intent = new Intent(UserMainActivity.this, Horario.class);
-            startActivity(intent);
+            //Intent intent = new Intent(UserMainActivity.this, Horario.class);
+            //startActivity(intent);
 
         } else if (id == R.id.nav_share) {
             //Cerrar sesión
-            Intent intent = new Intent(UserMainActivity.this, MainActivity.class);
-            startActivity(intent);
+            //Intent intent = new Intent(UserMainActivity.this, MainActivity.class);
+            //startActivity(intent);
         }
-
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_user_main, fragment).commit();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+        if (getSupportActionBar()!=null) {
+            getSupportActionBar().setTitle(item.getTitle());
+        }
         return true;
     }
 
