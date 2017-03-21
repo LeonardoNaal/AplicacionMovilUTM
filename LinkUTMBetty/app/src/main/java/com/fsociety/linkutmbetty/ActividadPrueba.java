@@ -57,7 +57,7 @@ import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class ActividadPrueba extends AppCompatActivity  {
-    Button btnIniciar,btnAbrirGaleria;
+    Button btnIniciar,btnAbrirGaleria,btnCancelar;
     ImageView imageView;
     private static String APP_DIRECTORY = "MyPictureApp/";
     private static String MEDIA_DIRECTORY = APP_DIRECTORY + "PictureApp";
@@ -65,10 +65,9 @@ public class ActividadPrueba extends AppCompatActivity  {
     private final int MY_PERMISSIONS = 100;
     private final int PHOTO_CODE = 200;
     private final int SELECT_PICTURE = 300;
-
     private static final int REQUEST_CODE_ASK_PERMISSIONS = 123;
     private String mPath;
-Bitmap bnp;
+    Bitmap bnp;
     EditText txtTitulo,txtContenido;
     public int idTipoSeleccionado;
     //public String SERVER = "http://fsociety.somee.com/WebService.asmx/agregarPublicacion?", timestamp;
@@ -88,18 +87,23 @@ String matricula;
         txtContenido=(EditText)findViewById(R.id.txtContenido);
         spn1=(Spinner)findViewById(R.id.spinner2);
 
-        //Se ajusta un botón de atrás al título de la actividad
-        if(getSupportActionBar()!=null){
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-
         ArrayAdapter<String> adaptador=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,Tipos);
         spn1.setAdapter(adaptador);
-        Intent intent=getIntent();
+        final Intent intent=getIntent();
         Bundle extras =intent.getExtras();
         if (extras != null) {//ver si contiene datos
             matricula=(String)extras.get("Matricula");//Obtengo la matriculs
         }
+        btnCancelar=(Button)findViewById(R.id.btnCancelar);
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             Intent intent=new Intent(ActividadPrueba.this,UserMainActivity.class);
+                intent.putExtra("Matricula",matricula);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(intent);
+            }
+        });
         spn1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -213,18 +217,6 @@ String matricula;
                 showOptions();
             }
         });
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                //NavUtils.navigateUpFromSameTask(this);
-                Intent intent = NavUtils.getParentActivityIntent(this);
-                intent.putExtra("Matricula", matricula);
-                NavUtils.navigateUpTo(ActividadPrueba.this,intent);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     private boolean mayRequestStoragePermission() {

@@ -97,19 +97,36 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btnPublicar"
-            android:layout_width="150dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
-            android:layout_marginStart="100dp"
             android:layout_marginTop="10dp"
-            android:backgroundTint="@color/colorAccent"
-            android:text="Publicar"
-            android:textAllCaps="false"
-            android:textColor="#fff"
-            android:textSize="18sp" />
+            android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/btnCancelar"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorAccent"
+                android:layout_marginTop="10dp"
+                android:text="Cancelar"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                android:textColor="#fff"/>
+
+            <Button
+                android:id="@+id/btnPublicar"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/colorAccent"
+                android:text="Publicar"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textSize="18sp" />
+        </LinearLayout>
 
         <RelativeLayout
             android:id="@+id/rlative"

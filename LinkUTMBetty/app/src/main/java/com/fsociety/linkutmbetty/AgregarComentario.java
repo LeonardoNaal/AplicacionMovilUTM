@@ -52,7 +52,7 @@ public class AgregarComentario extends AppCompatActivity implements SwipeRefresh
     EditText edtContenido;
     public String SERVER = "http://davisaac19-001-site1.atempurl.com/WebService.asmx/AgregarComentarios?", timestamp;
     private SwipeRefreshLayout swipeLayout;
-    Button btnAgregar;
+    Button btnAgregar,btnRegresar;
     boolean validar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,10 +69,17 @@ public class AgregarComentario extends AppCompatActivity implements SwipeRefresh
             codUser = (String) extras.get("codUser");
             lblTitulo.setText(datotitulo);
         }
-        //Se ajusta un botón de atrás al título de la actividad
-        if(getSupportActionBar()!=null){
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+        btnRegresar=(Button)findViewById(R.id.btnRegresar);
+        btnRegresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(AgregarComentario.this,UserMainActivity.class);
+                intent.putExtra("Matricula",codUser);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(intent);
+            }
+        });
+
         edtContenido=(EditText)findViewById(R.id.txtComentario);
         btnAgregar=(Button)findViewById(R.id.btnComentar);
         btnAgregar.setOnClickListener(new View.OnClickListener() {
@@ -92,9 +99,7 @@ public class AgregarComentario extends AppCompatActivity implements SwipeRefresh
             }
         });
 
-
         //Indicamos que listener recogerá la retrollamada (callback), en este caso, será el metodo OnRefresh de esta clase.
-
         swipeLayout.setOnRefreshListener(this);
         //Podemos espeficar si queremos, un patron de colores diferente al patrón por defecto.
         swipeLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
@@ -123,20 +128,6 @@ public class AgregarComentario extends AppCompatActivity implements SwipeRefresh
         String Url = "http://davisaac19-001-site1.atempurl.com/WebService.asmx/";
         String UrlWeb = Url + action + "?CodPublicacion=" + codPublicacion;
         new JSONTask().execute(UrlWeb);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home: //hago un case por si en un futuro agrego mas opciones
-                //NavUtils.navigateUpFromSameTask(this);
-                Intent intent = NavUtils.getParentActivityIntent(this);
-                intent.putExtra("Matricula", codUser);
-                NavUtils.navigateUpTo(AgregarComentario.this,intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     @Override

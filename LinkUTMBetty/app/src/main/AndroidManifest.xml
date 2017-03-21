@@ -24,7 +24,6 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -44,12 +43,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LogInActivity" />
         <activity android:name=".GestionPublicaciones" />
-        <activity android:name=".ActividadPrueba">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".UserMainActivity">
-            </meta-data>
-        </activity>
+        <activity android:name=".ActividadPrueba"/>
         <activity android:name=".RegistroActivity" />
         <activity android:name=".Horario" />
         <activity android:name=".VistaHorario" />
@@ -62,12 +56,7 @@
 
             </meta-data>
         </activity>
-        <activity android:name=".AgregarComentario">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".UserMainActivity">
-            </meta-data>
-        </activity>
+        <activity android:name=".AgregarComentario"/>
         <activity
             android:name=".DetallesActividades"
             android:label="@string/title_activity_detalles_actividades"
