@@ -206,6 +206,7 @@ public class UserMainActivity extends AppCompatActivity
         } else if (id == R.id.nav_manage) {
             //Horarios
             Intent intent = new Intent(UserMainActivity.this, Horario.class);
+            intent.putExtra("Matricula",dato);
             startActivity(intent);
 
         } else if (id == R.id.nav_share) {
