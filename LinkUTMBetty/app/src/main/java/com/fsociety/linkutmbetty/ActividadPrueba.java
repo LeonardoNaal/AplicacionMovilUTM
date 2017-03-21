@@ -218,7 +218,10 @@ String matricula;
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+                //NavUtils.navigateUpFromSameTask(this);
+                Intent intent = NavUtils.getParentActivityIntent(this);
+                intent.putExtra("Matricula", matricula);
+                NavUtils.navigateUpTo(ActividadPrueba.this,intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);
