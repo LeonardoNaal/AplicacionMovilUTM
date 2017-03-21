@@ -36,24 +36,12 @@
 
         <Button
             android:text="Guardar"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:id="@+id/btnBoton"
-            android:background="@color/colorPrimaryDark"
-            android:layout_marginTop="29dp"
+            android:background="@color/colorPrimary"
+            android:layout_marginTop="50dp"
             android:layout_below="@+id/edtHora"
-            android:layout_toRightOf="@+id/txtxxt"
-            android:layout_toEndOf="@+id/txtxxt" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/edtHora"
-            android:textSize="18sp"
-            android:hint="Hora"
-            android:layout_below="@+id/textView7"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -66,7 +54,9 @@
             android:hint="Laboratorio"
             android:layout_below="@+id/textView6"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -78,7 +68,9 @@
             android:hint="Profesor "
             android:layout_below="@+id/txtxxt"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
         <TextView
             android:text="Profesor"
@@ -101,7 +93,9 @@
             android:hint="Materia"
             android:layout_below="@+id/textView4"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
         <TextView
             android:text="Materia"
@@ -141,15 +135,40 @@
 
         <Button
             android:text="Eliminar"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:id="@+id/btnEliminar"
-            android:layout_marginLeft="44dp"
-            android:layout_marginStart="44dp"
             android:background="@color/colorAccent"
             android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@+id/btnBoton"
-            android:layout_toEndOf="@+id/btnBoton" />
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/edtHora"
+            android:textSize="18sp"
+            android:hint="Hora"
+            android:layout_below="@+id/textView7"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <Button
+            android:text="Seleccionar hora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnSeleccionar"
+            android:background="@color/colorPrimary"
+            android:layout_below="@+id/edtHora"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
 

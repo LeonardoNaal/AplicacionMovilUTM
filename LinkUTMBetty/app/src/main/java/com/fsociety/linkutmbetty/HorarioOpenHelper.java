@@ -18,12 +18,12 @@ public class HorarioOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("CREATE TABLE HORARIO(USUARIO TEXT,DIA TEXT,MATERIA TEXT,PROFESOR TEXT,LABORATORIO TEXT,HORA TEXT)");
+        sqLiteDatabase.execSQL("CREATE TABLE HORARIO(USUARIO TEXT,DIA TEXT,MATERIA TEXT,PROFESOR TEXT,LABORATORIO TEXT,HORA TIME)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS HORARIO");
-        sqLiteDatabase.execSQL("CREATE TABLE HORARIO(USUARIO TEXT,DIA TEXT ,MATERIA TEXT,PROFESOR TEXT,LABORATORIO TEXT,HORA TEXT)");
+        sqLiteDatabase.execSQL("CREATE TABLE HORARIO(USUARIO TEXT,DIA TEXT ,MATERIA TEXT,PROFESOR TEXT,LABORATORIO TEXT,HORA TIME)");
     }
 }

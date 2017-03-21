@@ -3,6 +3,8 @@ package com.fsociety.linkutmbetty;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 
 public class ListaHorario extends AppCompatActivity {
 
+    String dia;
     ArrayList<HorarioBO> listaDatos = new ArrayList<HorarioBO>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +27,8 @@ public class ListaHorario extends AppCompatActivity {
         Bundle extra = getIntent().getExtras();
         if (extra != null)
         {
-            String dia = (String)extra.get("Dia").toString();
-            Toast.makeText(getApplicationContext(), dia , Toast.LENGTH_SHORT).show();
+            dia = (String)extra.get("Dia").toString();
+            //Toast.makeText(getApplicationContext(), dia , Toast.LENGTH_SHORT).show();
         }
 
         final ListView listview = (ListView)findViewById(R.id.lstvHorario);
@@ -53,13 +56,18 @@ public class ListaHorario extends AppCompatActivity {
             }
         });
 
-        listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String  itemValue    = (String) listview.getItemAtPosition(i);
-                Object item = (Object) listview.getItemAtPosition(i);
-
-                return true;
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                HorarioBO item = (HorarioBO) adapterView.getItemAtPosition(i);
+                Intent intent = new Intent(ListaHorario.this,GestionHorario.class);
+                intent.putExtra("Dia", dia);
+                intent.putExtra("Edificio", item.getEdificio());
+                intent.putExtra("Hora", item.getHora());
+                intent.putExtra("Maestro", item.getMaestro());
+                intent.putExtra("Materia", item.getMateria());
+                intent.putExtra("Accion", "Actualizar");
+                startActivity(intent);
             }
         });
 
@@ -80,7 +88,6 @@ public class ListaHorario extends AppCompatActivity {
             {
                 do
                 {
-                    Toast.makeText(getApplicationContext(),fila.getString(1), Toast.LENGTH_SHORT).show();
                     listaDatos.add(new HorarioBO(fila.getString(0),fila.getString(1),fila.getString(2),fila.getString(3)));
                 }while(fila.moveToNext());
             }
@@ -90,5 +97,24 @@ public class ListaHorario extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "No hay horarios" , Toast.LENGTH_SHORT).show();
         }
         db.close();
+    }
+
+    public void Alerta()
+    {
+        AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);
+        dialogo1.setTitle("Importante");
+        dialogo1.setMessage("¿Acepta la modificación de datos?");
+        dialogo1.setCancelable(false);
+        dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+
+            }
+        });
+        dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+
+            }
+        });
+        dialogo1.show();
     }
 }

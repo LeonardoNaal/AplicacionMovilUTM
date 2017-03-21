@@ -17,7 +17,6 @@ public class Horario extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_horario);
 
-
         crearLista();
 
         Button boton = (Button) findViewById(R.id.btnAgregar);
@@ -38,15 +37,14 @@ public class Horario extends AppCompatActivity {
         final ListView listView = (ListView) findViewById(R.id.lstvLista);
         listView.setAdapter(adapter);
 
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String  itemValue    = (String) listView.getItemAtPosition(i);
                 Object item = (Object) listView.getItemAtPosition(i);
                 Intent intent = new Intent(Horario.this, ListaHorario.class);
                 intent.putExtra("Dia", itemValue);
                 startActivity(intent);
-                return true;
             }
         });
     }
