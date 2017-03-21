@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v4.app.NavUtils;
@@ -21,6 +22,7 @@ import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -52,8 +54,10 @@ public class AgregarComentario extends AppCompatActivity implements SwipeRefresh
     EditText edtContenido;
     public String SERVER = "http://davisaac19-001-site1.atempurl.com/WebService.asmx/AgregarComentarios?", timestamp;
     private SwipeRefreshLayout swipeLayout;
-    Button btnAgregar,btnRegresar;
+    Button btnAgregar, btnRegresar;
+    ImageButton btnLlamar;
     boolean validar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,33 +73,42 @@ public class AgregarComentario extends AppCompatActivity implements SwipeRefresh
             codUser = (String) extras.get("codUser");
             lblTitulo.setText(datotitulo);
         }
-        btnRegresar=(Button)findViewById(R.id.btnRegresar);
+        btnRegresar = (Button) findViewById(R.id.btnRegresar);
         btnRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(AgregarComentario.this,UserMainActivity.class);
-                intent.putExtra("Matricula",codUser);
+                Intent intent = new Intent(AgregarComentario.this, UserMainActivity.class);
+                intent.putExtra("Matricula", codUser);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
             }
         });
 
-        edtContenido=(EditText)findViewById(R.id.txtComentario);
-        btnAgregar=(Button)findViewById(R.id.btnComentar);
+        btnLlamar = (ImageButton) findViewById(R.id.btnLlamar);
+        btnLlamar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(android.content.Intent.ACTION_DIAL,
+                        Uri.parse("tel:+3748593458")); //
+                startActivity(i);
+            }
+        });
+
+        edtContenido = (EditText) findViewById(R.id.txtComentario);
+        btnAgregar = (Button) findViewById(R.id.btnComentar);
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String contenido=edtContenido.getText().toString();
-                if(TextUtils.isEmpty(contenido)){
+                String contenido = edtContenido.getText().toString();
+                if (TextUtils.isEmpty(contenido)) {
                     edtContenido.setError("Dato obligatorio");
-                   validar=false;
-                }else{
-                    validar=true;
+                    validar = false;
+                } else {
+                    validar = true;
                 }
-                if (validar==true)
-                    {
-                        new Upload(codUser,codPublicacion,edtContenido.getText().toString()).execute();
-                    }
+                if (validar == true) {
+                    new Upload(codUser, codPublicacion, edtContenido.getText().toString()).execute();
+                }
             }
         });
 

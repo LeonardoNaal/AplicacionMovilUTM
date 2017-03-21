@@ -42,16 +42,32 @@
             </ListView>
         </android.support.v4.widget.SwipeRefreshLayout>
 
-        <TextView
-            android:layout_width="200dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            android:gravity="center"
-            android:text="Únete a la conversación"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btnLlamar"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:src="@drawable/ic_call_white_24dp"
+                android:contentDescription="@string/content_img"
+                android:layout_gravity="start"
+                android:backgroundTint="@color/colorAccent"/>
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
+                android:text="Llamar al autor"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                android:textStyle="italic" />
+
+        </LinearLayout>
 
         <EditText
             android:id="@+id/txtComentario"
@@ -79,6 +95,9 @@
                 android:layout_marginTop="10dp"
                 android:text="Regresar"
                 android:textAllCaps="false"
+                android:drawableLeft="@drawable/ic_arrow_back_black_18dp"
+                android:drawableStart="@drawable/ic_arrow_back_black_18dp"
+                android:drawableTint="#fff"
                 android:textSize="18sp"
                 android:textColor="#fff"/>
 
@@ -88,8 +107,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="@color/colorAccent"
-                android:layout_marginLeft="50dp"
-                android:layout_marginStart="50dp"
+                android:drawableStart="@drawable/ic_mode_edit_white_18dp"
+                android:drawableLeft="@drawable/ic_mode_edit_white_18dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
                 android:text="Comentar"
                 android:textAllCaps="false"
                 android:textColor="#fff"
