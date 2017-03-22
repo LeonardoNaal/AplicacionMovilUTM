@@ -74,7 +74,7 @@ public class AgregarComentario extends AppCompatActivity implements SwipeRefresh
             codUser = (String) extras.get("codUser");
             lblTitulo.setText(datotitulo);
         }
-        new VerTelefono(codUser).execute();
+
         btnRegresar = (Button) findViewById(R.id.btnRegresar);
         btnRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +85,7 @@ public class AgregarComentario extends AppCompatActivity implements SwipeRefresh
                 startActivity(intent);
             }
         });
-
+        new VerTelefono(codUser).execute();
         btnLlamar = (ImageButton) findViewById(R.id.btnLlamar);
         btnLlamar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -352,7 +352,7 @@ public class AgregarComentario extends AppCompatActivity implements SwipeRefresh
             String cod = String.valueOf(codPublicacion);
             //generate hashMap to store encodedImage and the name
             HashMap<String, String> detail = new HashMap<>();
-            detail.put("codUsuario", codUsuario);
+            detail.put("matricula", codUsuario);
             try {
                 //convert this HashMap to encodedUrl to send to php file
                 String dataToSend = hashMapToUrl(detail);
