@@ -200,7 +200,7 @@ public class LogInActivity extends AppCompatActivity {
                     Intent intent = new Intent(LogInActivity.this, UserMainActivity.class);
                     intent.putExtra("carrera",objeto.getString("carrera"));
                     intent.putExtra("Matricula",objeto.getString("CodUsuario"));
-                    intent.putExtra("grado",objeto.getString("grado"));
+                    intent.putExtra("grado",objeto.getInt("grado"));
                     intent.putExtra("grupo",objeto.getString("grupo"));
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                     startActivity(intent);

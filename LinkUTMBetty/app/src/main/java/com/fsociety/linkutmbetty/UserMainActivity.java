@@ -55,7 +55,7 @@ public class UserMainActivity extends AppCompatActivity
     TextView txtMatricula;
     ArrayList<publicacion> image;
     public String dato;
-    public String grado;
+    public int grado;
     public String grupo;
     public String carrera;
     private SwipeRefreshLayout swipeLayout;
@@ -68,7 +68,7 @@ public class UserMainActivity extends AppCompatActivity
         Bundle extras = intent.getExtras();
         if (extras != null) {//ver si contiene datos
             dato = (String) extras.get("Matricula");//Obtengo la matriculs
-            grado=(String)extras.get("grado");
+            grado=(int)extras.get("grado");
             grupo=(String) extras.get("grupo");
             carrera=(String)extras.get("carrera");
         }
@@ -171,7 +171,7 @@ public class UserMainActivity extends AppCompatActivity
             fragment = new UserPublicacionesFragment();
             final Bundle argument = new Bundle();
             argument.putString("idUser", dato);
-            argument.putString("grado",grado);
+            argument.putInt("grado",grado);
             argument.putString("grupo",grupo);
             argument.putString("carrera",carrera);
             fragment.setArguments(argument);
