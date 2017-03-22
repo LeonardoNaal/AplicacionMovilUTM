@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -15,69 +19,98 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="Administra tu publicación"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:gravity="center"/>
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="25dp">
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
 
         <EditText
             android:id="@+id/txtTitulo"
-            android:layout_width="240dp"
-            android:layout_height="wrap_content"
-            android:hint="Título de publicación"/>
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/borde_edit_text"
+            android:gravity="center"
+            android:hint="Título de publicación" />
 
-        <Spinner
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="El tipo de publicación es:"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Spinner
             android:id="@+id/spinner2"
-            android:layout_weight="1" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/borde_edit_text" />
     </LinearLayout>
 
     <EditText
         android:id="@+id/txtContenido"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="10dp"
-        android:hint="Modifica la descripcion de tu publicación"
-        android:inputType="textMultiLine"/>
+        android:layout_height="120dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/borde_edit_text"
+        android:gravity="top|start"
+        android:hint="Describe tu publicación"
+        android:inputType="textMultiLine"
+        android:lines="10"
+        android:padding="16dp" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="170dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:contentDescription="@string/content_img"
+        app:srcCompat="@drawable/estandar2" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btnEliminar"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
+            android:backgroundTint="#B71C1C"
+            android:drawableLeft="@drawable/ic_delete_white_18dp"
+            android:drawableStart="@drawable/ic_delete_white_18dp"
             android:text="Eliminar"
             android:textAllCaps="false"
-            android:textSize="18sp"
             android:textColor="#fff"
-            android:backgroundTint="#B71C1C"/>
+            android:textSize="18sp" />
+
         <Button
             android:id="@+id/btnModificar"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:backgroundTint="@color/colorAccent"
+            android:drawableLeft="@drawable/ic_save_white_18dp"
+            android:drawableStart="@drawable/ic_save_white_18dp"
             android:text="Guardar"
             android:textAllCaps="false"
-            android:textSize="18sp"
             android:textColor="#fff"
-            android:backgroundTint="@color/colorAccent"/>
+            android:textSize="18sp" />
     </LinearLayout>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="122dp"
-        app:srcCompat="@drawable/estandar2"
-        android:id="@+id/imageView6" />
 
 </LinearLayout>

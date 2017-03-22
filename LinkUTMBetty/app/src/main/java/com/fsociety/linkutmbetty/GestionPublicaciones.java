@@ -48,37 +48,45 @@ public class GestionPublicaciones extends AppCompatActivity {
     public int idPublicacion;
     public String codUser;
     ImageView img1;
-    public Bitmap bmp1,image;
+    public Bitmap bmp1, image;
     //public String SERVER = "http://fsociety.somee.com/WebService.asmx/ModificarPublicacion?",     timestamp;
     //public String SERVER = "http://169.254.3.130:8091/WebService.asmx/ModificarPublicacion?",timestamp;
+<<<<<<< HEAD
     public String SERVER = "http://davisaac19-001-site1.atempurl.com//WebService.asmx/ModificarPublicacion?",timestamp;
 public String carrer,grup;
     public int TipoPub,idTipoSeleccionado=0,grad;
     String[] Tipos={"Seleccionar...","Publicidad","Aviso","Reporte","Otra"};
+=======
+    public String SERVER = "http://davisaac19-001-site1.atempurl.com//WebService.asmx/ModificarPublicacion?", timestamp;
+
+    public int TipoPub, idTipoSeleccionado = 0;
+    String[] Tipos = {"Seleccionar...", "Publicidad", "Aviso", "Reporte", "Otra"};
+
+>>>>>>> origin/master
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gestion_publicaciones);
-
         //La actividad GestionPublicaciones recibe los datos de la publicación que están en el ListView de UserMainActivity
         //Como título, descripción o ¿tipo?
         //La actividad incluye dos botones
         //Un botón para guardar los cambios que después de guardar regresa a UserMainActivity
         //Otro botón para eliminar que después de eliminar regresa a UserMainActivity
-        spn1=(Spinner)findViewById(R.id.spinner2);
-        ArrayAdapter<String> adaptador=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,Tipos);
+        spn1 = (Spinner) findViewById(R.id.spinner2);
+        ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, Tipos);
         spn1.setAdapter(adaptador);
-        img1=(ImageView)findViewById(R.id.imageView6);
+        img1 = (ImageView) findViewById(R.id.imageView6);
         //Referencia al EditText Título
         txtTitulo = (EditText) findViewById(R.id.txtTitulo);
         //Referencia al EditTex Contenido
         txtContenido = (EditText) findViewById(R.id.txtContenido);
         Bundle extras = getIntent().getExtras();
-        if(extras != null){
-            Bitmap image= (Bitmap)extras.get("imagen");
+        if (extras != null) {
+            Bitmap image = (Bitmap) extras.get("imagen");
             String datotitulo = (String) extras.get("titulo");
             String datocontenido = (String) extras.get("contenido");
             idPublicacion = (int) extras.getInt("id");
+<<<<<<< HEAD
             String fecha=(String) extras.get("fecha");
             codUser=(String) extras.get("codUser");
             TipoPub=(int)extras.getInt("IDTipo");
@@ -86,26 +94,33 @@ public String carrer,grup;
             grup=(String)extras.get("grupo");
             carrer=(String)extras.get("carrera");
             bmp1=image;
+=======
+            String fecha = (String) extras.get("fecha");
+            codUser = (String) extras.get("codUser");
+            TipoPub = (int) extras.getInt("IDTipo");
+            bmp1 = image;
+>>>>>>> origin/master
             txtContenido.setText(datocontenido);
             txtTitulo.setText(datotitulo);
             img1.setImageBitmap(image);
         }
+        setTitle(txtTitulo.getText());
         spn1.setSelection(TipoPub);
         spn1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position){
+                switch (position) {
                     case 1:
-                        idTipoSeleccionado=1;
+                        idTipoSeleccionado = 1;
                         break;
                     case 2:
-                        idTipoSeleccionado=2;
+                        idTipoSeleccionado = 2;
                         break;
                     case 3:
-                        idTipoSeleccionado=3;
+                        idTipoSeleccionado = 3;
                         break;
                     case 4:
-                        idTipoSeleccionado=4;
+                        idTipoSeleccionado = 4;
                         break;
                 }
             }
@@ -121,14 +136,14 @@ public String carrer,grup;
             @Override
             public void onClick(View v) {
                 //Al finalizar este método debe regresar a UserMainActivity
-                if(((BitmapDrawable) img1.getDrawable()).getBitmap()==null){
+                if (((BitmapDrawable) img1.getDrawable()).getBitmap() == null) {
                     Resources resources = getResources();
-                    Bitmap source = BitmapFactory.decodeResource(resources,R.drawable.estandar2);
+                    Bitmap source = BitmapFactory.decodeResource(resources, R.drawable.estandar2);
 
                     int width = source.getWidth();
                     int height = source.getHeight();
-                    int newWidth =180;
-                    int newHeight =150;
+                    int newWidth = 180;
+                    int newHeight = 150;
 
                     // calculamos el escalado de la imagen destino
                     float scaleWidth = ((float) newWidth) / width;
@@ -139,18 +154,17 @@ public String carrer,grup;
                     // resize the Bitmap
                     matrix.postScale(scaleWidth, scaleHeight);
                     // volvemos a crear la imagen con los nuevos valores
-                    Bitmap resizedBitmap = Bitmap.createBitmap(source, 0, 0,width, height, matrix, true);
+                    Bitmap resizedBitmap = Bitmap.createBitmap(source, 0, 0, width, height, matrix, true);
                     img1.setImageBitmap(resizedBitmap);
                     image = resizedBitmap;
-                }
-                else{
-                     image = ((BitmapDrawable) img1.getDrawable()).getBitmap();
+                } else {
+                    image = ((BitmapDrawable) img1.getDrawable()).getBitmap();
                 }
                 //execute the async task and upload the image to server
-                if(idTipoSeleccionado==0){
-                    idTipoSeleccionado=TipoPub;
+                if (idTipoSeleccionado == 0) {
+                    idTipoSeleccionado = TipoPub;
                 }
-                new Upload(image,txtTitulo.getText().toString(),txtContenido.getText().toString(),idTipoSeleccionado,codUser,idPublicacion).execute();
+                new Upload(image, txtTitulo.getText().toString(), txtContenido.getText().toString(), idTipoSeleccionado, codUser, idPublicacion).execute();
             }
         });
 
@@ -159,16 +173,17 @@ public String carrer,grup;
         btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String action="EliminarPublicaciones";
+                String action = "EliminarPublicaciones";
                 //String Url="http://fsociety.somee.com/WebService.asmx/";
                 //String Url="http://169.254.3.130:8091/WebService.asmx/";
-                String Url="http://davisaac19-001-site1.atempurl.com//WebService.asmx/";
-                String UrlWeb=Url+action+"?idPublicacion="+idPublicacion;
+                String Url = "http://davisaac19-001-site1.atempurl.com//WebService.asmx/";
+                String UrlWeb = Url + action + "?idPublicacion=" + idPublicacion;
                 new JSONTask().execute(UrlWeb);
                 //Al finalizar este método debe regresar a UserMainActivity
             }
         });
     }
+<<<<<<< HEAD
     @Override
     public void onBackPressed(){
         Intent intent = new Intent(GestionPublicaciones.this, UserMainActivity.class);
@@ -180,48 +195,51 @@ public String carrer,grup;
         finish();
     }
     public class  JSONTask extends AsyncTask<String ,String, String> {
+=======
+
+    public class JSONTask extends AsyncTask<String, String, String> {
+>>>>>>> origin/master
         @Override
-        protected  String doInBackground(String... parametros){
-            HttpURLConnection conexion=null;
-            BufferedReader reader=null;
-            try{
-                URL url=new URL(parametros[0]);
-                conexion=(HttpURLConnection)url.openConnection();
+        protected String doInBackground(String... parametros) {
+            HttpURLConnection conexion = null;
+            BufferedReader reader = null;
+            try {
+                URL url = new URL(parametros[0]);
+                conexion = (HttpURLConnection) url.openConnection();
                 conexion.connect();
-                InputStream stream=conexion.getInputStream();
-                reader=new BufferedReader(new InputStreamReader(stream));
-                StringBuffer buffer=new StringBuffer();
-                String Line="";
-                while((Line=reader.readLine())!=null){
+                InputStream stream = conexion.getInputStream();
+                reader = new BufferedReader(new InputStreamReader(stream));
+                StringBuffer buffer = new StringBuffer();
+                String Line = "";
+                while ((Line = reader.readLine()) != null) {
                     buffer.append(Line);
                 }
                 return buffer.toString();
-            }
-            catch (MalformedURLException e){
+            } catch (MalformedURLException e) {
                 e.printStackTrace();
-            }
-            catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
-            }
-            finally {
-                if(conexion!=null){
+            } finally {
+                if (conexion != null) {
                     conexion.disconnect();
                 }
 
-                try{
-                    if(reader!=null){
+                try {
+                    if (reader != null) {
                         reader.close();
                     }
-                }catch (IOException e){
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-            return  null;
+            return null;
         }
+
         @Override
-        protected  void onPostExecute(String resultado){
+        protected void onPostExecute(String resultado) {
             super.onPostExecute(resultado);
 
+<<<<<<< HEAD
             try{
                 Log.e("salida",resultado);
         if(Integer.parseInt(resultado)==1){
@@ -236,18 +254,30 @@ public String carrer,grup;
                 else{
             Toast.makeText(GestionPublicaciones.this, "Error", Toast.LENGTH_SHORT).show();
         }
+=======
+            try {
+                Log.e("salida", resultado);
+                if (Integer.parseInt(resultado) == 1) {
+                    Toast.makeText(GestionPublicaciones.this, "Datos eliminados correctamente", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(GestionPublicaciones.this, UserMainActivity.class);
+                    intent.putExtra("Matricula", codUser);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(GestionPublicaciones.this, "Error", Toast.LENGTH_SHORT).show();
+                }
+>>>>>>> origin/master
 
-            }
-            catch (Throwable t){
-                Log.e("Falla",t.toString());
+            } catch (Throwable t) {
+                Log.e("Falla", t.toString());
 
             }
         }
     }
-    private String hashMapToUrl(HashMap< String,String> params) throws UnsupportedEncodingException {
+
+    private String hashMapToUrl(HashMap<String, String> params) throws UnsupportedEncodingException {
         StringBuilder result = new StringBuilder();
         boolean first = true;
-        for(Map.Entry<String,String> entry : params.entrySet()){
+        for (Map.Entry<String, String> entry : params.entrySet()) {
             if (first)
                 first = false;
             else
@@ -260,51 +290,53 @@ public String carrer,grup;
 
         return result.toString();
     }
-    private class Upload extends AsyncTask<Void,Void,String> {
+
+    private class Upload extends AsyncTask<Void, Void, String> {
         private Bitmap imagen;
         private String titulo;
         private String contenido;
         private int tipoPub;
         private String CodUsuario;
         private int idPublicacion;
-        public Upload(Bitmap imagen,String titulo,String contenido,int Tipo,String CodUsuario,int idPublicacion){
+
+        public Upload(Bitmap imagen, String titulo, String contenido, int Tipo, String CodUsuario, int idPublicacion) {
             this.imagen = imagen;
             this.titulo = titulo;
-            this.contenido=contenido;
-            this.tipoPub=Tipo;
-            this.CodUsuario=CodUsuario;
-            this.idPublicacion=idPublicacion;
+            this.contenido = contenido;
+            this.tipoPub = Tipo;
+            this.CodUsuario = CodUsuario;
+            this.idPublicacion = idPublicacion;
         }
 
         @Override
         protected String doInBackground(Void... params) {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             //compress the image to jpg format
-            imagen.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
+            imagen.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
             /*
             * encode image to base64 so that it can be picked by saveImage.php file
             * */
             String encodeImage = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
-            String idpub=String.valueOf(idPublicacion);
-            String tip=String.valueOf(tipoPub);
+            String idpub = String.valueOf(idPublicacion);
+            String tip = String.valueOf(tipoPub);
             //generate hashMap to store encodedImage and the name
-            HashMap<String,String> detail = new HashMap<>();
-            detail.put("idPublicacion",idpub);
+            HashMap<String, String> detail = new HashMap<>();
+            detail.put("idPublicacion", idpub);
             detail.put("tit", titulo);
             detail.put("imagen", encodeImage);
-            detail.put("contenido",contenido);
-            detail.put("tipo",tip);
-            detail.put("codUser",CodUsuario);
-            try{
+            detail.put("contenido", contenido);
+            detail.put("tipo", tip);
+            detail.put("codUser", CodUsuario);
+            try {
                 //convert this HashMap to encodedUrl to send to php file
                 String dataToSend = hashMapToUrl(detail);
                 //make a Http request and send data to saveImage.php file
-                String response = Request.post(SERVER,dataToSend);
+                String response = Request.post(SERVER, dataToSend);
 
                 //return the response
                 return response;
 
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
                 return null;
             }
@@ -313,12 +345,18 @@ public String carrer,grup;
         @Override
         protected void onPostExecute(String s) {
             //show image uploaded
+<<<<<<< HEAD
             Toast.makeText(getApplicationContext(),"Datos modificados correctamente", Toast.LENGTH_SHORT).show();
             Intent intent=new Intent(GestionPublicaciones.this,UserMainActivity.class);
             intent.putExtra("Matricula",codUser);
             intent.putExtra("grado",grad);
             intent.putExtra("grupo",grup);
             intent.putExtra("carrera",carrer);
+=======
+            Toast.makeText(getApplicationContext(), "Datos modificados correctamente", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(GestionPublicaciones.this, UserMainActivity.class);
+            intent.putExtra("Matricula", codUser);
+>>>>>>> origin/master
             startActivity(intent);
         }
     }
