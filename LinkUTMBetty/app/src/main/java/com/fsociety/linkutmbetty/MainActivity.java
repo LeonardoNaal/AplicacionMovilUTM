@@ -68,8 +68,9 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+            System.exit(0);
         } else {
-            super.onBackPressed();
+           System.exit(0);
         }
     }
 

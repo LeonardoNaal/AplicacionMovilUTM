@@ -84,6 +84,9 @@ public class UserMainActivity extends AppCompatActivity
                 //Este código será reemplazado por un intent para llevar a otra actividad (AgregarPublicación)
                 Intent intent = new Intent(UserMainActivity.this, ActividadPrueba.class);
                 intent.putExtra("Matricula", dato);
+                intent.putExtra("grado",grado);
+                intent.putExtra("grupo",grupo);
+                intent.putExtra("carrera",carrera);
                 startActivity(intent);
             }
         });
@@ -185,6 +188,9 @@ public class UserMainActivity extends AppCompatActivity
             try {
                 final Bundle arguments = new Bundle();
                 arguments.putString("id", dato);
+                arguments.putInt("grado",grado);
+                arguments.putString("grupo",grupo);
+                arguments.putString("carrera",carrera);
                 fragment = (Fragment) fragmentClass.newInstance();
                 fragment.setArguments(arguments);
             } catch (Exception e) {
@@ -221,6 +227,7 @@ public class UserMainActivity extends AppCompatActivity
         } else if (id == R.id.nav_share) {
             //Cerrar sesión
             Intent intent = new Intent(UserMainActivity.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             startActivity(intent);
         }
 

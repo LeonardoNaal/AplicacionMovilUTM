@@ -40,6 +40,10 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -72,11 +76,13 @@ public class ActividadPrueba extends AppCompatActivity  {
     public int idTipoSeleccionado;
     //public String SERVER = "http://fsociety.somee.com/WebService.asmx/agregarPublicacion?", timestamp;
    //public String SERVER = "http://192.168.1.71:8091/WebService.asmx/agregarPublicacion?", timestamp;
-    public String SERVER = "http://davisaac19-001-site1.atempurl.com/WebService.asmx/agregarPublicacion?", timestamp;
+    public String SERVER = "http://davisaac19-001-site1.atempurl.com/WebService.asmx/agregarPub?", timestamp;
     private static final String TAG = ActividadPrueba.class.getSimpleName();
     Spinner spn1;
     String[] Tipos={"Seleccionar...","Publicidad","Aviso","Reporte","Otra"};
-String matricula;
+String matricula,grupo,carrera;
+    int grado;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,13 +92,15 @@ String matricula;
         txtTitulo=(EditText)findViewById(R.id.txtTitulo);
         txtContenido=(EditText)findViewById(R.id.txtContenido);
         spn1=(Spinner)findViewById(R.id.spinner2);
-
         ArrayAdapter<String> adaptador=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,Tipos);
         spn1.setAdapter(adaptador);
         final Intent intent=getIntent();
         Bundle extras =intent.getExtras();
         if (extras != null) {//ver si contiene datos
             matricula=(String)extras.get("Matricula");//Obtengo la matriculs
+            grado=(int)extras.getInt("grado");
+            grupo=(String)extras.getString("grupo");
+            carrera=(String)extras.getString("carrera");
         }
         btnCancelar=(Button)findViewById(R.id.btnCancelar);
         btnCancelar.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +108,9 @@ String matricula;
             public void onClick(View v) {
              Intent intent=new Intent(ActividadPrueba.this,UserMainActivity.class);
                 intent.putExtra("Matricula",matricula);
+                intent.putExtra("grado",grado);
+                intent.putExtra("grupo",grupo);
+                intent.putExtra("carrera",carrera);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
             }
@@ -329,7 +340,16 @@ String matricula;
         super.onSaveInstanceState(outState);
         outState.putString("file_path", mPath);
     }
-
+@Override
+public void onBackPressed(){
+    Intent intent = new Intent(ActividadPrueba.this, UserMainActivity.class);
+    intent.putExtra("Matricula",matricula);
+    intent.putExtra("grado",grado);
+    intent.putExtra("grupo",grupo);
+    intent.putExtra("carrera",carrera);
+    startActivity(intent);
+    finish();
+}
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
@@ -418,6 +438,9 @@ String matricula;
         private String contenido;
         private int tipoPub;
         private String CodUsuario;
+        private String car;
+        private String grup;
+        private int grad;
         public Upload(Bitmap image,String titulo,String contenido,int Tipo,String CodUsuario){
             this.image = image;
             this.titulo = titulo;
@@ -434,15 +457,19 @@ String matricula;
             /*
             * encode image to base64 so that it can be picked by saveImage.php file
             * */
+            //exec InsertarPublicacion @titulo='nuevo',@contenido='hola',@image=null,@IDTipo=2,@video=null,@CodUsuario='aga00001',@carrera=null,@grado=null,@grupo=null
             String encodeImage = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
             String tip=String.valueOf(tipoPub);
             //generate hashMap to store encodedImage and the name
             HashMap<String,String> detail = new HashMap<>();
-            detail.put("tit", titulo);
-            detail.put("imagen", encodeImage);
-            detail.put("contenido",contenido);
-            detail.put("tipo",tip);
             detail.put("codUser",CodUsuario);
+            detail.put("tit", titulo);
+            detail.put("contenido",contenido);
+            detail.put("imagen", encodeImage);
+            detail.put("tipo",tip);
+            detail.put("carrera","null");
+            detail.put("grado","0");
+            detail.put("grupo","0");
             try{
                 //convert this HashMap to encodedUrl to send to php file
                 String dataToSend = hashMapToUrl(detail);
@@ -461,11 +488,24 @@ String matricula;
         @Override
         protected void onPostExecute(String s) {
             //show image uploaded
-            Toast.makeText(getApplicationContext(),"Datos agregados correctamente", Toast.LENGTH_SHORT).show();
-            Intent intent=new Intent(ActividadPrueba.this,UserMainActivity.class);
-            intent.putExtra("Matricula",matricula);
-            startActivity(intent);
-        }
+            super.onPostExecute(s);
+            try {
+                Log.e("salida", s);
+                try {
+                Toast.makeText(getApplicationContext(),"Datos agregados correctamente", Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(ActividadPrueba.this,UserMainActivity.class);
+                intent.putExtra("Matricula",matricula);
+                intent.putExtra("grado",grado);
+                intent.putExtra("grupo",grupo);
+                intent.putExtra("carrera",carrera);
+                startActivity(intent);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } catch (Throwable t) {
+                Log.e("Falla", t.toString());
+            }
+                    }
     }
 }
 

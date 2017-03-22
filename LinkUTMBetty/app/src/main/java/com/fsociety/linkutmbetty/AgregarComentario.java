@@ -53,12 +53,13 @@ public class AgregarComentario extends AppCompatActivity implements SwipeRefresh
     ListView lsvComents2;
     EditText edtContenido;
     public String SERVER = "http://davisaac19-001-site1.atempurl.com/WebService.asmx/AgregarComentarios?", timestamp;
-    public String SERVER2 = "http://davisaac19-001-site1.atempurl.com/WebService.asmx/DatosAlumno?", timestam;
+    public String SERVER2 = "http://davisaac19-001-site1.atempurl.com/WebService.asmx/ObtenerCelular?", timestam;
     private SwipeRefreshLayout swipeLayout;
     Button btnAgregar, btnRegresar;
     ImageButton btnLlamar;
     boolean validar;
-    String tel;
+    int grado;
+    String tel,grupo,carrera;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +74,9 @@ public class AgregarComentario extends AppCompatActivity implements SwipeRefresh
             codPublicacion = (int) extras.getInt("id");
             codUser = (String) extras.get("codUser");
             lblTitulo.setText(datotitulo);
+            grado=(int)extras.getInt("grado");
+            grupo=(String)extras.getString("grupo");
+            carrera=(String)extras.getString("carrera");
         }
 
         btnRegresar = (Button) findViewById(R.id.btnRegresar);
@@ -81,17 +85,20 @@ public class AgregarComentario extends AppCompatActivity implements SwipeRefresh
             public void onClick(View v) {
                 Intent intent = new Intent(AgregarComentario.this, UserMainActivity.class);
                 intent.putExtra("Matricula", codUser);
+                intent.putExtra("grado",grado);
+                intent.putExtra("grupo",grupo);
+                intent.putExtra("carrera",carrera);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
             }
         });
-        new VerTelefono(codUser).execute();
+        new VerTelefono(codPublicacion).execute();
         btnLlamar = (ImageButton) findViewById(R.id.btnLlamar);
         btnLlamar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(android.content.Intent.ACTION_DIAL,
-                        Uri.parse("tel:+"+tel)); //
+                        Uri.parse("tel:"+tel)); //
                 startActivity(i);
             }
         });
@@ -144,7 +151,16 @@ public class AgregarComentario extends AppCompatActivity implements SwipeRefresh
         String UrlWeb = Url + action + "?CodPublicacion=" + codPublicacion;
         new JSONTask().execute(UrlWeb);
     }
-
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(AgregarComentario.this, UserMainActivity.class);
+        intent.putExtra("Matricula", codUser);
+        intent.putExtra("grado",grado);
+        intent.putExtra("grupo",grupo);
+        intent.putExtra("carrera",carrera);
+        startActivity(intent);
+        finish();
+    }
     @Override
     public void onRefresh() {
         //Codigo para traer todas las publicaciones
@@ -341,10 +357,10 @@ public class AgregarComentario extends AppCompatActivity implements SwipeRefresh
     }
 
     private class VerTelefono extends AsyncTask<Void, Void, String> {
-        private String codUsuario;
+        private int idPublicacion;
 
-        public VerTelefono(String codUsuario) {
-            this.codUsuario = codUsuario;
+        public VerTelefono(int idpub) {
+            this.idPublicacion= idpub;
         }
         @Override
         protected String doInBackground(Void... params) {
@@ -352,7 +368,8 @@ public class AgregarComentario extends AppCompatActivity implements SwipeRefresh
             String cod = String.valueOf(codPublicacion);
             //generate hashMap to store encodedImage and the name
             HashMap<String, String> detail = new HashMap<>();
-            detail.put("matricula", codUsuario);
+            String tele=String.valueOf(idPublicacion);
+            detail.put("idPublicacion", tele);
             try {
                 //convert this HashMap to encodedUrl to send to php file
                 String dataToSend = hashMapToUrl(detail);

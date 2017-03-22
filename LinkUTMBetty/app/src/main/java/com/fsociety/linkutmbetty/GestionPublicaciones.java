@@ -52,8 +52,8 @@ public class GestionPublicaciones extends AppCompatActivity {
     //public String SERVER = "http://fsociety.somee.com/WebService.asmx/ModificarPublicacion?",     timestamp;
     //public String SERVER = "http://169.254.3.130:8091/WebService.asmx/ModificarPublicacion?",timestamp;
     public String SERVER = "http://davisaac19-001-site1.atempurl.com//WebService.asmx/ModificarPublicacion?",timestamp;
-
-    public int TipoPub,idTipoSeleccionado=0;
+public String carrer,grup;
+    public int TipoPub,idTipoSeleccionado=0,grad;
     String[] Tipos={"Seleccionar...","Publicidad","Aviso","Reporte","Otra"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +82,9 @@ public class GestionPublicaciones extends AppCompatActivity {
             String fecha=(String) extras.get("fecha");
             codUser=(String) extras.get("codUser");
             TipoPub=(int)extras.getInt("IDTipo");
+            grad=(int)extras.getInt("grado");
+            grup=(String)extras.get("grupo");
+            carrer=(String)extras.get("carrera");
             bmp1=image;
             txtContenido.setText(datocontenido);
             txtTitulo.setText(datotitulo);
@@ -166,7 +169,16 @@ public class GestionPublicaciones extends AppCompatActivity {
             }
         });
     }
-
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(GestionPublicaciones.this, UserMainActivity.class);
+        intent.putExtra("Matricula",codUser);
+        intent.putExtra("grado",grad);
+        intent.putExtra("grupo",grup);
+        intent.putExtra("carrera",carrer);;
+        startActivity(intent);
+        finish();
+    }
     public class  JSONTask extends AsyncTask<String ,String, String> {
         @Override
         protected  String doInBackground(String... parametros){
@@ -216,6 +228,9 @@ public class GestionPublicaciones extends AppCompatActivity {
             Toast.makeText(GestionPublicaciones.this, "Datos eliminados correctamente", Toast.LENGTH_SHORT).show();
             Intent intent=new Intent(GestionPublicaciones.this,UserMainActivity.class);
             intent.putExtra("Matricula",codUser);
+            intent.putExtra("grado",grad);
+            intent.putExtra("grupo",grup);
+            intent.putExtra("carrera",carrer);
             startActivity(intent);
         }
                 else{
@@ -301,6 +316,9 @@ public class GestionPublicaciones extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Datos modificados correctamente", Toast.LENGTH_SHORT).show();
             Intent intent=new Intent(GestionPublicaciones.this,UserMainActivity.class);
             intent.putExtra("Matricula",codUser);
+            intent.putExtra("grado",grad);
+            intent.putExtra("grupo",grup);
+            intent.putExtra("carrera",carrer);
             startActivity(intent);
         }
     }

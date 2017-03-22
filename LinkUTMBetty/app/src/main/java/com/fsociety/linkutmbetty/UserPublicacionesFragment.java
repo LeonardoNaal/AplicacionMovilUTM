@@ -94,6 +94,9 @@ public class UserPublicacionesFragment extends Fragment  implements SwipeRefresh
                 intent.putExtra("id",auxid);
                 intent.putExtra("titulo",auxtitulo);
                 intent.putExtra("codUser",dato);
+                intent.putExtra("grado",grado);
+                intent.putExtra("grupo",grupo);
+                intent.putExtra("carrera",carrera);
                 startActivity(intent);
             }
         });

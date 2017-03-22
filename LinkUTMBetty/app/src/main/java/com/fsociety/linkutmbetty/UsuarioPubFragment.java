@@ -83,7 +83,8 @@ public class UsuarioPubFragment extends Fragment implements SwipeRefreshLayout.O
     private SwipeRefreshLayout swipeLayout;
     TextView txtMatricula;
     ArrayList<publicacion> image;
-    public String dato;
+    public String dato,carrera,grupo;
+    int grado;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -102,6 +103,9 @@ public class UsuarioPubFragment extends Fragment implements SwipeRefreshLayout.O
         try
         {
             dato = bdl.getString("id");
+            grado=bdl.getInt("grado");
+            grupo=bdl.getString("grupo");
+            carrera=bdl.getString("carrera");
         }
         catch(final Exception e)
         {
@@ -118,7 +122,6 @@ public class UsuarioPubFragment extends Fragment implements SwipeRefreshLayout.O
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
-
 
         String action="BuscarPublicacionUsuario";
         //String Url="http://fsociety.somee.com/WebService.asmx/";
@@ -147,6 +150,9 @@ public class UsuarioPubFragment extends Fragment implements SwipeRefreshLayout.O
                 intent.putExtra("contenido",contenido);
                 intent.putExtra("codUser",dato);
                 intent.putExtra("IDTipo",TipoPub);
+                intent.putExtra("carrera",carrera);
+                intent.putExtra("grado",grado);
+                intent.putExtra("grupo",grupo);
                 startActivity(intent);
             }
         });
