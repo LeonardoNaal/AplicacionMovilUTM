@@ -56,8 +56,8 @@ import java.util.Map;
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
-public class ActividadPrueba extends AppCompatActivity  {
-    Button btnIniciar,btnAbrirGaleria,btnCancelar;
+public class ActividadPrueba extends AppCompatActivity {
+    Button btnIniciar, btnAbrirGaleria, btnCancelar;
     ImageView imageView;
     private static String APP_DIRECTORY = "MyPictureApp/";
     private static String MEDIA_DIRECTORY = APP_DIRECTORY + "PictureApp";
@@ -68,38 +68,40 @@ public class ActividadPrueba extends AppCompatActivity  {
     private static final int REQUEST_CODE_ASK_PERMISSIONS = 123;
     private String mPath;
     Bitmap bnp;
-    EditText txtTitulo,txtContenido;
+    EditText txtTitulo, txtContenido;
     public int idTipoSeleccionado;
     //public String SERVER = "http://fsociety.somee.com/WebService.asmx/agregarPublicacion?", timestamp;
-   //public String SERVER = "http://192.168.1.71:8091/WebService.asmx/agregarPublicacion?", timestamp;
+    //public String SERVER = "http://192.168.1.71:8091/WebService.asmx/agregarPublicacion?", timestamp;
     public String SERVER = "http://davisaac19-001-site1.atempurl.com/WebService.asmx/agregarPublicacion?", timestamp;
     private static final String TAG = ActividadPrueba.class.getSimpleName();
     Spinner spn1;
-    String[] Tipos={"Seleccionar...","Publicidad","Aviso","Reporte","Otra"};
-String matricula;
+    String[] Tipos = {"Seleccionar...", "Publicidad", "Aviso", "Reporte", "Otra"};
+    String matricula;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actividad_prueba);
+        setTitle("Publicar");
         mRlView = (RelativeLayout) findViewById(R.id.rlative);
-        imageView=(ImageView)findViewById(R.id.imageView5);
-        txtTitulo=(EditText)findViewById(R.id.txtTitulo);
-        txtContenido=(EditText)findViewById(R.id.txtContenido);
-        spn1=(Spinner)findViewById(R.id.spinner2);
+        imageView = (ImageView) findViewById(R.id.imageView5);
+        txtTitulo = (EditText) findViewById(R.id.txtTitulo);
+        txtContenido = (EditText) findViewById(R.id.txtContenido);
+        spn1 = (Spinner) findViewById(R.id.spinner2);
 
-        ArrayAdapter<String> adaptador=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,Tipos);
+        ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, Tipos);
         spn1.setAdapter(adaptador);
-        final Intent intent=getIntent();
-        Bundle extras =intent.getExtras();
+        final Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
         if (extras != null) {//ver si contiene datos
-            matricula=(String)extras.get("Matricula");//Obtengo la matriculs
+            matricula = (String) extras.get("Matricula");//Obtengo la matriculs
         }
-        btnCancelar=(Button)findViewById(R.id.btnCancelar);
+        btnCancelar = (Button) findViewById(R.id.btnCancelar);
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             Intent intent=new Intent(ActividadPrueba.this,UserMainActivity.class);
-                intent.putExtra("Matricula",matricula);
+                Intent intent = new Intent(ActividadPrueba.this, UserMainActivity.class);
+                intent.putExtra("Matricula", matricula);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
             }
@@ -107,18 +109,18 @@ String matricula;
         spn1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position){
+                switch (position) {
                     case 1:
-                        idTipoSeleccionado=1;
+                        idTipoSeleccionado = 1;
                         break;
                     case 2:
-                        idTipoSeleccionado=2;
+                        idTipoSeleccionado = 2;
                         break;
                     case 3:
-                        idTipoSeleccionado=3;
+                        idTipoSeleccionado = 3;
                         break;
                     case 4:
-                        idTipoSeleccionado=4;
+                        idTipoSeleccionado = 4;
                         break;
                 }
             }
@@ -129,47 +131,45 @@ String matricula;
             }
         });
 
-        final String[] MalasPalabras=new String[]{"PUTO","PENDEJO","MARICÓN","PINCHE","CHINGADERA","PENDEJETE","PUTA","CHINGADA","PUÑETAS","HIJO DE LA CHINGADA","MIERDA","MARRANO","VERGA","MAMES","MAMADA","MAMÓN","MAMONA","MADRAZO","CABRÓN","REPENDEJO","PENDEJA","PUTAZO","VERGAZO"};
+        final String[] MalasPalabras = new String[]{"PUTO", "PENDEJO", "MARICÓN", "PINCHE", "CHINGADERA", "PENDEJETE", "PUTA", "CHINGADA", "PUÑETAS", "HIJO DE LA CHINGADA", "MIERDA", "MARRANO", "VERGA", "MAMES", "MAMADA", "MAMÓN", "MAMONA", "MADRAZO", "CABRÓN", "REPENDEJO", "PENDEJA", "PUTAZO", "VERGAZO"};
         //Referencia al botón Iniciar
         btnIniciar = (Button) findViewById(R.id.btnPublicar);
         btnIniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean comprobar=true;
-                boolean ValTitulo=true,ValContenido=true;
+                boolean comprobar = true;
+                boolean ValTitulo = true, ValContenido = true;
                 String strTitulo = txtTitulo.getText().toString().toUpperCase();
                 String strContenido = txtContenido.getText().toString().toUpperCase();
-                for (String d : MalasPalabras)
-                {
-                    if(strTitulo.contains(d)){
-                        comprobar=false;
+                for (String d : MalasPalabras) {
+                    if (strTitulo.contains(d)) {
+                        comprobar = false;
                     }
-                    if(strContenido.contains(d)){
-                        comprobar=false;
+                    if (strContenido.contains(d)) {
+                        comprobar = false;
                     }
                 }
-                if (comprobar==false){
-                    Toast.makeText(ActividadPrueba.this,"Contenido inapropiado",Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    if(TextUtils.isEmpty(strTitulo))
-                    {txtTitulo.setError("Dato obligatorio");
-                        ValTitulo=false;
+                if (comprobar == false) {
+                    Toast.makeText(ActividadPrueba.this, "Contenido inapropiado", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (TextUtils.isEmpty(strTitulo)) {
+                        txtTitulo.setError("Dato obligatorio");
+                        ValTitulo = false;
                     }
-                    if(TextUtils.isEmpty(strContenido)){
+                    if (TextUtils.isEmpty(strContenido)) {
                         txtContenido.setError("Dato obligatorio");
-                        ValContenido=false;
+                        ValContenido = false;
                     }
-                    if(ValContenido==true && ValTitulo==true){
-                        if(imageView.getDrawable()==null){
+                    if (ValContenido == true && ValTitulo == true) {
+                        if (imageView.getDrawable() == null) {
 
                             Resources resources = getResources();
-                            Bitmap source = BitmapFactory.decodeResource(resources,R.drawable.estandar2);
+                            Bitmap source = BitmapFactory.decodeResource(resources, R.drawable.estandar2);
 
                             int width = source.getWidth();
                             int height = source.getHeight();
-                            int newWidth =180;
-                            int newHeight =150;
+                            int newWidth = 180;
+                            int newHeight = 150;
 
                             // calculamos el escalado de la imagen destino
                             float scaleWidth = ((float) newWidth) / width;
@@ -180,17 +180,16 @@ String matricula;
                             // resize the Bitmap
                             matrix.postScale(scaleWidth, scaleHeight);
                             // volvemos a crear la imagen con los nuevos valores
-                            Bitmap resizedBitmap = Bitmap.createBitmap(source, 0, 0,width, height, matrix, true);
+                            Bitmap resizedBitmap = Bitmap.createBitmap(source, 0, 0, width, height, matrix, true);
                             imageView.setImageBitmap(resizedBitmap);
-                            new Upload(resizedBitmap,txtTitulo.getText().toString(),txtContenido.getText().toString(),idTipoSeleccionado,matricula).execute();
-                        }
-                        else{
+                            new Upload(resizedBitmap, txtTitulo.getText().toString(), txtContenido.getText().toString(), idTipoSeleccionado, matricula).execute();
+                        } else {
                             //Código para publicar los datos
                             Bitmap image = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
                             int width = image.getWidth();
                             int height = image.getHeight();
-                            int newWidth =150;
-                            int newHeight =120;
+                            int newWidth = 150;
+                            int newHeight = 120;
 
                             // calculamos el escalado de la imagen destino
                             float scaleWidth = ((float) newWidth) / width;
@@ -201,16 +200,16 @@ String matricula;
                             // resize the Bitmap
                             matrix.postScale(scaleWidth, scaleHeight);
                             // volvemos a crear la imagen con los nuevos valores
-                            Bitmap resizedBitmap = Bitmap.createBitmap(image, 0, 0,width, height, matrix, true);
+                            Bitmap resizedBitmap = Bitmap.createBitmap(image, 0, 0, width, height, matrix, true);
                             //execute the async task and upload the image to serve
-                            new Upload(resizedBitmap,txtTitulo.getText().toString(),txtContenido.getText().toString(),idTipoSeleccionado,matricula).execute();
+                            new Upload(resizedBitmap, txtTitulo.getText().toString(), txtContenido.getText().toString(), idTipoSeleccionado, matricula).execute();
                         }
                     }
                 }
 
             }
         });
-        btnAbrirGaleria=(Button)findViewById(R.id.btnAbrir);
+        btnAbrirGaleria = (Button) findViewById(R.id.btnAbrir);
         btnAbrirGaleria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -221,14 +220,14 @@ String matricula;
 
     private boolean mayRequestStoragePermission() {
 
-        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
             return true;
 
-        if((checkSelfPermission(WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) &&
+        if ((checkSelfPermission(WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) &&
                 (checkSelfPermission(CAMERA) == PackageManager.PERMISSION_GRANTED))
             return true;
 
-        if((shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE)) || (shouldShowRequestPermissionRationale(CAMERA))){
+        if ((shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE)) || (shouldShowRequestPermissionRationale(CAMERA))) {
             Snackbar.make(mRlView, "Los permisos son necesarios para poder usar la aplicación",
                     Snackbar.LENGTH_INDEFINITE).setAction(android.R.string.ok, new View.OnClickListener() {
                 @TargetApi(Build.VERSION_CODES.M)
@@ -237,12 +236,13 @@ String matricula;
                     requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE, CAMERA}, MY_PERMISSIONS);
                 }
             });
-        }else{
+        } else {
             requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE, CAMERA}, MY_PERMISSIONS);
         }
 
         return false;
     }
+
     private void checkPermission() {
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
@@ -255,12 +255,12 @@ String matricula;
 
             if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
 
-                requestPermissions(new String[] {Manifest.permission.CAMERA},
+                requestPermissions(new String[]{Manifest.permission.CAMERA},
                         REQUEST_CODE_ASK_PERMISSIONS);
 
                 Toast.makeText(this, "Requesting permissions", Toast.LENGTH_LONG).show();
 
-            }else if (hasWriteContactsPermission == PackageManager.PERMISSION_GRANTED){
+            } else if (hasWriteContactsPermission == PackageManager.PERMISSION_GRANTED) {
 
                 Toast.makeText(this, "The permissions are already granted ", Toast.LENGTH_LONG).show();
                 openCamera();
@@ -271,27 +271,29 @@ String matricula;
 
         return;
     }
+
     @Override
-    public void onRequestPermissionsResult(int requestsCode,String [] permissions, int[] grantResults){
-        if(REQUEST_CODE_ASK_PERMISSIONS == requestsCode) {
+    public void onRequestPermissionsResult(int requestsCode, String[] permissions, int[] grantResults) {
+        if (REQUEST_CODE_ASK_PERMISSIONS == requestsCode) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "OK Permissions granted ! " + Build.VERSION.SDK_INT, Toast.LENGTH_LONG).show();
                 openCamera();
             } else {
                 Toast.makeText(this, "Permissions are not granted " + Build.VERSION.SDK_INT, Toast.LENGTH_LONG).show();
             }
-        }else{
+        } else {
             super.onRequestPermissionsResult(requestsCode, permissions, grantResults);
         }
-        if(requestsCode == MY_PERMISSIONS){
-            if(grantResults.length == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED){
+        if (requestsCode == MY_PERMISSIONS) {
+            if (grantResults.length == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(ActividadPrueba.this, "Permisos aceptados", Toast.LENGTH_SHORT).show();
                 btnAbrirGaleria.setEnabled(true);
             }
-        }else{
+        } else {
             showExplanation();
         }
-        }
+    }
+
     private void showOptions() {
         final CharSequence[] option = {"Tomar foto", "Elegir de galeria", "Cancelar"};
         final AlertDialog.Builder builder = new AlertDialog.Builder(ActividadPrueba.this);
@@ -299,13 +301,13 @@ String matricula;
         builder.setItems(option, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(option[which] == "Tomar foto"){
+                if (option[which] == "Tomar foto") {
                     checkPermission();
-                }else if(option[which] == "Elegir de galeria"){
+                } else if (option[which] == "Elegir de galeria") {
                     Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     intent.setType("image/*");
                     startActivityForResult(intent.createChooser(intent, "Selecciona app de imagen"), SELECT_PICTURE);
-                }else {
+                } else {
                     dialog.dismiss();
                 }
             }
@@ -315,11 +317,10 @@ String matricula;
     }
 
     private void openCamera() {
-        try{
-            Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        try {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, PHOTO_CODE);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -341,18 +342,18 @@ String matricula;
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(resultCode == RESULT_OK){
-            switch (requestCode){
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
                 case PHOTO_CODE:
-                   Bundle ext=data.getExtras();
-                    bnp=(Bitmap)ext.get("data");
+                    Bundle ext = data.getExtras();
+                    bnp = (Bitmap) ext.get("data");
                     imageView.setImageBitmap(bnp);
                     break;
                 case SELECT_PICTURE:
                     Uri path = data.getData();
                     InputStream is;
                     try {
-                        is =getContentResolver().openInputStream(path);
+                        is = getContentResolver().openInputStream(path);
                         BufferedInputStream bis = new BufferedInputStream(is);
                         Bitmap bit = BitmapFactory.decodeStream(bis);
                         imageView.setImageBitmap(bit);
@@ -360,14 +361,14 @@ String matricula;
                         Long tsLong = System.currentTimeMillis() / 1000;
                         timestamp = tsLong.toString();
 
-                        Toast.makeText(getApplicationContext(),timestamp,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), timestamp, Toast.LENGTH_SHORT).show();
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
                     break;
             }
-            }
         }
+    }
 
     private void showExplanation() {
         AlertDialog.Builder builder = new AlertDialog.Builder(ActividadPrueba.this);
@@ -394,10 +395,10 @@ String matricula;
         builder.show();
     }
 
-    private String hashMapToUrl(HashMap< String,String> params) throws UnsupportedEncodingException {
+    private String hashMapToUrl(HashMap<String, String> params) throws UnsupportedEncodingException {
         StringBuilder result = new StringBuilder();
         boolean first = true;
-        for(Map.Entry<String,String> entry : params.entrySet()){
+        for (Map.Entry<String, String> entry : params.entrySet()) {
             if (first)
                 first = false;
             else
@@ -412,47 +413,48 @@ String matricula;
     }
     //async task to upload image
 
-    private class Upload extends AsyncTask<Void,Void,String> {
+    private class Upload extends AsyncTask<Void, Void, String> {
         private Bitmap image;
         private String titulo;
         private String contenido;
         private int tipoPub;
         private String CodUsuario;
-        public Upload(Bitmap image,String titulo,String contenido,int Tipo,String CodUsuario){
+
+        public Upload(Bitmap image, String titulo, String contenido, int Tipo, String CodUsuario) {
             this.image = image;
             this.titulo = titulo;
-            this.contenido=contenido;
-            this.tipoPub=Tipo;
-            this.CodUsuario=CodUsuario;
+            this.contenido = contenido;
+            this.tipoPub = Tipo;
+            this.CodUsuario = CodUsuario;
         }
 
         @Override
         protected String doInBackground(Void... params) {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             //compress the image to jpg format
-            image.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
+            image.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
             /*
             * encode image to base64 so that it can be picked by saveImage.php file
             * */
             String encodeImage = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
-            String tip=String.valueOf(tipoPub);
+            String tip = String.valueOf(tipoPub);
             //generate hashMap to store encodedImage and the name
-            HashMap<String,String> detail = new HashMap<>();
+            HashMap<String, String> detail = new HashMap<>();
             detail.put("tit", titulo);
             detail.put("imagen", encodeImage);
-            detail.put("contenido",contenido);
-            detail.put("tipo",tip);
-            detail.put("codUser",CodUsuario);
-            try{
+            detail.put("contenido", contenido);
+            detail.put("tipo", tip);
+            detail.put("codUser", CodUsuario);
+            try {
                 //convert this HashMap to encodedUrl to send to php file
                 String dataToSend = hashMapToUrl(detail);
                 //make a Http request and send data to saveImage.php file
-                String response = Request.post(SERVER,dataToSend);
+                String response = Request.post(SERVER, dataToSend);
 
                 //return the response
                 return response;
 
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
                 return null;
             }
@@ -461,9 +463,9 @@ String matricula;
         @Override
         protected void onPostExecute(String s) {
             //show image uploaded
-            Toast.makeText(getApplicationContext(),"Datos agregados correctamente", Toast.LENGTH_SHORT).show();
-            Intent intent=new Intent(ActividadPrueba.this,UserMainActivity.class);
-            intent.putExtra("Matricula",matricula);
+            Toast.makeText(getApplicationContext(), "Datos agregados correctamente", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(ActividadPrueba.this, UserMainActivity.class);
+            intent.putExtra("Matricula", matricula);
             startActivity(intent);
         }
     }
