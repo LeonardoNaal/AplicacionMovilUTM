@@ -119,7 +119,7 @@ public class UserPublicacionesFragment extends Fragment  implements SwipeRefresh
             grupo="0";
         }
         String Url="http://davisaac19-001-site1.atempurl.com/WebService.asmx/";
-        String UrlWeb=Url+action+"?carrera="+carrera+"&grado="+grado+"&grupo="+grupo;;
+        String UrlWeb=Url+action+"?carrera="+carrera+"&grado="+grado+"&grupo="+grupo;
         new JSONTask().execute(UrlWeb);
         return view;
     }
@@ -134,7 +134,7 @@ public class UserPublicacionesFragment extends Fragment  implements SwipeRefresh
         {
             grupo="0";
         }
-        String Url="http://davisaac19-001-site1.atempurl.com//WebService.asmx/";
+        String Url="http://davisaac19-001-site1.atempurl.com/WebService.asmx/";
         String UrlWeb=Url+action+"?carrera="+carrera+"&grado="+grado+"&grupo="+grupo;
         new JSONTask().execute(UrlWeb);
         //Antes de ejecutarlo, indicamos al swipe layout que muestre la barra indeterminada de progreso.

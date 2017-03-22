@@ -53,11 +53,12 @@ public class AgregarComentario extends AppCompatActivity implements SwipeRefresh
     ListView lsvComents2;
     EditText edtContenido;
     public String SERVER = "http://davisaac19-001-site1.atempurl.com/WebService.asmx/AgregarComentarios?", timestamp;
+    public String SERVER2 = "http://davisaac19-001-site1.atempurl.com/WebService.asmx/DatosAlumno?", timestam;
     private SwipeRefreshLayout swipeLayout;
     Button btnAgregar, btnRegresar;
     ImageButton btnLlamar;
     boolean validar;
-
+    String tel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +74,7 @@ public class AgregarComentario extends AppCompatActivity implements SwipeRefresh
             codUser = (String) extras.get("codUser");
             lblTitulo.setText(datotitulo);
         }
+        new VerTelefono(codUser).execute();
         btnRegresar = (Button) findViewById(R.id.btnRegresar);
         btnRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,7 +91,7 @@ public class AgregarComentario extends AppCompatActivity implements SwipeRefresh
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(android.content.Intent.ACTION_DIAL,
-                        Uri.parse("tel:+3748593458")); //
+                        Uri.parse("tel:+"+tel)); //
                 startActivity(i);
             }
         });
@@ -335,6 +337,55 @@ public class AgregarComentario extends AppCompatActivity implements SwipeRefresh
         protected void onPostExecute(String s) {
             //show image uploaded
             Toast.makeText(getApplicationContext(), "Datos agregados correctamente", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private class VerTelefono extends AsyncTask<Void, Void, String> {
+        private String codUsuario;
+
+        public VerTelefono(String codUsuario) {
+            this.codUsuario = codUsuario;
+        }
+        @Override
+        protected String doInBackground(Void... params) {
+
+            String cod = String.valueOf(codPublicacion);
+            //generate hashMap to store encodedImage and the name
+            HashMap<String, String> detail = new HashMap<>();
+            detail.put("codUsuario", codUsuario);
+            try {
+                //convert this HashMap to encodedUrl to send to php file
+                String dataToSend = hashMapToUrl(detail);
+                //make a Http request and send data to saveImage.php file
+                String response = Request.post(SERVER2, dataToSend);
+
+                //return the response
+                return response;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            //show image uploaded
+            super.onPostExecute(s);
+            try {
+                Log.e("salida", s);
+                JSONArray ResultadoArray = null;
+                try {
+                    JSONObject Jasonobject = new JSONObject(s);
+                    JSONArray Jarray = Jasonobject.getJSONArray("Table");
+                    JSONObject objeto = Jarray.getJSONObject(0);
+                    tel=objeto.getString("celular");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } catch (Throwable t) {
+                Log.e("Falla", t.toString());
+            }
         }
     }
 }
