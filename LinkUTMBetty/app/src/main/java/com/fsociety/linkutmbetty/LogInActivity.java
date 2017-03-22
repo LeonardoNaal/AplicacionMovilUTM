@@ -13,18 +13,26 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LogInActivity extends AppCompatActivity {
     EditText edtUsuario, edtContraseña;
     boolean verificar = true;
-
+    public String SERVER = "http://davisaac19-001-site1.atempurl.com/WebService.asmx/DatosAlumno?", timestamp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +49,6 @@ public class LogInActivity extends AppCompatActivity {
                     verificar = true;
                 }
             }
-
         });
         edtContraseña = (EditText) findViewById(R.id.txtContraseña);
         Button btnIniciar = (Button) findViewById(R.id.btnIniciar);
@@ -115,13 +122,8 @@ public class LogInActivity extends AppCompatActivity {
             try {
                 Log.e("salida", resultado);
                 if (Integer.parseInt(resultado) == 1) {
-                    Toast.makeText(LogInActivity.this, "Bienvenido", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LogInActivity.this, UserMainActivity.class);
                     String Nombre = edtUsuario.getText().toString();
-                    intent.putExtra("Matricula", Nombre);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                    startActivity(intent);
-                    LogInActivity.this.finish();
+                    new Upload(Nombre).execute();
                 } else {
                     Toast.makeText(LogInActivity.this, "Usuario o contraseña incorrecto", Toast.LENGTH_SHORT).show();
                     //Snackbar.make(LogInActivity.this, "Usuario o contraseña incorrectos", Snackbar.LENGTH_LONG).setAction("Action", null).show();
@@ -131,6 +133,81 @@ public class LogInActivity extends AppCompatActivity {
                 i.putExtra("ResultadoEnArray",resultado);
                 startActivity(i);
                  */
+            } catch (Throwable t) {
+                Log.e("Falla", t.toString());
+            }
+        }
+    }
+
+    private String hashMapToUrl(HashMap<String, String> params) throws UnsupportedEncodingException {
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            if (first)
+                first = false;
+            else
+                result.append("&");
+
+            result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+            result.append("=");
+            StringBuilder append = result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+        }
+
+        return result.toString();
+    }
+
+    //async task to upload image
+    private class Upload extends AsyncTask<Void, Void, String> {
+        private String codUsuario;
+
+        public Upload(String codUsuario) {
+            this.codUsuario = codUsuario;
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+
+            //generate hashMap to store encodedImage and the name
+            HashMap<String, String> detail = new HashMap<>();
+            detail.put("matricula", codUsuario);
+            try {
+                //convert this HashMap to encodedUrl to send to php file
+                String dataToSend = hashMapToUrl(detail);
+                //make a Http request and send data to saveImage.php file
+                String response = Request.post(SERVER, dataToSend);
+
+                //return the response
+                return response;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            //show image uploaded
+            super.onPostExecute(s);
+            try {
+                Log.e("salida", s);
+                JSONArray ResultadoArray = null;
+                try {
+                    JSONObject Jasonobject = new JSONObject(s);
+                    JSONArray Jarray = Jasonobject.getJSONArray("Table");
+                    JSONObject objeto = Jarray.getJSONObject(0);
+                    Toast.makeText(LogInActivity.this, "Bienvenido "+objeto.getString("Nombres")+" "+objeto.getString("ApePat"), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LogInActivity.this, UserMainActivity.class);
+                    intent.putExtra("carrera",objeto.getString("carrera"));
+                    intent.putExtra("Matricula",objeto.getString("CodUsuario"));
+                    intent.putExtra("grado",objeto.getString("grado"));
+                    intent.putExtra("grupo",objeto.getString("grupo"));
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    startActivity(intent);
+                    LogInActivity.this.finish();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             } catch (Throwable t) {
                 Log.e("Falla", t.toString());
             }

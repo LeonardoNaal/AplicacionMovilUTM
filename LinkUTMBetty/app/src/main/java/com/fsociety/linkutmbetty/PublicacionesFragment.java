@@ -79,7 +79,6 @@ public class PublicacionesFragment extends Fragment  implements SwipeRefreshLayo
                 String auxtitulo = elegido.getTitulo();
                 String contenido=elegido.getContenido();
                 int auxid = elegido.getId();
-
                 intent.putExtra("id",auxid);
                 intent.putExtra("titulo",auxtitulo);
                 intent.putExtra("contenido",contenido);
@@ -100,11 +99,11 @@ public class PublicacionesFragment extends Fragment  implements SwipeRefreshLayo
                 swipeLayout.setEnabled(filaSuperior >= 0);
             }
         });
-        String action="TopTenPublicaciones";
+        String action="PublicacionesGeneral";
         //String Url="http://fsociety.somee.com/WebService.asmx/";
         //String Url="http://192.168.1.71:8091/WebService.asmx/";
         String Url="http://davisaac19-001-site1.atempurl.com/WebService.asmx/";
-        String UrlWeb=Url+action;
+        String UrlWeb=Url+action+"?carrera="+"&grado=0"+"&grupo=0";
         new JSONTask().execute(UrlWeb);
         return view;
     }
@@ -112,11 +111,11 @@ public class PublicacionesFragment extends Fragment  implements SwipeRefreshLayo
     @Override
     public void onRefresh() {
         //Codigo para traer todas las publicaciones
-        String action="TopTenPublicaciones";
+        String action="PublicacionesGeneral";
         //String Url="http://fsociety.somee.com/WebService.asmx/";
         //String Url="http://192.168.1.71:8091/WebService.asmx/";
         String Url="http://davisaac19-001-site1.atempurl.com/WebService.asmx/";
-        String UrlWeb=Url+action;
+        String UrlWeb=Url+action+"?carrera="+"&grado=0"+"&grupo=0";
         new JSONTask().execute(UrlWeb);
         //Antes de ejecutarlo, indicamos al swipe layout que muestre la barra indeterminada de progreso.
         swipeLayout.setRefreshing(true);
@@ -187,7 +186,7 @@ public class PublicacionesFragment extends Fragment  implements SwipeRefreshLayo
                         JSONObject objeto=Jarray.getJSONObject(i);
                         //list.add(objeto.getString("Titulo"));
                         publicacion pub=new publicacion(objeto.getInt("IDPublicacion"),objeto.getString("Titulo"));
-                        pub.setData(objeto.getString("image"));
+                        pub.setData(objeto.getString("Image"));
                         pub.setContenido(objeto.getString("Contenido"));
                         pub.setFecha(objeto.getString("Fecha").substring(0,10));
                         image.add(pub);

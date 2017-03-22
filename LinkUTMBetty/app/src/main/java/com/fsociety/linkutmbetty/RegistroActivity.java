@@ -37,7 +37,6 @@ public class RegistroActivity extends AppCompatActivity {
         //Referencias y eventos de los botones
         txtMatricula=(EditText)findViewById(R.id.txtMatricula);
         txtNombre=(EditText)findViewById(R.id.txtNombre);
-        txtAMaterno=(EditText)findViewById(R.id.txtApellidoMaterno);
         txtAPaterno=(EditText)findViewById(R.id.txtApellidoPaterno);
         txtContraseña=(EditText)findViewById(R.id.txtContraseña);
         txtContraseña2=(EditText)findViewById(R.id.txtConfirmPass);
