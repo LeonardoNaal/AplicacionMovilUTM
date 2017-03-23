@@ -101,126 +101,126 @@ public class SitiosFragment extends Fragment {
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificioa);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
                 lblnomEd.setText("Edificio A");
-                lbldesEd.setText("Soy un edificio");
+                lbldesEd.setText("Este es el edificio de la bliblioteca de la escuela, el aula magna y el aula TIC");
                 break;
             case 1:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificiob);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText("");
-                lbldesEd.setText("");
+                lblnomEd.setText("Edificio B");
+                lbldesEd.setText("Edificio de control escolar y rectoría");
                 break;
             case 2:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificioc);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText("");
-                lbldesEd.setText("");
+                lblnomEd.setText("Edificio C");
+                lbldesEd.setText("Edificio de la división TIC");
                 break;
             case 3:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText("");
-                lbldesEd.setText("");
+                lblnomEd.setText("Edificio E");
+                lbldesEd.setText("Cafetería de la escuela");
                 break;
             case 4:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificiof);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText("");
-                lbldesEd.setText("");
+                lblnomEd.setText("Edificio F");
+                lbldesEd.setText("Edificio de la división de administración y laboratorios de electronica y redes");
                 break;
             case 5:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificiog);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText("");
-                lbldesEd.setText("");
+                lblnomEd.setText("Edificio G");
+                lbldesEd.setText("Edificio de la división de industrial");
                 break;
             case 6:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText("");
-                lbldesEd.setText("");
+                lblnomEd.setText("Edificio H");
+                lbldesEd.setText("Pesado II");
                 break;
             case 7:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificioi);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText("");
-                lbldesEd.setText("");
+                lblnomEd.setText("Edificio I");
+                lbldesEd.setText("Cocina");
                 break;
             case 8:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificioj);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText("");
-                lbldesEd.setText("");
+                lblnomEd.setText("Edificio J");
+                lbldesEd.setText("Edificio de la división de administración");
                 break;
             case 9:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificiok);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText("");
-                lbldesEd.setText("");
+                lblnomEd.setText("Edificio K");
+                lbldesEd.setText("Vinculación");
                 break;
             case 10:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificiom);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText("");
-                lbldesEd.setText("");
+                lblnomEd.setText("Edificio M");
+                lbldesEd.setText("Edificio de la división de mecatrónica");
                 break;
             case 11:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificion);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText("");
-                lbldesEd.setText("");
+                lblnomEd.setText("Edificio N");
+                lbldesEd.setText("Edificio de la división inductrial - Dide");
                 break;
             case 12:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificioq);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText("");
+                lblnomEd.setText("Edificio Q");
                 lbldesEd.setText("");
                 break;
             case 13:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificior);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText("");
+                lblnomEd.setText("Edificio R");
                 lbldesEd.setText("");
                 break;
             case 14:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificiot);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText("");
+                lblnomEd.setText("Edificio T");
                 lbldesEd.setText("");
                 break;
             case 15:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText("");
+                lblnomEd.setText("Entrada 1");
                 lbldesEd.setText("");
                 break;
             case 16:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText("");
+                lblnomEd.setText("Entrada 2");
                 lbldesEd.setText("");
                 break;
             case 17:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText("");
+                lblnomEd.setText("Estacionamiento");
                 lbldesEd.setText("");
                 break;
             case 18:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText("");
+                lblnomEd.setText("Canchitas");
                 lbldesEd.setText("");
                 break;
             case 19:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText("");
+                lblnomEd.setText("Cancha UTM");
                 lbldesEd.setText("");
                 break;
             case 20:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText("");
+                lblnomEd.setText("Campo UTM");
                 lbldesEd.setText("");
                 break;
         }
