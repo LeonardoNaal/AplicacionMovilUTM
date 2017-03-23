@@ -39,7 +39,7 @@ public class DetallesActividades extends AppCompatActivity {
             lblHoraIni.setText(datoHoraIni);
             lblHoraFin.setText(datoHoraFin);
             lblContenido.setText(datoContenido);
-            //setTitle(datoTitulo);
+            setTitle(datoTitulo);
         }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

@@ -58,6 +58,7 @@
                     android:layout_width="160dp"
                     android:layout_height="wrap_content"
                     android:hint="Num. Celular"
+                    android:inputType="number"
                     android:textColor="@color/colorPrimary"
                     android:textColorHint="#fff"
                     android:textSize="16sp" />
@@ -93,7 +94,7 @@
                 android:id="@+id/txtApellidoPaterno"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Apellidos"
+                android:hint="Apellido"
                 android:textColor="@color/colorPrimary"
                 android:textColorHint="#fff"
                 android:textSize="16sp" />
@@ -170,6 +171,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Elige una contraseña"
+                android:inputType="textPassword"
                 android:textColor="@color/colorPrimary"
                 android:textColorHint="#fff"
                 android:textSize="16sp" />
@@ -187,6 +189,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Confirma tu contraseña"
+                android:inputType="textPassword"
                 android:textColor="@color/colorPrimary"
                 android:textColorHint="#fff"
                 android:textSize="16sp" />

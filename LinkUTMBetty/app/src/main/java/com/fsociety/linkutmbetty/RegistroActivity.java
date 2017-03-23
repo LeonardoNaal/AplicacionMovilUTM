@@ -40,8 +40,8 @@ public class RegistroActivity extends AppCompatActivity {
         txtAPaterno=(EditText)findViewById(R.id.txtApellidoPaterno);
         txtContraseña=(EditText)findViewById(R.id.txtContraseña);
         txtContraseña2=(EditText)findViewById(R.id.txtConfirmPass);
-        txtcarrera=(EditText)findViewById(R.id.txtGrado);
-        txtgrado=(EditText)findViewById(R.id.txtGrupo);
+        txtcarrera=(EditText)findViewById(R.id.txtCarrera);
+        txtgrupo=(EditText)findViewById(R.id.txtGrupo);
         txtgrado=(EditText)findViewById(R.id.txtGrado);
         txtcelular=(EditText)findViewById(R.id.txtCelular);
         txtMatricula.addTextChangedListener(new TextValidator(txtMatricula) {
@@ -83,7 +83,7 @@ txtcelular.addTextChangedListener(new TextValidator(txtcelular) {
                 String strgrado=txtgrado.getText().toString();
                 String strgrupo=txtgrupo.getText().toString();
                 if(TextUtils.isEmpty(strcarrera)){
-                    txtMatricula.setError("Dato obligatorio");
+                    txtcarrera.setError("Dato obligatorio");
                     Valcarrera=false;
                 }
                 else{
@@ -125,7 +125,7 @@ txtcelular.addTextChangedListener(new TextValidator(txtcelular) {
                 else{
                     ValApaterno=true;
                 }
-                if(strContraseña1==strContraseña2){
+                if(strContraseña1.equals(strContraseña2)){
                     ValContraseña=true;
                 }
                 else{
@@ -138,7 +138,7 @@ txtcelular.addTextChangedListener(new TextValidator(txtcelular) {
                     //String Url="http://fsociety.somee.com/WebService.asmx/";
                     //String Url="http://169.254.3.130:8091/WebService.asmx/";
                     String Url="http://davisaac19-001-site1.atempurl.com/WebService.asmx/";
-                    String UrlWeb=Url+action+"?codUser="+txtMatricula.getText().toString()+"&nombre="+txtNombre.getText().toString()+"&apPaterno="+txtAPaterno.getText().toString()+"&apMaterno="+txtAMaterno.getText().toString()+"&contra="+txtContraseña.getText().toString()+"&TipoUser="+1+"&carrera="+txtcarrera.getText().toString()+"&grado="+Integer.parseInt(txtgrado.getText().toString())+"&grupo="+txtgrupo.getText().toString()+"&celular="+txtcelular.getText().toString()+;
+                    String UrlWeb=Url+action+"?codUser="+txtMatricula.getText().toString()+"&nombre="+txtNombre.getText().toString()+"&apPaterno="+txtAPaterno.getText().toString()+"&apMaterno=null"+"&contra="+txtContraseña.getText().toString()+"&TipoUser="+1+"&carrera="+txtcarrera.getText().toString()+"&grado="+Integer.parseInt(txtgrado.getText().toString())+"&grupo="+txtgrupo.getText().toString()+"&celular="+txtcelular.getText().toString();
                     new JSONTask().execute(UrlWeb);
                 }
                 //    Toast.makeText(RegistroActivity.this,"Favor de verificar sus datos",Toast.LENGTH_SHORT).show();
@@ -207,6 +207,9 @@ txtcelular.addTextChangedListener(new TextValidator(txtcelular) {
                  Toast.makeText(RegistroActivity.this,"Datos agregados correctamente",Toast.LENGTH_SHORT).show();
                      Intent intent=new Intent(RegistroActivity.this,UserMainActivity.class);
                      intent.putExtra("Matricula",txtMatricula.getText().toString());
+                     intent.putExtra("grado", Integer.parseInt(txtgrado.getText().toString()));
+                     intent.putExtra("grupo", txtgrupo.getText().toString());
+                     intent.putExtra("carrera", txtcarrera.getText().toString());
                      startActivity(intent);
 
 
