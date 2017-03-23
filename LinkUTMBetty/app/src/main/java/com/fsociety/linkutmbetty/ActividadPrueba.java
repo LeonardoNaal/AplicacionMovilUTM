@@ -108,7 +108,6 @@ public class ActividadPrueba extends AppCompatActivity {
             grupo = (String) extras.getString("grupo");
             carrera = (String) extras.getString("carrera");
 
-            matricula = (String) extras.get("Matricula");//Obtengo la matriculs
 
         }
         btnCancelar = (Button) findViewById(R.id.btnCancelar);
@@ -283,11 +282,8 @@ public class ActividadPrueba extends AppCompatActivity {
 
                 Toast.makeText(this, "The permissions are already granted ", Toast.LENGTH_LONG).show();
                 openCamera();
-
             }
-
         }
-
         return;
     }
 

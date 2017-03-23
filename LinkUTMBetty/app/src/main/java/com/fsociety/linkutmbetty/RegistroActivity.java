@@ -27,8 +27,8 @@ import java.util.ArrayList;
 public class RegistroActivity extends AppCompatActivity {
     Button btnGuardar;
     Button btnCancelar;
-    boolean ValNombre,ValMatricula,ValApaterno,ValContraseña,verificar;
-    EditText txtNombre,txtMatricula,txtAPaterno,txtAMaterno,txtContraseña,txtContraseña2;
+    boolean ValNombre,ValMatricula,ValApaterno,ValContraseña,verificar,Valcarrera,Valgrado,Valgrupo,Valcelular;
+    EditText txtNombre,txtMatricula,txtAPaterno,txtAMaterno,txtContraseña,txtContraseña2,txtcarrera,txtgrado,txtgrupo,txtcelular;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +40,10 @@ public class RegistroActivity extends AppCompatActivity {
         txtAPaterno=(EditText)findViewById(R.id.txtApellidoPaterno);
         txtContraseña=(EditText)findViewById(R.id.txtContraseña);
         txtContraseña2=(EditText)findViewById(R.id.txtConfirmPass);
+        txtcarrera=(EditText)findViewById(R.id.txtGrado);
+        txtgrado=(EditText)findViewById(R.id.txtGrupo);
+        txtgrado=(EditText)findViewById(R.id.txtGrado);
+        txtcelular=(EditText)findViewById(R.id.txtCelular);
         txtMatricula.addTextChangedListener(new TextValidator(txtMatricula) {
             @Override
             public void validate(EditText editText, String text) {
@@ -53,7 +57,18 @@ public class RegistroActivity extends AppCompatActivity {
             }
 
         });
-
+txtcelular.addTextChangedListener(new TextValidator(txtcelular) {
+    @Override
+    public void validate(EditText editText, String text) {
+        if( text.length() < 10 ){
+            txtMatricula.setError( "El celular es muy corto" );
+            Valcelular=false;
+        }
+        else{
+            Valcelular=true;
+        }
+    }
+});
         btnGuardar = (Button) findViewById(R.id.btnGuardar);
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +79,32 @@ public class RegistroActivity extends AppCompatActivity {
                 String strApPaterno = txtAPaterno.getText().toString();
                 String strContraseña1 = txtContraseña.getText().toString();
                 String strContraseña2 = txtContraseña2.getText().toString();
+                String strcarrera=txtcarrera.getText().toString();
+                String strgrado=txtgrado.getText().toString();
+                String strgrupo=txtgrupo.getText().toString();
+                if(TextUtils.isEmpty(strcarrera)){
+                    txtMatricula.setError("Dato obligatorio");
+                    Valcarrera=false;
+                }
+                else{
+                    Valcarrera=true;
+                }
+
+                if(TextUtils.isEmpty(strgrado)){
+                    txtgrado.setError("Dato obligatorio");
+                    Valgrado=false;
+                }
+                else{
+                    Valgrado=true;
+                }
+                if(TextUtils.isEmpty(strgrupo)){
+                    txtgrupo.setError("Dato obligatorio");
+                    Valgrupo=false;
+                }
+                else{
+                    Valgrupo=true;
+                }
+
                 if(TextUtils.isEmpty(strMatricula)){
                     txtMatricula.setError("Dato obligatorio");
                     ValMatricula=false;
@@ -92,12 +133,12 @@ public class RegistroActivity extends AppCompatActivity {
                     ValContraseña=false;
                 }
 
-                if(ValNombre==true && ValContraseña==true && ValApaterno==true && ValMatricula==true && verificar==true) {
+                if(ValNombre==true && ValContraseña==true && ValApaterno==true && ValMatricula==true && verificar==true &&Valcarrera==true &&Valgrado==true&&Valgrupo==true&&Valcelular==true) {
                     String action="Registrarse";
                     //String Url="http://fsociety.somee.com/WebService.asmx/";
                     //String Url="http://169.254.3.130:8091/WebService.asmx/";
                     String Url="http://davisaac19-001-site1.atempurl.com/WebService.asmx/";
-                    String UrlWeb=Url+action+"?codUser="+txtMatricula.getText().toString()+"&nombre="+txtNombre.getText().toString()+"&apPaterno="+txtAPaterno.getText().toString()+"&apMaterno="+txtAMaterno.getText().toString()+"&contra="+txtContraseña.getText().toString()+"&TipoUser="+1;
+                    String UrlWeb=Url+action+"?codUser="+txtMatricula.getText().toString()+"&nombre="+txtNombre.getText().toString()+"&apPaterno="+txtAPaterno.getText().toString()+"&apMaterno="+txtAMaterno.getText().toString()+"&contra="+txtContraseña.getText().toString()+"&TipoUser="+1+"&carrera="+txtcarrera.getText().toString()+"&grado="+Integer.parseInt(txtgrado.getText().toString())+"&grupo="+txtgrupo.getText().toString()+"&celular="+txtcelular.getText().toString()+;
                     new JSONTask().execute(UrlWeb);
                 }
                 //    Toast.makeText(RegistroActivity.this,"Favor de verificar sus datos",Toast.LENGTH_SHORT).show();

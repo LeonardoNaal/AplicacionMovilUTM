@@ -161,7 +161,7 @@ public String carrer,grup;
                 String action = "EliminarPublicaciones";
                 //String Url="http://fsociety.somee.com/WebService.asmx/";
                 //String Url="http://169.254.3.130:8091/WebService.asmx/";
-                String Url = "http://davisaac19-001-site1.atempurl.com//WebService.asmx/";
+                String Url = "http://davisaac19-001-site1.atempurl.com/WebService.asmx/";
                 String UrlWeb = Url + action + "?idPublicacion=" + idPublicacion;
                 new JSONTask().execute(UrlWeb);
                 //Al finalizar este método debe regresar a UserMainActivity
