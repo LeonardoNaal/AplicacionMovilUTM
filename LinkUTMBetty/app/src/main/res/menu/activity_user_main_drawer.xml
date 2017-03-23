@@ -8,7 +8,7 @@
             android:title="Publicaciones" />
         <item
             android:id="@+id/mis_pub"
-            android:icon="@drawable/publicaciones"
+            android:icon="@drawable/user1"
             android:title="Mis publicaciones" />
         <item
             android:id="@+id/nav_gallery"
@@ -28,7 +28,7 @@
         <menu>
             <item
                 android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/clear"
                 android:title="Cerrar sesion" />
         </menu>
     </item>
