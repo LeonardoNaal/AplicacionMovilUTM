@@ -4,112 +4,131 @@
     android:layout_height="wrap_content">
 
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_gestion_publicaciones"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
-
-
-    <TextView
-        android:id="@+id/text"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="Dia"
-        android:textColor="@color/colorPrimary"
-        android:textSize="18sp" />
-
-    <Spinner
-        android:background="@drawable/borde_edit_text"
-        android:id="@+id/spinner"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_width="match_parent" />
-
-    <EditText
-        android:ems="10"
-        android:hint="Materia"
-        android:id="@+id/edtxMateria"
-        android:inputType="textPersonName"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_width="wrap_content"/>
-
-    <EditText
-        android:ems="10"
-        android:hint="Laboratorio"
-        android:id="@+id/edtxLaboratorio"
-        android:inputType="textPersonName"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_width="wrap_content" />
-
-    <EditText
-        android:ems="10"
-        android:hint="Profesor "
-        android:id="@+id/edtxProfesor"
-        android:inputType="textPersonName"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_width="wrap_content"
-        android:textSize="18sp" />
-
-    <EditText
-        android:ems="10"
-        android:hint="Hora"
-        android:id="@+id/edtHora"
-        android:inputType="textPersonName"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_width="wrap_content"
-        android:textSize="18sp" />
-
-    <Button
-        android:background="@color/colorPrimary"
-        android:id="@+id/btnSeleccionar"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_width="150dp"
-        android:text="Seleccionar"
-        android:textAllCaps="false"
-        android:textColor="#fff"
-        android:textSize="18sp" />
-
-    <LinearLayout
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_gestion_publicaciones"
         android:layout_width="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
 
 
-        <Button
-            android:background="@color/colorAccent"
-            android:id="@+id/btnEliminar"
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_width="150dp"
-            android:text="Eliminar"
-            android:textAllCaps="false"
-            android:textColor="#fff"
+            android:text="Selecciona el dia"
+            android:layout_gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/borde_edit_text" />
+
+        <EditText
+            android:id="@+id/edtxMateria"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/borde_edit_text"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Materia"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/edtxLaboratorio"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/borde_edit_text"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Laboratorio"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/edtxProfesor"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/borde_edit_text"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Profesor "
+            android:inputType="textPersonName"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edtHora"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/borde_edit_text"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Hora"
+            android:inputType="textPersonName"
             android:textSize="18sp" />
 
         <Button
+            android:id="@+id/btnSeleccionar"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="8dp"
             android:background="@color/colorPrimary"
-            android:id="@+id/btnBoton"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_width="150dp"
-            android:text="Guardar"
+            android:layout_gravity="center"
+            android:drawableLeft="@drawable/horario"
+            android:drawableTint="#fff"
             android:textAllCaps="false"
             android:textColor="#fff"
             android:textSize="18sp" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:id="@+id/btnEliminar"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#B71C1C"
+                android:drawableLeft="@drawable/ic_delete_white_18dp"
+                android:drawableStart="@drawable/ic_delete_white_18dp"
+                android:text="Eliminar"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btnBoton"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:backgroundTint="@color/colorAccent"
+                android:drawableLeft="@drawable/ic_save_white_18dp"
+                android:drawableStart="@drawable/ic_save_white_18dp"
+                android:text="Guardar"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textSize="18sp" />
+
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
 </ScrollView>

@@ -16,26 +16,35 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/side_nav_bar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:text="Esta actividad inicial el:"
+                android:textColor="#fff"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/fechaini"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_marginStart="3dp"
                 android:gravity="center"
-                android:layout_marginLeft="30dp"
-                android:layout_marginStart="30dp"
-                android:text="Fecha inicio"/>
+                android:text="Fecha inicio"
+                android:textColor="#fff"
+                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/finfecha"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginLeft="60dp"
-                android:layout_marginStart="60dp"
-                android:text="Fecha final"/>
         </LinearLayout>
 
         <LinearLayout
@@ -45,22 +54,86 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/horaini"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:gravity="center"
+                android:text="Finalizando el dia:"
+                android:textColor="#fff"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/finfecha"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_marginStart="3dp"
                 android:gravity="center"
-                android:layout_marginLeft="30dp"
-                android:layout_marginStart="30dp"
-                android:text="Hora inicio"/>
+                android:text="Fecha fin"
+                android:textColor="#fff"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:text="Desde las:"
+                android:textColor="#fff"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/horaini"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="Hora inicio"
+                android:textColor="#fff"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_marginStart="3dp"
+                android:text="Hasta las:"
+                android:textColor="#fff"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/horafin"
-                android:layout_width="100dp"
+                android:layout_width="90dp"
                 android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="Hora final"
+                android:textColor="#fff"
+                android:textStyle="bold" />
+        </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:layout_marginLeft="60dp"
-                android:layout_marginStart="60dp"
-                android:text="Hora final"/>
+                android:text="Detalles de la actividad"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp" />
         </LinearLayout>
 
         <TextView
@@ -68,6 +141,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:text="Hola mundo maldito" />
+            android:text="Hola mundo maldito"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp" />
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
