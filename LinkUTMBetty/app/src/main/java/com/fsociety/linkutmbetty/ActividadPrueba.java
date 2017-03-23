@@ -75,22 +75,15 @@ public class ActividadPrueba extends AppCompatActivity {
     EditText txtTitulo, txtContenido;
     public int idTipoSeleccionado;
     //public String SERVER = "http://fsociety.somee.com/WebService.asmx/agregarPublicacion?", timestamp;
-<<<<<<< HEAD
-   //public String SERVER = "http://192.168.1.71:8091/WebService.asmx/agregarPublicacion?", timestamp;
+
+    //public String SERVER = "http://192.168.1.71:8091/WebService.asmx/agregarPublicacion?", timestamp;
     public String SERVER = "http://davisaac19-001-site1.atempurl.com/WebService.asmx/agregarPub?", timestamp;
     private static final String TAG = ActividadPrueba.class.getSimpleName();
     Spinner spn1;
-    String[] Tipos={"Seleccionar...","Publicidad","Aviso","Reporte","Otra"};
-String matricula,grupo,carrera;
-    int grado;
-=======
-    //public String SERVER = "http://192.168.1.71:8091/WebService.asmx/agregarPublicacion?", timestamp;
-    public String SERVER = "http://davisaac19-001-site1.atempurl.com/WebService.asmx/agregarPublicacion?", timestamp;
-    private static final String TAG = ActividadPrueba.class.getSimpleName();
-    Spinner spn1;
     String[] Tipos = {"Seleccionar...", "Publicidad", "Aviso", "Reporte", "Otra"};
-    String matricula;
->>>>>>> origin/master
+    String matricula, grupo, carrera;
+    int grado;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,47 +91,36 @@ String matricula,grupo,carrera;
         setContentView(R.layout.activity_actividad_prueba);
         setTitle("Publicar");
         mRlView = (RelativeLayout) findViewById(R.id.rlative);
-<<<<<<< HEAD
-        imageView=(ImageView)findViewById(R.id.imageView5);
-        txtTitulo=(EditText)findViewById(R.id.txtTitulo);
-        txtContenido=(EditText)findViewById(R.id.txtContenido);
-        spn1=(Spinner)findViewById(R.id.spinner2);
-        ArrayAdapter<String> adaptador=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,Tipos);
-=======
+
         imageView = (ImageView) findViewById(R.id.imageView5);
         txtTitulo = (EditText) findViewById(R.id.txtTitulo);
         txtContenido = (EditText) findViewById(R.id.txtContenido);
         spn1 = (Spinner) findViewById(R.id.spinner2);
-
         ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, Tipos);
->>>>>>> origin/master
+
         spn1.setAdapter(adaptador);
         final Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         if (extras != null) {//ver si contiene datos
-<<<<<<< HEAD
-            matricula=(String)extras.get("Matricula");//Obtengo la matriculs
-            grado=(int)extras.getInt("grado");
-            grupo=(String)extras.getString("grupo");
-            carrera=(String)extras.getString("carrera");
-=======
+
             matricula = (String) extras.get("Matricula");//Obtengo la matriculs
->>>>>>> origin/master
+            grado = (int) extras.getInt("grado");
+            grupo = (String) extras.getString("grupo");
+            carrera = (String) extras.getString("carrera");
+
+            matricula = (String) extras.get("Matricula");//Obtengo la matriculs
+
         }
         btnCancelar = (Button) findViewById(R.id.btnCancelar);
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-<<<<<<< HEAD
-             Intent intent=new Intent(ActividadPrueba.this,UserMainActivity.class);
-                intent.putExtra("Matricula",matricula);
-                intent.putExtra("grado",grado);
-                intent.putExtra("grupo",grupo);
-                intent.putExtra("carrera",carrera);
-=======
+
                 Intent intent = new Intent(ActividadPrueba.this, UserMainActivity.class);
                 intent.putExtra("Matricula", matricula);
->>>>>>> origin/master
+                intent.putExtra("grado", grado);
+                intent.putExtra("grupo", grupo);
+                intent.putExtra("carrera", carrera);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
             }
@@ -367,16 +349,18 @@ String matricula,grupo,carrera;
         super.onSaveInstanceState(outState);
         outState.putString("file_path", mPath);
     }
-@Override
-public void onBackPressed(){
-    Intent intent = new Intent(ActividadPrueba.this, UserMainActivity.class);
-    intent.putExtra("Matricula",matricula);
-    intent.putExtra("grado",grado);
-    intent.putExtra("grupo",grupo);
-    intent.putExtra("carrera",carrera);
-    startActivity(intent);
-    finish();
-}
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ActividadPrueba.this, UserMainActivity.class);
+        intent.putExtra("Matricula", matricula);
+        intent.putExtra("grado", grado);
+        intent.putExtra("grupo", grupo);
+        intent.putExtra("carrera", carrera);
+        startActivity(intent);
+        finish();
+    }
+
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
@@ -465,97 +449,72 @@ public void onBackPressed(){
         private String contenido;
         private int tipoPub;
         private String CodUsuario;
-<<<<<<< HEAD
         private String car;
         private String grup;
         private int grad;
-        public Upload(Bitmap image,String titulo,String contenido,int Tipo,String CodUsuario){
-=======
 
         public Upload(Bitmap image, String titulo, String contenido, int Tipo, String CodUsuario) {
->>>>>>> origin/master
-            this.image = image;
-            this.titulo = titulo;
-            this.contenido = contenido;
-            this.tipoPub = Tipo;
-            this.CodUsuario = CodUsuario;
-        }
+
+                this.image = image;
+                this.titulo = titulo;
+                this.contenido = contenido;
+                this.tipoPub = Tipo;
+                this.CodUsuario = CodUsuario;
+            }
 
         @Override
-        protected String doInBackground(Void... params) {
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            //compress the image to jpg format
-            image.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        protected String doInBackground (Void... params){
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                //compress the image to jpg format
+                image.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
             /*
             * encode image to base64 so that it can be picked by saveImage.php file
             * */
-            //exec InsertarPublicacion @titulo='nuevo',@contenido='hola',@image=null,@IDTipo=2,@video=null,@CodUsuario='aga00001',@carrera=null,@grado=null,@grupo=null
-            String encodeImage = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
-            String tip = String.valueOf(tipoPub);
-            //generate hashMap to store encodedImage and the name
-<<<<<<< HEAD
-            HashMap<String,String> detail = new HashMap<>();
-            detail.put("codUser",CodUsuario);
-            detail.put("tit", titulo);
-            detail.put("contenido",contenido);
-            detail.put("imagen", encodeImage);
-            detail.put("tipo",tip);
-            detail.put("carrera","null");
-            detail.put("grado","0");
-            detail.put("grupo","0");
-            try{
-=======
-            HashMap<String, String> detail = new HashMap<>();
-            detail.put("tit", titulo);
-            detail.put("imagen", encodeImage);
-            detail.put("contenido", contenido);
-            detail.put("tipo", tip);
-            detail.put("codUser", CodUsuario);
-            try {
->>>>>>> origin/master
-                //convert this HashMap to encodedUrl to send to php file
-                String dataToSend = hashMapToUrl(detail);
-                //make a Http request and send data to saveImage.php file
-                String response = Request.post(SERVER, dataToSend);
+                //exec InsertarPublicacion @titulo='nuevo',@contenido='hola',@image=null,@IDTipo=2,@video=null,@CodUsuario='aga00001',@carrera=null,@grado=null,@grupo=null
+                String encodeImage = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
+                String tip = String.valueOf(tipoPub);
+                //generate hashMap to store encodedImage and the name
 
-                //return the response
-                return response;
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
+                HashMap<String, String> detail = new HashMap<>();
+                detail.put("codUser", CodUsuario);
+                detail.put("tit", titulo);
+                detail.put("contenido", contenido);
+                detail.put("imagen", encodeImage);
+                detail.put("tipo", tip);
+                detail.put("carrera", "null");
+                detail.put("grado", "0");
+                detail.put("grupo", "0");
+                try{
+                    String dataToSend = hashMapToUrl(detail);
+                    String response = Request.post(SERVER, dataToSend);
+                    return response;
+                } catch (Exception e){
+                    e.printStackTrace();
+                    return  null;
+                }
             }
-        }
-
         @Override
-        protected void onPostExecute(String s) {
+        protected void onPostExecute (String s){
             //show image uploaded
-<<<<<<< HEAD
+
             super.onPostExecute(s);
             try {
                 Log.e("salida", s);
                 try {
-                Toast.makeText(getApplicationContext(),"Datos agregados correctamente", Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(ActividadPrueba.this,UserMainActivity.class);
-                intent.putExtra("Matricula",matricula);
-                intent.putExtra("grado",grado);
-                intent.putExtra("grupo",grupo);
-                intent.putExtra("carrera",carrera);
-                startActivity(intent);
+                    Toast.makeText(getApplicationContext(), "Datos agregados correctamente", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(ActividadPrueba.this, UserMainActivity.class);
+                    intent.putExtra("Matricula", matricula);
+                    intent.putExtra("grado", grado);
+                    intent.putExtra("grupo", grupo);
+                    intent.putExtra("carrera", carrera);
+                    startActivity(intent);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             } catch (Throwable t) {
                 Log.e("Falla", t.toString());
             }
-                    }
-=======
-            Toast.makeText(getApplicationContext(), "Datos agregados correctamente", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(ActividadPrueba.this, UserMainActivity.class);
-            intent.putExtra("Matricula", matricula);
-            startActivity(intent);
         }
->>>>>>> origin/master
+        }
     }
-}
 

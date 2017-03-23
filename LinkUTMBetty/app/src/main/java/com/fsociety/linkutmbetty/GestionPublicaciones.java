@@ -51,18 +51,10 @@ public class GestionPublicaciones extends AppCompatActivity {
     public Bitmap bmp1, image;
     //public String SERVER = "http://fsociety.somee.com/WebService.asmx/ModificarPublicacion?",     timestamp;
     //public String SERVER = "http://169.254.3.130:8091/WebService.asmx/ModificarPublicacion?",timestamp;
-<<<<<<< HEAD
     public String SERVER = "http://davisaac19-001-site1.atempurl.com//WebService.asmx/ModificarPublicacion?",timestamp;
 public String carrer,grup;
     public int TipoPub,idTipoSeleccionado=0,grad;
     String[] Tipos={"Seleccionar...","Publicidad","Aviso","Reporte","Otra"};
-=======
-    public String SERVER = "http://davisaac19-001-site1.atempurl.com//WebService.asmx/ModificarPublicacion?", timestamp;
-
-    public int TipoPub, idTipoSeleccionado = 0;
-    String[] Tipos = {"Seleccionar...", "Publicidad", "Aviso", "Reporte", "Otra"};
-
->>>>>>> origin/master
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,7 +78,6 @@ public String carrer,grup;
             String datotitulo = (String) extras.get("titulo");
             String datocontenido = (String) extras.get("contenido");
             idPublicacion = (int) extras.getInt("id");
-<<<<<<< HEAD
             String fecha=(String) extras.get("fecha");
             codUser=(String) extras.get("codUser");
             TipoPub=(int)extras.getInt("IDTipo");
@@ -94,12 +85,6 @@ public String carrer,grup;
             grup=(String)extras.get("grupo");
             carrer=(String)extras.get("carrera");
             bmp1=image;
-=======
-            String fecha = (String) extras.get("fecha");
-            codUser = (String) extras.get("codUser");
-            TipoPub = (int) extras.getInt("IDTipo");
-            bmp1 = image;
->>>>>>> origin/master
             txtContenido.setText(datocontenido);
             txtTitulo.setText(datotitulo);
             img1.setImageBitmap(image);
@@ -183,7 +168,6 @@ public String carrer,grup;
             }
         });
     }
-<<<<<<< HEAD
     @Override
     public void onBackPressed(){
         Intent intent = new Intent(GestionPublicaciones.this, UserMainActivity.class);
@@ -194,11 +178,7 @@ public String carrer,grup;
         startActivity(intent);
         finish();
     }
-    public class  JSONTask extends AsyncTask<String ,String, String> {
-=======
-
     public class JSONTask extends AsyncTask<String, String, String> {
->>>>>>> origin/master
         @Override
         protected String doInBackground(String... parametros) {
             HttpURLConnection conexion = null;
@@ -238,8 +218,6 @@ public String carrer,grup;
         @Override
         protected void onPostExecute(String resultado) {
             super.onPostExecute(resultado);
-
-<<<<<<< HEAD
             try{
                 Log.e("salida",resultado);
         if(Integer.parseInt(resultado)==1){
@@ -254,18 +232,6 @@ public String carrer,grup;
                 else{
             Toast.makeText(GestionPublicaciones.this, "Error", Toast.LENGTH_SHORT).show();
         }
-=======
-            try {
-                Log.e("salida", resultado);
-                if (Integer.parseInt(resultado) == 1) {
-                    Toast.makeText(GestionPublicaciones.this, "Datos eliminados correctamente", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(GestionPublicaciones.this, UserMainActivity.class);
-                    intent.putExtra("Matricula", codUser);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(GestionPublicaciones.this, "Error", Toast.LENGTH_SHORT).show();
-                }
->>>>>>> origin/master
 
             } catch (Throwable t) {
                 Log.e("Falla", t.toString());
@@ -345,18 +311,12 @@ public String carrer,grup;
         @Override
         protected void onPostExecute(String s) {
             //show image uploaded
-<<<<<<< HEAD
             Toast.makeText(getApplicationContext(),"Datos modificados correctamente", Toast.LENGTH_SHORT).show();
             Intent intent=new Intent(GestionPublicaciones.this,UserMainActivity.class);
             intent.putExtra("Matricula",codUser);
             intent.putExtra("grado",grad);
             intent.putExtra("grupo",grup);
             intent.putExtra("carrera",carrer);
-=======
-            Toast.makeText(getApplicationContext(), "Datos modificados correctamente", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(GestionPublicaciones.this, UserMainActivity.class);
-            intent.putExtra("Matricula", codUser);
->>>>>>> origin/master
             startActivity(intent);
         }
     }
