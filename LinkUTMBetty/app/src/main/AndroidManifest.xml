@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -25,6 +25,7 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -44,7 +45,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LogInActivity" />
         <activity android:name=".GestionPublicaciones" />
-        <activity android:name=".ActividadPrueba"/>
+        <activity android:name=".ActividadPrueba" />
         <activity android:name=".RegistroActivity" />
         <activity android:name=".Horario" />
         <activity android:name=".VistaHorario" />
@@ -53,17 +54,14 @@
         <activity android:name=".VerComentarios">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity">
-
-            </meta-data>
+                android:value=".MainActivity"></meta-data>
         </activity>
-        <activity android:name=".AgregarComentario"/>
+        <activity android:name=".AgregarComentario" />
         <activity
             android:name=".DetallesActividades"
             android:label="@string/title_activity_detalles_actividades"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".ReportarActivity"></activity>
     </application>
 
 </manifest>

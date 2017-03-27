@@ -25,6 +25,32 @@
     <string name="btn_canelar1">Cancelar</string>
     <string name="btn_registro">Registrarse</string>
 
+    <!-- Valores para la sección de Términos y condiciones -->
+    <string name="titulo_termns">Términos y condiciones | LinkUTM</string>
+    <string name="terms_sub"><u>Términos y condiciones</u></string>
+    <string name="contenido_terms">
+        "Eres propietario de todo lo que compartes en LinkUTM, Asimismo:"
+        "Los usuarios de LinkUTM proporcionan sus nombres y datos reales, y necesitamos tu colaboración para que siga siendo así."
+        "Estos son algunos de los compromisos que aceptas en relación con el registro y el mantenimiento de la seguridad de tu cuenta:"
+        "1.- No proporcionarás información falsa para los usuario de LinkUTM, ni utilizarás el medio para molestar o agredir a otros usuarios"
+        "2.- La administración de LinkUTM puede inhabilitar tu cuenta, si es así, no crearás otra sin nuestra autorización"
+        "3.- Mantendrás tu información de contacto exacta y actualizada"
+        "4.- No compartirás tu contraseña, no dejarás que otra persona acceda a tu cuenta, ni harás nada que pueda poner en peligro la seguridad de tu cuenta."
+        "5.- Si publicas información falsa, nos reservamos el derecho de eliminarla o en caso de reincidencia, inhabilitaremos tu cuenta si lo consideramos oportuno"
+        "Disposiciones si se incumplen estos compromisos"
+        "Nos reservamos el derecho de eliminar el contenido que publiques, si este cuenta con información falsa, contenido sexual explícito,"
+        "agresiones a terceros y/o cualquier actividad que ponga en peligro tu seguridad o la de otros usuarios de LinkUTM"
+        "Conflictos:"
+        "INTENTAMOS MANTENER LINKUTM EN FUNCIONAMIENTO, SIN ERRORES Y SEGURO, PERO LO UTILIZAS BAJO TU PROPIA RESPONSABILIDAD.
+        "PROPORCIONAMOS LINKUTM TAL CUAL, SIN GARANTÍA ALGUNA EXPRESA O IMPLÍCITA, INCLUIDAS, ENTRE OTRAS, LAS GARANTÍAS DE COMERCIABILIDAD,"
+        "ADECUACIÓN A UN FIN PARTICULAR Y NO INCUMPLIMIENTO. NO GARANTIZAMOS QUE LINKUTM SEA SIEMPRE SEGURO O ESTÉ LIBRE DE ERRORES,"
+        "NI QUE FUNCIONE SIEMPRE SIN INTERRUPCIONES, RETRASOS O IMPERFECCIONES. LINKUTM NO SE RESPONSABILIZA DE LAS ACCIONES, EL CONTENIDO,"
+        "LA INFORMACIÓN O LOS DATOS DE TERCEROS, Y POR LA PRESENTE NOS DISPENSAS A NOSOTROS, NUESTROS DIRECTIVOS, EMPLEADOS Y AGENTES DE CUALQUIER DEMANDA O DAÑOS,"
+        "CONOCIDOS O DESCONOCIDOS, DERIVADOS DE CUALQUIER DEMANDA QUE TENGAS INTERPUESTA CONTRA TALES TERCEROS O DE ALGÚN MODO RELACIONADOS CON ESTA."
+
+        UTILIZA LINKUTM CON RESPONSABILIDAD, ES UNA APLICACIÓN PARA MANTENERNOS COMUNICADOS
+    </string>
+
     <string name="iniciar_Horario">Iniciar horario</string>
     <string name="title_activity_detalles_actividades">DetallesActividades</string>
     <string name="large_text">

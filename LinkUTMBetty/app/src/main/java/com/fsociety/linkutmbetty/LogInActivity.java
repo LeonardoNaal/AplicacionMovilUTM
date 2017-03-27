@@ -4,13 +4,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -31,6 +34,7 @@ import java.util.Map;
 
 public class LogInActivity extends AppCompatActivity {
     EditText edtUsuario, edtContraseña;
+    TextView lblCondiciones;
     boolean verificar = true;
     public String SERVER = "http://davisaac19-001-site1.atempurl.com/WebService.asmx/DatosAlumno?", timestamp;
     @Override
@@ -77,6 +81,35 @@ public class LogInActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        lblCondiciones = (TextView) findViewById(R.id.lblCondiciones);
+        lblCondiciones.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogo().show();
+                //dialogo().dismiss();
+            }
+        });
+    }
+
+    public AlertDialog dialogo(){
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(LogInActivity.this);
+        final LayoutInflater inflater = LogInActivity.this.getLayoutInflater();
+
+        View v = inflater.inflate(R.layout.vista_condiciones, null);
+        builder.setView(v);
+
+
+        Button btnCerrar = (Button) v.findViewById(R.id.btnDismiss);
+        btnCerrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //ad.dismiss();
+            }
+        });
+
+        return builder.create();
     }
 
     public class JSONTask extends AsyncTask<String, String, String> {
