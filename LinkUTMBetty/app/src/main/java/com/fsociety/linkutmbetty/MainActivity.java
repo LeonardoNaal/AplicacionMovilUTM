@@ -29,6 +29,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -90,8 +91,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent intent = new Intent(MainActivity.this, LogInActivity.class);
-            startActivity(intent);
+            Toast.makeText(this, "Hay que ver que hacer", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);
