@@ -1,7 +1,9 @@
 package com.fsociety.linkutmbetty;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -44,6 +46,7 @@ import java.util.ArrayList;
 public class UserPublicacionesFragment extends Fragment  implements SwipeRefreshLayout.OnRefreshListener {
     ListView listaPub;
     public String dato;
+    public boolean aceptar;
     public int grado;
     public String grupo;
     public  String carrera;
@@ -53,6 +56,8 @@ public class UserPublicacionesFragment extends Fragment  implements SwipeRefresh
         // Required empty public constructor
     }
     private SwipeRefreshLayout swipeLayout;
+    public String auxtitulo;
+    public int auxid;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -83,6 +88,39 @@ public class UserPublicacionesFragment extends Fragment  implements SwipeRefresh
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
+        listaPub.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                publicacion elegido = (publicacion) parent.getItemAtPosition(position);
+
+                auxtitulo = elegido.getTitulo();
+                auxid = elegido.getId();
+
+                final CharSequence[] option = {"Reportar", "Cancelar"};
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Elige una opción");
+                builder.setItems(option, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (option[which] == "Reportar") {
+                            Intent intent = new Intent(getActivity(),ReportarActivity.class);
+                            intent.putExtra("id",auxid);
+                            intent.putExtra("titulo",auxtitulo);
+                            intent.putExtra("codUser",dato);
+                            intent.putExtra("grado",grado);
+                            intent.putExtra("grupo",grupo);
+                            intent.putExtra("carrera",carrera);
+                            startActivity(intent);
+                        } else {
+                            dialog.dismiss();
+                        }
+                    }
+                });
+
+                builder.show();
+                return true;
+            }
+        });
         listaPub.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

@@ -84,7 +84,9 @@
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp">
+            android:layout_marginTop="24dp"
+            android:id="@+id/myRadioGroup"
+            android:checkedButton="@+id/falsa">
 
             <RadioButton
                 android:id="@+id/falsa"
