@@ -211,8 +211,6 @@ txtcelular.addTextChangedListener(new TextValidator(txtcelular) {
                      intent.putExtra("grupo", txtgrupo.getText().toString());
                      intent.putExtra("carrera", txtcarrera.getText().toString());
                      startActivity(intent);
-
-
                  }
                  else {
                      Toast.makeText(RegistroActivity.this,"Error, Matrícula Existente",Toast.LENGTH_SHORT).show();

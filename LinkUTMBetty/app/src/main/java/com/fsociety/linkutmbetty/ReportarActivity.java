@@ -1,9 +1,11 @@
 package com.fsociety.linkutmbetty;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -29,7 +31,7 @@ public class ReportarActivity extends AppCompatActivity {
     private RadioGroup radioGroup;
     int grado,codPublicacion;
     String eleccion,grupo,carrera,codUser;
-
+boolean val;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +75,7 @@ public class ReportarActivity extends AppCompatActivity {
 
                 if(checkedId == R.id.otra) {
                     txtRazon.setEnabled(true);
+                    txtRazon.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
                 } else {
                     txtRazon.setText("");
                     txtRazon.setEnabled(false);
@@ -101,9 +104,18 @@ public class ReportarActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String razon;
+                String raz=txtRazon.getText().toString();
                 if(txtRazon.getText().toString().equals("")){
                     razon=eleccion;
+                    val=true;
                 }else{
+                    if(TextUtils.isEmpty(raz)){
+                        txtRazon.setError("Dato obligatorio");
+                        val=false;
+                    }
+                    else{
+                        val=true;
+                    }
                  razon=txtRazon.getText().toString();
                 }
                 //Acción para el botón Reportar
@@ -113,9 +125,21 @@ public class ReportarActivity extends AppCompatActivity {
                 String Url = "http://davisaac19-001-site1.atempurl.com/WebService.asmx/";
                 String UrlWeb = Url + action + "?CodPublicacion=" + codPublicacion + "&codUsuario=" + codUser+"&Razon="+razon;
                 UrlWeb=UrlWeb.replaceAll(" ","%20");
-                new JSONTask().execute(UrlWeb);
+                if(val==true){
+                    new JSONTask().execute(UrlWeb);
+                }
             }
         });
+    }
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(ReportarActivity.this, UserMainActivity.class);
+        intent.putExtra("Matricula", codUser);
+        intent.putExtra("grado",grado);
+        intent.putExtra("grupo",grupo);
+        intent.putExtra("carrera",carrera);
+        startActivity(intent);
+        finish();
     }
     public class JSONTask extends AsyncTask<String, String, String> {
         @Override
@@ -160,7 +184,13 @@ public class ReportarActivity extends AppCompatActivity {
             try {
                 Log.e("salida", resultado);
                 if (Integer.parseInt(resultado) == 1) {
-                    Toast.makeText(ReportarActivity.this, "Bienvenido ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ReportarActivity.this, "Gracias por reportar esta publicaciòn", Toast.LENGTH_SHORT).show();
+                    Intent intent =new Intent(ReportarActivity.this,UserMainActivity.class);
+                    intent.putExtra("Matricula",codUser);
+                    intent.putExtra("grado", grado);
+                    intent.putExtra("grupo", grupo);
+                    intent.putExtra("carrera", carrera);
+                    startActivity(intent);
                 } else {
                     Toast.makeText(ReportarActivity.this, "Error ", Toast.LENGTH_SHORT).show();
                     //Snackbar.make(LogInActivity.this, "Usuario o contraseña incorrectos", Snackbar.LENGTH_LONG).setAction("Action", null).show();
