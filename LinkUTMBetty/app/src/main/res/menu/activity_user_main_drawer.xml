@@ -11,6 +11,10 @@
             android:icon="@drawable/user1"
             android:title="Mis publicaciones" />
         <item
+            android:id="@+id/pubs_mi"
+            android:icon="@drawable/ic_menu_share"
+            android:title="Publicaciones grupales"/>
+        <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/event"
             android:title="Actividades" />

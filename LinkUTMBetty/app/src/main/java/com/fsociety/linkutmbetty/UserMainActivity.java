@@ -199,6 +199,23 @@ public class UserMainActivity extends AppCompatActivity
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_user_main, fragment).commit();
 
+        }else if(id==R.id.pubs_mi){
+            fragment = null;
+            Class fragmentClass = PublicacionesEspecificasFragment.class;
+            try {
+                final Bundle arguments = new Bundle();
+                arguments.putString("id", dato);
+                arguments.putInt("grado",grado);
+                arguments.putString("grupo",grupo);
+                arguments.putString("carrera",carrera);
+                fragment = (Fragment) fragmentClass.newInstance();
+                fragment.setArguments(arguments);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_user_main, fragment).commit();
+            getSupportActionBar().setTitle(item.getTitle());
         }
         else if (id == R.id.nav_gallery) {
             fragment = new ActividadesFragment();
