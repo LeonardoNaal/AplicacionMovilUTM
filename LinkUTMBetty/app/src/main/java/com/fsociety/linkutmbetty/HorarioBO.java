@@ -10,6 +10,15 @@ public class HorarioBO {
     private String hora;
     private String maestro;
     private String edificio;
+    private String grado;
+    private String grupo;
+    private String carrera;
+    private int id;
+
+    public HorarioBO()
+    {
+
+    }
 
     public HorarioBO (String materia, String hora, String maestro, String edificio) {
         this.edificio = edificio;
@@ -17,6 +26,22 @@ public class HorarioBO {
         this.hora = hora;
         this.maestro = maestro;
     }
+
+    public int getId(){return  id;}
+
+    public void setId(int id){this.id = id;}
+
+    public String getGrado(){return  grado;}
+
+    public void setGrado(String Grado){this.grado = Grado;}
+
+    public String getGrupo(){return  grupo;}
+
+    public void setGrupo(String grupo){this.grupo = grupo;}
+
+    public String getCarrera(){return  carrera;}
+
+    public void setCarrera(String carrera){this.carrera = carrera;}
 
     public String getDia() {
         return Dia;

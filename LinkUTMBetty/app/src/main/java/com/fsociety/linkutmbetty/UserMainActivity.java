@@ -50,7 +50,7 @@ import java.util.StringTokenizer;
 
 
 public class UserMainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, PublicacionesFragment.OnFragmentInteractionListener, ActividadesFragment.OnFragmentInteractionListener, UsuarioPubFragment.OnFragmentInteractionListener, SitiosFragment.OnFragmentInteractionListener, UserPublicacionesFragment.OnFragmentInteractionListener,PublicacionesEspecificasFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, PublicacionesFragment.OnFragmentInteractionListener, ActividadesFragment.OnFragmentInteractionListener, UsuarioPubFragment.OnFragmentInteractionListener, SitiosFragment.OnFragmentInteractionListener, UserPublicacionesFragment.OnFragmentInteractionListener,PublicacionesEspecificasFragment.OnFragmentInteractionListener, FragmentoDeLista.OnFragmentInteractionListener {
     ListView listaUsuario;
     TextView txtMatricula;
     ArrayList<publicacion> image;
@@ -237,9 +237,23 @@ public class UserMainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_manage) {
             //Horarios
-            Intent intent = new Intent(UserMainActivity.this, Horario.class);
-            intent.putExtra("Matricula",dato);
-            startActivity(intent);
+            fragment = new FragmentoDeLista();
+            try
+            {
+                final Bundle arguments = new Bundle();
+                arguments.putInt("Grado",grado);
+                arguments.putString("Grupo",grupo);
+                arguments.putString("Carrera",carrera);
+                fragment.setArguments(arguments);
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+            fragmentSelect = true;
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_user_main, fragment).commit();
+            getSupportActionBar().setTitle(item.getTitle());
 
         } else if (id == R.id.nav_share) {
             //Cerrar sesión
