@@ -18,5 +18,13 @@ public class MiFirebaseInstanceIdService extends FirebaseInstanceIdService {
         super.onTokenRefresh();
         String Token= FirebaseInstanceId.getInstance().getToken();
         Log.d(TAG,"Token"+Token);
+        Registrarse(Token);
     }
+
+    private void Registrarse(String Token) {
+
+
+    }
+
+
 }
