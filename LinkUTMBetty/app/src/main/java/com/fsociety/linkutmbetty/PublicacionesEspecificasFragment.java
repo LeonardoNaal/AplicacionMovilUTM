@@ -151,7 +151,7 @@ public class PublicacionesEspecificasFragment extends Fragment  implements Swipe
                 swipeLayout.setEnabled(filaSuperior >= 0);
             }
         });
-        String action="PublicacionesGeneral";
+        String action="PublicacionesUsuario";
         //String Url="http://fsociety.somee.com/WebService.asmx/";
         //String Url="http://169.254.3.130:8091/WebService.asmx/";
         if(grado==0)
@@ -168,7 +168,7 @@ public class PublicacionesEspecificasFragment extends Fragment  implements Swipe
     @Override
     public void onRefresh() {
         //Codigo para traer todas las publicaciones
-        String action="PublicacionesGeneral";
+        String action="PublicacionesUsuario";
         //String Url="http://fsociety.somee.com/WebService.asmx/";
         //String Url="http://169.254.3.130:8091/WebService.asmx/";
         if(grado==0)

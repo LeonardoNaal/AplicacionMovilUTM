@@ -50,7 +50,7 @@ import java.util.StringTokenizer;
 
 
 public class UserMainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, PublicacionesFragment.OnFragmentInteractionListener, ActividadesFragment.OnFragmentInteractionListener, UsuarioPubFragment.OnFragmentInteractionListener, SitiosFragment.OnFragmentInteractionListener, UserPublicacionesFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, PublicacionesFragment.OnFragmentInteractionListener, ActividadesFragment.OnFragmentInteractionListener, UsuarioPubFragment.OnFragmentInteractionListener, SitiosFragment.OnFragmentInteractionListener, UserPublicacionesFragment.OnFragmentInteractionListener,PublicacionesEspecificasFragment.OnFragmentInteractionListener {
     ListView listaUsuario;
     TextView txtMatricula;
     ArrayList<publicacion> image;
