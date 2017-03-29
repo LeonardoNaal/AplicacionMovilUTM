@@ -478,8 +478,9 @@ public class ActividadPrueba extends AppCompatActivity {
                 detail.put("imagen", encodeImage);
                 detail.put("tipo", tip);
                 detail.put("carrera", "null");
-                detail.put("grado", "0");
-                detail.put("grupo", "0");
+            detail.put("grado","0");
+            detail.put("grupo","0");
+            detail.put("reporte","true");
                 try{
                     String dataToSend = hashMapToUrl(detail);
                     String response = Request.post(SERVER, dataToSend);
