@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="SitiosPrincipal">
+        <item>Edificio A</item>
+        <item>Edificio B</item>
+        <item>Edificio C</item>
+        <item>Edificio E (Cafeteria)</item>
+        <item>Edificio F</item>
+        <item>Edificio G</item>
+        <item>Edificio H</item>
+        <item>Edificio I</item>
+        <item>Edificio J</item>
+        <item>Edificio K</item>
+        <item>Edificio M</item>
+        <item>Edificio N</item>
+        <item>Edificio Q (Ágora)</item>
+        <item>Edificio R</item>
+        <item>Edificio T</item>
+        <item>Entrada principal</item>
+        <item>Entrada secundaria</item>
+        <item>Estacionamiento</item>
+        <item>Canchas de futball rápido</item>
+        <item>Cancha de futball</item>
+        <item>Campo UTM</item>
+    </string-array>
+
+    <string-array name="EdiA">
+        <item>Biblioteca</item>
+        <item>Aula TIC</item>
+        <item>Aula magna</item>
+        <item>Ex aula magna</item>
+        <item>Salones para grupos</item>
+        <item>Videoteca</item>
+    </string-array>
+    <string-array name="EdiB">
+        <item>Rectoría</item>
+        <item>Control escolar</item>
+        <item>Departamentos de servicios generales</item>
+        <item>Dirección de administración de finanza</item>
+        <item>Departamento de recursos humanos y compras</item>
+    </string-array>
+    <string-array name="EdiC">
+        <item>Dirección TIC</item>
+        <item>Soporte técnico</item>
+        <item>Laboratorio comunitario</item>
+        <item>Cubículos TIC</item>
+        <item>C-16</item>
+        <item>C-17</item>
+        <item>C-18</item>
+        <item>C-19</item>
+        <item>C-20</item>
+        <item>C-21</item>
+        <item>C-22</item>
+        <item>C-23</item>
+    </string-array>
+    <string-array name="EdiE">
+        <item>Laboratorio de panadería</item>
+        <item>Cafetería</item>
+        <item>CCU Centro de Copiado Universitario</item>
+    </string-array>
+    <string-array name="EdiF">
+        <item>Auditorio 1</item>
+        <item>Laboratorio de electrónica</item>
+        <item>Laboratorio Cisco</item>
+        <item>Laboratotio 9</item>
+        <item>CSAE</item>
+        <item>F-1</item>
+        <item>F-2</item>
+        <item>F-3</item>
+        <item>F-4</item>
+        <item>F-5</item>
+        <item>F-6</item>
+        <item>F-7</item>
+        <item>F-8</item>
+        <item>F-9</item>
+        <item>F-10</item>
+        <item>F-11</item>
+        <item>F-12</item>
+        <item>F-13</item>
+        <item>F-14</item>
+        <item>F-15</item>
+        <item>F-16</item>
+        <item>F-17</item>
+    </string-array>
+    <string-array name="EdiG">
+        <item>Audiorio 2</item>
+        <item>Dirección MI y EEI</item>
+        <item>Laboratorio 3</item>
+        <item>Sala de maestros</item>
+        <item>G-24</item>
+        <item>G-25</item>
+        <item>G-25 A</item>
+        <item>G-26</item>
+        <item>G-27</item>
+        <item>G-28</item>
+        <item>G-29</item>
+        <item>G-30</item>
+    </string-array>
+    <string-array name="EdiH">
+        <item>Área Robótica</item>
+        <item>Área Diseño Asistido por Computadora</item>
+        <item>Área Informática</item>
+        <item>Área Informática 1</item>
+        <item>Área Plásticos</item>
+        <item>Área Patronaje y Confección(Telas)</item>
+        <item>Área Patronaje y Confección(Zapatos)</item>
+        <item>Cocina 2</item>
+    </string-array>
+    <string-array name="EdiI">
+        <item>Área Soldadura</item>
+        <item>Área Maquinas Herramientas</item>
+        <item>Área Electrónica I</item>
+        <item>Área Electrónica II</item>
+        <item>Área Simulación</item>
+        <item>Área Neumática e Hidráulica</item>
+        <item>Área Automización</item>
+        <item>Área Maquinas Eléctricas</item>
+        <item>Área Metrología</item>
+        <item>Área Instalaciones Eléctricas e Industriales</item>
+        <item>Área Proyectos</item>
+        <item>Área Máquinas Eléctricas I</item>
+        <item>Soporte Técnico</item>
+    </string-array>
+    <string-array name="EdiJ">
+        <item>Enfermería</item>
+        <item>Laboratorio de computo 1</item>
+        <item>Laboratorio de computo 2</item>
+        <item>J-2</item>
+        <item>J-3</item>
+        <item>J-4</item>
+        <item>J-5</item>
+        <item>J-6</item>
+        <item>J-7</item>
+        <item>J-8</item>
+        <item>J-9</item>
+        <item>J-10</item>
+        <item>J-11</item>
+        <item>J-12</item>
+    </string-array>
+    <string-array name="EdiK">
+        <item>Vinculación</item>
+        <item>ICATEY</item>
+        <item>Sala de usos multiples I</item>
+        <item>Sala de usos multiples II</item>
+        <item>Sala de usos multiples III</item>
+        <item>Auditorio 3</item>
+        <item>Sala de Modelado</item>
+        <item>Departamento de Comunicación y Difución</item>
+        <item>Departamento de Intercambio Académico</item>
+        <item>Dirección de Vinculación</item>
+    </string-array>
+    <string-array name="EdiM">
+        <item>Auditorio 4</item>
+        <item>Auditorio 5</item>
+        <item>Laboratorio 2</item>
+        <item>Laboratorio 6</item>
+        <item>Laboratorio 7</item>
+        <item>Laboratorio 8</item>
+        <item>Laboratorio de Idiomas</item>
+        <item>M-1</item>
+        <item>M-2</item>
+        <item>M-3</item>
+        <item>M-4</item>
+        <item>M-5</item>
+        <item>M-6</item>
+        <item>M-7</item>
+        <item>M-8</item>
+        <item>M-9</item>
+        <item>M-10</item>
+        <item>M-11</item>
+        <item>M-12</item>
+    </string-array>
+    <string-array name="EdiN">
+        <item>Laboratorio de Análisis Físico-Químico</item>
+        <item>Centro de Tecnología Tridimensional</item>
+        <item>Coordinación de Servicios de Tranferencia de Tecnología</item>
+        <item>Centro de Empaque y Manufactura</item>
+        <item>Hosting y Landing</item>
+        <item>Red de Apoyo al Emprendedor</item>
+        <item>Centro de Diseño</item>
+        <item>IDF 3</item>
+        <item>Sala de Usos Multiples DIDE</item>
+        <item>Sala de Videoconferencias</item>
+        <item>Infraestructura de Red</item>
+        <item>Entidad de Certificación y Evaluación(ECE)</item>
+        <item>Taller de Dibujo</item>
+        <item>NEOS</item>
+        <item>Laboratorio 2</item>
+        <item>Auditorio 4</item>
+        <item>N-1</item>
+        <item>N-2</item>
+        <item>N-3</item>
+        <item>N-3 A</item>
+        <item>N-4</item>
+    </string-array>
+    <string-array name="EdiR">
+        <item>CIDU</item>
+        <item>Área Impresión Digital</item>
+        <item>Área Dibujo Técnico</item>
+        <item>Área Diseño Gráfico</item>
+        <item>Área Serigrafía</item>
+        <item>Área Offset y Fotomecánica</item>
+        <item>Área Postimprenta</item>
+        <item>Estudio de Televisión</item>
+        <item>Laboraorio de Audio y Vídeo</item>
+    </string-array>
+    <string-array name="EdiT">
+        <item>Auditorio 6</item>
+        <item>Auditorio 7</item>
+        <item>Auditorio 8</item>
+        <item>Laboratotio 5</item>
+        <item>Laboratorio 6</item>
+        <item>Coordinación de Idiomas</item>
+        <item>T-1</item>
+        <item>T-2</item>
+        <item>T-3</item>
+        <item>T-4</item>
+        <item>T-5</item>
+        <item>T-6</item>
+        <item>T-7</item>
+        <item>T-8</item>
+        <item>T-9</item>
+        <item>T-10</item>
+        <item>T-11</item>
+        <item>T-12</item>
+    </string-array>
+</resources>
