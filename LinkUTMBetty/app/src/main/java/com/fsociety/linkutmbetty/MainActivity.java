@@ -92,7 +92,8 @@ PrincipalFragment.OnFragmentInteractionListener{
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Toast.makeText(this, "Hay que ver que hacer", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Hay que ver que hacer", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(MainActivity.this, LogInActivity.class));
         }
 
         return super.onOptionsItemSelected(item);
