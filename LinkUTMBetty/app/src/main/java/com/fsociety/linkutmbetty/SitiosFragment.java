@@ -1,6 +1,7 @@
 package com.fsociety.linkutmbetty;
 
 import android.content.Context;
+import android.database.DataSetObserver;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -15,15 +16,19 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -47,7 +52,8 @@ public class SitiosFragment extends Fragment {
     Bitmap icon,imagenEdificio;
     Canvas tempCanvas;
     Paint paint = new Paint();
-    ImageView imageView,imEdi;
+    TouchImageView imageView;
+    TouchImageView imEdi;
     Bitmap tempBitmap;
     CheckBox checkBox;
     Button btnBuscar;
@@ -96,60 +102,63 @@ public class SitiosFragment extends Fragment {
         imEdi.setVisibility(View.VISIBLE);
         lblnomEd.setVisibility(View.VISIBLE);
         lbldesEd.setVisibility(View.VISIBLE);
+
+        //region swichCambioInfoImagen
+
         switch (destino){
             case 0:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificioa);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
                 lblnomEd.setText("Edificio A");
-                lbldesEd.setText("Este es el edificio de la bliblioteca de la escuela, el aula magna y el aula TIC");
+                lbldesEd.setText("Centro de información, biblioteca, aula interactiva TIC y aula magna");
                 break;
             case 1:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificiob);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
                 lblnomEd.setText("Edificio B");
-                lbldesEd.setText("Edificio de control escolar y rectoría");
+                lbldesEd.setText("Rectoría y control escolar");
                 break;
             case 2:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificioc);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
                 lblnomEd.setText("Edificio C");
-                lbldesEd.setText("Edificio de la división TIC");
+                lbldesEd.setText("Dirección TIC");
                 break;
             case 3:
-                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificioe);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
                 lblnomEd.setText("Edificio E");
-                lbldesEd.setText("Cafetería de la escuela");
+                lbldesEd.setText("Cafetería");
                 break;
             case 4:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificiof);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
                 lblnomEd.setText("Edificio F");
-                lbldesEd.setText("Edificio de la división de administración y laboratorios de electronica y redes");
+                lbldesEd.setText("Dirección Administración");
                 break;
             case 5:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificiog);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
                 lblnomEd.setText("Edificio G");
-                lbldesEd.setText("Edificio de la división de industrial");
+                lbldesEd.setText("Dirección industrial");
                 break;
             case 6:
-                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificioh);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
                 lblnomEd.setText("Edificio H");
-                lbldesEd.setText("Pesado II");
+                lbldesEd.setText("Laboratorio pesado 2 (Industrial, turismo y gastronomía)");
                 break;
             case 7:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificioi);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
                 lblnomEd.setText("Edificio I");
-                lbldesEd.setText("Cocina");
+                lbldesEd.setText("Laboratorio pesado 1 (Industrial)");
                 break;
             case 8:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificioj);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
                 lblnomEd.setText("Edificio J");
-                lbldesEd.setText("Edificio de la división de administración");
+                lbldesEd.setText("Docencia administración");
                 break;
             case 9:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificiok);
@@ -161,79 +170,83 @@ public class SitiosFragment extends Fragment {
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificiom);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
                 lblnomEd.setText("Edificio M");
-                lbldesEd.setText("Edificio de la división de mecatrónica");
+                lbldesEd.setText("Docencia");
                 break;
             case 11:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificion);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
                 lblnomEd.setText("Edificio N");
-                lbldesEd.setText("Edificio de la división inductrial - Dide");
+                lbldesEd.setText("UNIDE, ECE, Laboratorios físico-químico y de 3D, Docencia");
                 break;
             case 12:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificioq);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
                 lblnomEd.setText("Edificio Q");
-                lbldesEd.setText("");
+                lbldesEd.setText("Ágora");
                 break;
             case 13:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificior);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
                 lblnomEd.setText("Edificio R");
-                lbldesEd.setText("");
+                lbldesEd.setText("CIDU, artes gráficas, CTA Y C-Pro");
                 break;
             case 14:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificiot);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
                 lblnomEd.setText("Edificio T");
-                lbldesEd.setText("");
+                lbldesEd.setText("Dirección DIDE");
                 break;
             case 15:
-                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.entrada1);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText("Entrada 1");
-                lbldesEd.setText("");
+                lblnomEd.setText("Entrada principal");
+                lbldesEd.setText("Entrada principal de la UTM");
                 break;
             case 16:
-                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.entrada2);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText("Entrada 2");
-                lbldesEd.setText("");
+                lblnomEd.setText("Entrada cafetería");
+                lbldesEd.setText("Entrada secundaria de la UTM");
                 break;
             case 17:
-                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.entrada2);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
                 lblnomEd.setText("Estacionamiento");
-                lbldesEd.setText("");
+                lbldesEd.setText("Estacionamiento principal UTM");
                 break;
             case 18:
-                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.canchitas);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
                 lblnomEd.setText("Canchitas");
-                lbldesEd.setText("");
+                lbldesEd.setText("Tres canchas pequeñas de la UTM");
                 break;
             case 19:
-                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.cancha);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText("Cancha UTM");
-                lbldesEd.setText("");
+                lblnomEd.setText("Cancha");
+                lbldesEd.setText("Cancha de la UTM");
                 break;
             case 20:
-                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.campo);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText("Campo UTM");
-                lbldesEd.setText("");
+                lblnomEd.setText("Campo");
+                lbldesEd.setText("Campo de la UTM");
                 break;
         }
+        //endregion
     }
+    List<SpinnerItem> list;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
+        imagenEdificio = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.mapautm);
         final View view = inflater.inflate(R.layout.fragment_sitios, container, false);
-        imEdi = (ImageView) view.findViewById(R.id.imgFotoDestino);
-        lblnomEd = (TextView) view.findViewById(R.id.lblNombreDestino);;
-        lbldesEd = (TextView) view.findViewById(R.id.lblDescripcionDestino);;
+        imEdi = (TouchImageView) view.findViewById(R.id.imgFotoDestino);
+        lblnomEd = (TextView) view.findViewById(R.id.lblNombreDestino);
+        lbldesEd = (TextView) view.findViewById(R.id.lblDescripcionDestino);
+        imageView = (TouchImageView) view.findViewById(R.id.imageView);
+        imageView.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
         imEdi.setVisibility(View.INVISIBLE);
         lblnomEd.setVisibility(View.INVISIBLE);
         lbldesEd.setVisibility(View.INVISIBLE);
@@ -302,7 +315,7 @@ public class SitiosFragment extends Fragment {
         matrizAdyacencia[0][17]=90;
         matrizAdyacencia[17][0]=90;
         matrizAdyacencia[1][20]=35;
-        matrizAdyacencia[20][0]=35;
+        matrizAdyacencia[20][1]=35;
         matrizAdyacencia[1][24]=66;
         matrizAdyacencia[24][1]=66;
         matrizAdyacencia[2][37]=61;
@@ -359,6 +372,10 @@ public class SitiosFragment extends Fragment {
         matrizAdyacencia[20][19]=85;
         matrizAdyacencia[20][21]=65;
         matrizAdyacencia[21][20]=65;
+        matrizAdyacencia[21][24]=45;
+        matrizAdyacencia[24][21]=45;
+        matrizAdyacencia[21][25]=60;
+        matrizAdyacencia[25][21]=60;
         matrizAdyacencia[21][22]=190;
         matrizAdyacencia[22][21]=190;
         matrizAdyacencia[22][23]=140;
@@ -445,36 +462,107 @@ public class SitiosFragment extends Fragment {
         //region spinners
         spinnerDestino = (Spinner)view.findViewById(R.id.spnDestino);
         spinnerOrigen = (Spinner) view.findViewById(R.id.spnOrigen);
-        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(getContext(), R.layout.support_simple_spinner_dropdown_item);
-        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        adapter.add("Edificio A");
-        adapter.add("Edificio B");
-        adapter.add("Edificio C");
-        adapter.add("Edificio E (Cafeteria)");
-        adapter.add("Edificio F");
-        adapter.add("Edificio G");
-        adapter.add("Edificio H");
-        adapter.add("Edificio I");
-        adapter.add("Edificio J");
-        adapter.add("Edificio K");
-        adapter.add("Edificio M");
-        adapter.add("Edificio N");
-        adapter.add("Edificio Q");
-        adapter.add("Edificio R");
-        adapter.add("Edificio T");
-        adapter.add("Entrada 1");
-        adapter.add("Entrada 2");
-        adapter.add("Estacionamiento");
-        adapter.add("Canchas pequeñas");
-        adapter.add("Cancha");
-        adapter.add("Campo");
+        String[] array = (getResources().getStringArray(R.array.SitiosPrincipal));
+        list = new ArrayList();
+        //Lista principal
+        list.add(new SpinnerItem(array[0],R.drawable.icon_a));
+        list.add(new SpinnerItem(array[1],R.drawable.icon_b));
+        list.add(new SpinnerItem(array[2],R.drawable.icon_c));
+        list.add(new SpinnerItem(array[3],R.drawable.icon_e));
+        list.add(new SpinnerItem(array[4],R.drawable.icon_f));
+        list.add(new SpinnerItem(array[5],R.drawable.icon_g));
+        list.add(new SpinnerItem(array[6],R.drawable.icon_h));
+        list.add(new SpinnerItem(array[7],R.drawable.icon_i));
+        list.add(new SpinnerItem(array[8],R.drawable.icon_j));
+        list.add(new SpinnerItem(array[9],R.drawable.icon_k));
+        list.add(new SpinnerItem(array[10],R.drawable.icon_m));
+        list.add(new SpinnerItem(array[11],R.drawable.icon_n));
+        list.add(new SpinnerItem(array[12],R.drawable.icon_q));
+        list.add(new SpinnerItem(array[13],R.drawable.icon_r));
+        list.add(new SpinnerItem(array[14],R.drawable.icon_t));
+        list.add(new SpinnerItem(array[15],R.drawable.icon_o));
+        list.add(new SpinnerItem(array[16],R.drawable.icon_o));
+        list.add(new SpinnerItem(array[17],R.drawable.icon_o));
+        list.add(new SpinnerItem(array[18],R.drawable.icon_o));
+        list.add(new SpinnerItem(array[19],R.drawable.icon_o));
+        list.add(new SpinnerItem(array[20],R.drawable.icon_o));
+        //21-26
+        array = (getResources().getStringArray(R.array.EdiA));
+        for(String nom : array){
+            list.add(new SpinnerItem(nom,R.drawable.icon_a));
+        }
+        //27-31
+        array = (getResources().getStringArray(R.array.EdiB));
+        for(String nom : array){
+            list.add(new SpinnerItem(nom,R.drawable.icon_b));
+        }
+        //32-43
+        array = (getResources().getStringArray(R.array.EdiC));
+        for(String nom : array){
+            list.add(new SpinnerItem(nom,R.drawable.icon_c));
+        }//44-46
+        array = (getResources().getStringArray(R.array.EdiE));
+        for(String nom : array){
+            list.add(new SpinnerItem(nom,R.drawable.icon_e));
+        }
+        //47-68
+        array = (getResources().getStringArray(R.array.EdiF));
+        for(String nom : array){
+            list.add(new SpinnerItem(nom,R.drawable.icon_f));
+        }
+        //69-90
+        array = (getResources().getStringArray(R.array.EdiG));
+        for(String nom : array){
+            list.add(new SpinnerItem(nom,R.drawable.icon_g));
+        }
+        //91-98
+        array = (getResources().getStringArray(R.array.EdiH));
+        for(String nom : array){
+            list.add(new SpinnerItem(nom,R.drawable.icon_h));
+        }
+        //99-111
+        array = (getResources().getStringArray(R.array.EdiI));
+        for(String nom : array){
+            list.add(new SpinnerItem(nom,R.drawable.icon_i));
+        }
+        //112-125
+        array = (getResources().getStringArray(R.array.EdiJ));
+        for(String nom : array){
+            list.add(new SpinnerItem(nom,R.drawable.icon_j));
+        }
+        //126-135
+        array = (getResources().getStringArray(R.array.EdiK));
+        for(String nom : array){
+            list.add(new SpinnerItem(nom,R.drawable.icon_k));
+        }
+        //136-154
+        array = (getResources().getStringArray(R.array.EdiM));
+        for(String nom : array){
+            list.add(new SpinnerItem(nom,R.drawable.icon_m));
+        }
+        //155-175
+        array = (getResources().getStringArray(R.array.EdiN));
+        for(String nom : array){
+            list.add(new SpinnerItem(nom,R.drawable.icon_n));
+        }
+        //176-184
+        array = (getResources().getStringArray(R.array.EdiR));
+        for(String nom : array){
+            list.add(new SpinnerItem(nom,R.drawable.icon_r));
+        }
+        //177-202
+        array = (getResources().getStringArray(R.array.EdiT));
+        for(String nom : array){
+            list.add(new SpinnerItem(nom,R.drawable.icon_t));
+        }
+        SpinnerAdapter spinnerAdapter = new FilterAdapter(getActivity(),list);
 
-        spinnerDestino.setAdapter(adapter);
-        spinnerOrigen.setAdapter(adapter);
+        spinnerDestino.setAdapter(spinnerAdapter);
+        spinnerOrigen.setAdapter(spinnerAdapter);
         //endregion
         paint.setColor(Color.RED);
         paint.setStrokeWidth(15);
-
+        //region checkbox
         checkBox = (CheckBox) view.findViewById(R.id.checkBox);
         checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -488,6 +576,8 @@ public class SitiosFragment extends Fragment {
                 }
             }
         });
+        //endregion
+        //region btnBuscar
         btnBuscar=(Button)view.findViewById(R.id.button2);
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -503,7 +593,66 @@ public class SitiosFragment extends Fragment {
                 int origen;
                 origen = (int)spinnerOrigen.getSelectedItemId();
                 destino = (int)spinnerDestino.getSelectedItemId();
+
+                //21-26 A
+                if(destino >= 21 && destino <= 26){
+                    destino = 0;
+                }
+                //27-31 B
+                if(destino >= 27 && destino <= 31){
+                    destino = 1;
+                }
+                //32-43 C
+                if(destino >= 32 && destino <= 43){
+                    destino = 2;
+                }
+                //44-46 E
+                if(destino >= 44 && destino <= 46){
+                    destino = 3;
+                }
+                //47-68 F
+                if(destino >= 47 && destino <= 68){
+                    destino = 4;
+                }
+                //69-80 G
+                if(destino >= 69 && destino <= 80){
+                    destino = 5;
+                }
+                //90-98
+                if(destino >= 81 && destino <= 88){
+                    destino = 6;
+                }
+                //99-111
+                if(destino >= 89 && destino <= 101){
+                    destino = 7;
+                }
+                //112-125
+                if(destino >= 102 && destino <= 115){
+                    destino = 8;
+                }
+                //126-135
+                if(destino >= 116 && destino <= 125){
+                    destino = 9;
+                }
+                //136-154
+                if(destino >= 126 && destino <= 144){
+                    destino = 10;
+                }
+                //155-175
+                if(destino >= 145 && destino <= 165){
+                    destino = 11;
+                }
+                //176-184
+                if(destino >= 166 && destino <= 174){
+                    destino = 13;
+                }
+                //176-202
+                if(destino >= 175 && destino <= 192){
+                    destino = 14;
+                }
+
                 llenarDatosEdificio(destino);
+
                 if(origen == 17){origen = 19;}
                 else if(origen == 18){origen = 48;}
                 else if(origen == 19){origen = 28;}
@@ -515,12 +664,19 @@ public class SitiosFragment extends Fragment {
                 else if(destino == 20){destino = 49;}
 
                 if(origen == destino){
-                    Toast.makeText(context,"El origen y el destino deben ser diferentes", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,"Ya estás aquí XD", Toast.LENGTH_SHORT).show();
+                    Point t = new Point(0,0);
+                    int width = tempBitmap.getWidth() / 1000;
+                    int height = tempBitmap.getHeight() / 655;
+                    imageView = (TouchImageView) view.findViewById(R.id.imageView);
+                    t = listaPuntos.get(origen);
+                    tempCanvas.drawLine(t.x*width,t.y*height,t.x*width+10,t.y*height+10, paint);
+                    imageView.setImageDrawable(new BitmapDrawable(getResources(), tempBitmap));
                 }
                 else {
                     dijkstra asd = new dijkstra(matrizAdyacencia, origen, destino);
                     int x = 0;
-                    imageView = (ImageView) view.findViewById(R.id.imageView);
+                    imageView = (TouchImageView) view.findViewById(R.id.imageView);
                     Point trazo1 = new Point(0, 0), trazo2;
                     for (int i = 0; i < asd.caminosFinal.length(); i++) {
                         if (x == 0) {
@@ -539,6 +695,7 @@ public class SitiosFragment extends Fragment {
                 //Fin del código
             }
         });
+        //endregion
         return  view;
 }
 

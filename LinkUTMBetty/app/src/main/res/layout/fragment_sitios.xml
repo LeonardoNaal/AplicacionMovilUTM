@@ -39,7 +39,7 @@
                 android:textSize="16sp" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -71,7 +71,7 @@
                 android:textSize="16sp" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -112,7 +112,7 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="22sp" />
 
-                <ImageView
+                <com.fsociety.linkutmbetty.TouchImageView
                     android:id="@+id/imageView"
                     android:layout_width="298dp"
                     android:layout_height="195dp"
@@ -134,7 +134,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/lblNombreDestino" />
 
-                <ImageView
+                <com.fsociety.linkutmbetty.TouchImageView
                     android:layout_width="298dp"
                     android:layout_height="195dp"
                     app:srcCompat="@drawable/borde_edit_text"

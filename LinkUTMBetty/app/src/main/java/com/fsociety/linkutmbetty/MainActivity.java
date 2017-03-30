@@ -34,7 +34,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, PublicacionesFragment.OnFragmentInteractionListener, ActividadesFragment.OnFragmentInteractionListener, SitiosFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, PublicacionesFragment.OnFragmentInteractionListener, ActividadesFragment.OnFragmentInteractionListener, SitiosFragment.OnFragmentInteractionListener,
+PrincipalFragment.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         Fragment fragment = null;
-        Class fragmentClass = SitiosFragment.class;
+        Class fragmentClass = PrincipalFragment.class;
         try {
             fragment = (Fragment) fragmentClass.newInstance();
         } catch (Exception e) {
@@ -106,7 +107,15 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         Fragment fragment = null;
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_home){
+            fragment = new PrincipalFragment();
+            fragmentSelect = true;
+            item.isChecked();
+            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, fragment).commit();
+            //Obtiene y ajusta el título al que tiene el fragmento
+            getSupportActionBar().setTitle(item.getTitle());
+
+        } else if (id == R.id.nav_camera) {
             fragment = new PublicacionesFragment();
             fragmentSelect = true;
             item.isChecked();

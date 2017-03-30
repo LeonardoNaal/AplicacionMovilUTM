@@ -34,10 +34,10 @@ public class dijkstra {
         //Inicializando listas
         for(int i=0;i<nNodos;i++){
             if(i!=origen)
-                conjComp_S.add(""+i);
+                conjComp_S.add(""+i);//nodos
             else
-                conj_S.add(""+i);
-            caminos.add("");
+                conj_S.add(""+i);//origen
+            caminos.add("");//caminos posibles
         }
         //Aplicando ciclo i de diksjtra
         for(int i=0;i<nNodos;i++){
@@ -79,6 +79,8 @@ public class dijkstra {
             }
         System.out.println("\n <-  Que tenga un buen viaje! ->\n");
     }
+    int nodnod;
+    int noddest;
     private int min(int dest){
         int min=-1;
         int nod=0;
@@ -86,7 +88,9 @@ public class dijkstra {
         int aux;
         for(int i=0;i<conj_S.size();i++){
             nod=Integer.valueOf((String)(conj_S.get(i))).intValue();
-            if(matrizAdyacencia[nod][nod]!=-1 && matrizAdyacencia[nod][dest]!=-1)
+            nodnod = matrizAdyacencia[nod][nod];
+            noddest = matrizAdyacencia[nod][dest];
+            if(nodnod !=-1 && noddest !=-1)
                 aux=matrizAdyacencia[nod][nod]+matrizAdyacencia[nod][dest];
             else
                 aux=-1;

@@ -1,0 +1,122 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/blurutm"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/btnPubs"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:layout_marginLeft="34dp"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/mi_fondo"
+            android:clickable="true"
+            android:src="@drawable/posts" />
+
+        <ImageView
+            android:id="@+id/btnActivity"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="90dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="90dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/mi_fondo"
+            android:clickable="true"
+            android:src="@drawable/calendario1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="115dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_marginStart="35dp"
+            android:gravity="center"
+            android:src="@drawable/posts"
+            android:text="Publicaciones"
+            android:textColor="#fff"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="115dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="63dp"
+            android:layout_marginStart="63dp"
+            android:gravity="center"
+            android:src="@drawable/posts"
+            android:text="Actividades"
+            android:textColor="#fff"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:text="Sitios en la UTM"
+        android:textColor="#fff"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <ImageButton
+        android:id="@+id/btnSitios"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/mi_fondo"
+        android:padding="20dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/sitios" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:drawableLeft="@drawable/verified2"
+        android:drawableStart="@drawable/verified2"
+        android:text="Iniciar sesión"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btnSignup"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:drawableLeft="@drawable/ic_mode_edit_white_18dp"
+        android:drawableStart="@drawable/ic_mode_edit_white_18dp"
+        android:text="Registrarse"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="16sp" />
+
+</LinearLayout>
