@@ -109,127 +109,127 @@ public class SitiosFragment extends Fragment {
             case 0:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificioa);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
+                lblnomEd.setText("Edificio A");
                 lbldesEd.setText("Centro de información, biblioteca, aula interactiva TIC y aula magna");
                 break;
             case 1:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificiob);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
+                lblnomEd.setText("Edificio B");
                 lbldesEd.setText("Rectoría y control escolar");
                 break;
             case 2:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificioc);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
+                lblnomEd.setText("Edificio C");
                 lbldesEd.setText("Dirección TIC");
                 break;
             case 3:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificioe);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
+                lblnomEd.setText("Edificio E");
                 lbldesEd.setText("Cafetería");
                 break;
             case 4:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificiof);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
+                lblnomEd.setText("Edificio F");
                 lbldesEd.setText("Dirección Administración");
                 break;
             case 5:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificiog);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
+                lblnomEd.setText("Edificio G");
                 lbldesEd.setText("Dirección industrial");
                 break;
             case 6:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificioh);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
+                lblnomEd.setText("Edificio H");
                 lbldesEd.setText("Laboratorio pesado 2 (Industrial, turismo y gastronomía)");
                 break;
             case 7:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificioi);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
+                lblnomEd.setText("Edificio I");
                 lbldesEd.setText("Laboratorio pesado 1 (Industrial)");
                 break;
             case 8:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificioj);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
+                lblnomEd.setText("Edificio J");
                 lbldesEd.setText("Docencia administración");
                 break;
             case 9:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificiok);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
+                lblnomEd.setText("Edificio K");
                 lbldesEd.setText("Vinculación");
                 break;
             case 10:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificiom);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
+                lblnomEd.setText("Edificio M");
                 lbldesEd.setText("Docencia");
                 break;
             case 11:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificion);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
+                lblnomEd.setText("Edificio N");
                 lbldesEd.setText("UNIDE, ECE, Laboratorios físico-químico y de 3D, Docencia");
                 break;
             case 12:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificioq);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
+                lblnomEd.setText("Edificio Q");
                 lbldesEd.setText("Ágora");
                 break;
             case 13:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificior);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
+                lblnomEd.setText("Edificio R");
                 lbldesEd.setText("CIDU, artes gráficas, CTA Y C-Pro");
                 break;
             case 14:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificiot);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
+                lblnomEd.setText("Edificio T");
                 lbldesEd.setText("Dirección DIDE");
                 break;
             case 15:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.entrada1);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
+                lblnomEd.setText("Entrada principal");
                 lbldesEd.setText("Entrada principal de la UTM");
                 break;
             case 16:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.entrada2);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
+                lblnomEd.setText("Entrada cafetería");
                 lbldesEd.setText("Entrada secundaria de la UTM");
                 break;
             case 17:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.entrada2);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
+                lblnomEd.setText("Estacionamiento");
                 lbldesEd.setText("Estacionamiento principal UTM");
                 break;
             case 18:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.canchitas);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
+                lblnomEd.setText("Canchitas");
                 lbldesEd.setText("Tres canchas pequeñas de la UTM");
                 break;
             case 19:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.cancha);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
+                lblnomEd.setText("Cancha");
                 lbldesEd.setText("Cancha de la UTM");
                 break;
             case 20:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.campo);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
-                lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
+                lblnomEd.setText("Campo");
                 lbldesEd.setText("Campo de la UTM");
                 break;
         }
@@ -590,60 +590,60 @@ public class SitiosFragment extends Fragment {
                 origen = (int)spinnerOrigen.getSelectedItemId();
                 destino = (int)spinnerDestino.getSelectedItemId();
 
-                //21-26
+                //21-26 A
                 if(destino >= 21 && destino <= 26){
                     destino = 0;
                 }
-                //27-31
+                //27-31 B
                 if(destino >= 27 && destino <= 31){
                     destino = 1;
                 }
-                //32-43
+                //32-43 C
                 if(destino >= 32 && destino <= 43){
                     destino = 2;
                 }
-                //44-46
+                //44-46 E
                 if(destino >= 44 && destino <= 46){
                     destino = 3;
                 }
-                //47-68
+                //47-68 F
                 if(destino >= 47 && destino <= 68){
                     destino = 4;
                 }
-                //69-90
-                if(destino >= 69 && destino <= 90){
+                //69-80 G
+                if(destino >= 69 && destino <= 80){
                     destino = 5;
                 }
-                //91-98
-                if(destino >= 91 && destino <= 98){
+                //90-98
+                if(destino >= 81 && destino <= 88){
                     destino = 6;
                 }
                 //99-111
-                if(destino >= 99 && destino <= 111){
+                if(destino >= 89 && destino <= 101){
                     destino = 7;
                 }
                 //112-125
-                if(destino >= 112 && destino <= 125){
+                if(destino >= 102 && destino <= 115){
                     destino = 8;
                 }
                 //126-135
-                if(destino >= 126 && destino <= 135){
+                if(destino >= 116 && destino <= 125){
                     destino = 9;
                 }
                 //136-154
-                if(destino >= 136 && destino <= 154){
+                if(destino >= 126 && destino <= 144){
                     destino = 10;
                 }
                 //155-175
-                if(destino >= 155 && destino <= 175){
-                    destino = 12;
+                if(destino >= 145 && destino <= 165){
+                    destino = 11;
                 }
                 //176-184
-                if(destino >= 176 && destino <= 184){
+                if(destino >= 166 && destino <= 174){
                     destino = 13;
                 }
-                //177-202
-                if(destino >= 177 && destino <= 202){
+                //176-202
+                if(destino >= 175 && destino <= 192){
                     destino = 14;
                 }
 
