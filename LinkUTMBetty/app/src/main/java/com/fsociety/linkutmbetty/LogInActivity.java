@@ -32,16 +32,21 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
+import xyz.hanks.library.SmallBang;
+import xyz.hanks.library.SmallBangListener;
+
 public class LogInActivity extends AppCompatActivity {
     EditText edtUsuario, edtContraseña;
     TextView lblCondiciones;
     boolean verificar = true;
+    private SmallBang mSmallBang;
     public String SERVER = "http://davisaac19-001-site1.atempurl.com/WebService.asmx/DatosAlumno?", timestamp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
         setTitle("Iniciar sesión");
+        mSmallBang = SmallBang.attach2Window(this);
         edtUsuario = (EditText) findViewById(R.id.txtMatricula);
         edtUsuario.addTextChangedListener(new TextValidator(edtUsuario) {
             @Override
@@ -59,6 +64,7 @@ public class LogInActivity extends AppCompatActivity {
         btnIniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                addNumber(v);
                 String user = edtUsuario.getText().toString();
                 String contraseña = edtContraseña.getText().toString();
                 if (verificar) {
@@ -77,6 +83,7 @@ public class LogInActivity extends AppCompatActivity {
         btnRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                addNumber(v);
                 Intent intent = new Intent(LogInActivity.this, RegistroActivity.class);
                 startActivity(intent);
             }
@@ -88,6 +95,20 @@ public class LogInActivity extends AppCompatActivity {
             public void onClick(View v) {
                 dialogo().show();
                 //dialogo().dismiss();
+            }
+        });
+    }
+
+    public void addNumber(View view){
+            mSmallBang.bang(view,new SmallBangListener() {
+            @Override
+            public void onAnimationStart() {
+
+            }
+
+            @Override
+            public void onAnimationEnd() {
+
             }
         });
     }
