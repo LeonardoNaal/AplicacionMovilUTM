@@ -16,6 +16,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -51,7 +52,8 @@ public class SitiosFragment extends Fragment {
     Bitmap icon,imagenEdificio;
     Canvas tempCanvas;
     Paint paint = new Paint();
-    ImageView imageView,imEdi;
+    TouchImageView imageView;
+    TouchImageView imEdi;
     Bitmap tempBitmap;
     CheckBox checkBox;
     Button btnBuscar;
@@ -123,7 +125,7 @@ public class SitiosFragment extends Fragment {
                 lbldesEd.setText("Dirección TIC");
                 break;
             case 3:
-                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificioe);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
                 lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
                 lbldesEd.setText("Cafetería");
@@ -141,7 +143,7 @@ public class SitiosFragment extends Fragment {
                 lbldesEd.setText("Dirección industrial");
                 break;
             case 6:
-                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificioh);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
                 lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
                 lbldesEd.setText("Laboratorio pesado 2 (Industrial, turismo y gastronomía)");
@@ -180,7 +182,7 @@ public class SitiosFragment extends Fragment {
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificioq);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
                 lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
-                lbldesEd.setText("Anfiteatro");
+                lbldesEd.setText("Ágora");
                 break;
             case 13:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificior);
@@ -195,37 +197,37 @@ public class SitiosFragment extends Fragment {
                 lbldesEd.setText("Dirección DIDE");
                 break;
             case 15:
-                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.entrada1);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
                 lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
                 lbldesEd.setText("Entrada principal de la UTM");
                 break;
             case 16:
-                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.entrada2);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
                 lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
                 lbldesEd.setText("Entrada secundaria de la UTM");
                 break;
             case 17:
-                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.entrada2);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
                 lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
                 lbldesEd.setText("Estacionamiento principal UTM");
                 break;
             case 18:
-                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.canchitas);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
                 lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
                 lbldesEd.setText("Tres canchas pequeñas de la UTM");
                 break;
             case 19:
-                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.cancha);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
                 lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
                 lbldesEd.setText("Cancha de la UTM");
                 break;
             case 20:
-                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.mapautm);
+                imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.campo);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
                 lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
                 lbldesEd.setText("Campo de la UTM");
@@ -238,11 +240,13 @@ public class SitiosFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
+        imagenEdificio = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.mapautm);
         final View view = inflater.inflate(R.layout.fragment_sitios, container, false);
-        imEdi = (ImageView) view.findViewById(R.id.imgFotoDestino);
-        lblnomEd = (TextView) view.findViewById(R.id.lblNombreDestino);;
-        lbldesEd = (TextView) view.findViewById(R.id.lblDescripcionDestino);;
+        imEdi = (TouchImageView) view.findViewById(R.id.imgFotoDestino);
+        lblnomEd = (TextView) view.findViewById(R.id.lblNombreDestino);
+        lbldesEd = (TextView) view.findViewById(R.id.lblDescripcionDestino);
+        imageView = (TouchImageView) view.findViewById(R.id.imageView);
+        imageView.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
         imEdi.setVisibility(View.INVISIBLE);
         lblnomEd.setVisibility(View.INVISIBLE);
         lbldesEd.setVisibility(View.INVISIBLE);
@@ -537,7 +541,7 @@ public class SitiosFragment extends Fragment {
                 else {
                     dijkstra asd = new dijkstra(matrizAdyacencia, origen, destino);
                     int x = 0;
-                    imageView = (ImageView) view.findViewById(R.id.imageView);
+                    imageView = (TouchImageView) view.findViewById(R.id.imageView);
                     Point trazo1 = new Point(0, 0), trazo2;
                     for (int i = 0; i < asd.caminosFinal.length(); i++) {
                         if (x == 0) {

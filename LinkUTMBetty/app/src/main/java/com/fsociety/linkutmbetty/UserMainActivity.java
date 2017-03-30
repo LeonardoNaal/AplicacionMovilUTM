@@ -116,8 +116,6 @@ public class UserMainActivity extends AppCompatActivity
         }
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_user_main, fragment).commit();
-
-
     }
 
     @Override
