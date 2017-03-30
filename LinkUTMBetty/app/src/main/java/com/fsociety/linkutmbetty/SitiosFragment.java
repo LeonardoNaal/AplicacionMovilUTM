@@ -315,7 +315,7 @@ public class SitiosFragment extends Fragment {
         matrizAdyacencia[0][17]=90;
         matrizAdyacencia[17][0]=90;
         matrizAdyacencia[1][20]=35;
-        matrizAdyacencia[20][0]=35;
+        matrizAdyacencia[20][1]=35;
         matrizAdyacencia[1][24]=66;
         matrizAdyacencia[24][1]=66;
         matrizAdyacencia[2][37]=61;
@@ -372,6 +372,10 @@ public class SitiosFragment extends Fragment {
         matrizAdyacencia[20][19]=85;
         matrizAdyacencia[20][21]=65;
         matrizAdyacencia[21][20]=65;
+        matrizAdyacencia[21][24]=45;
+        matrizAdyacencia[24][21]=45;
+        matrizAdyacencia[21][25]=60;
+        matrizAdyacencia[25][21]=60;
         matrizAdyacencia[21][22]=190;
         matrizAdyacencia[22][21]=190;
         matrizAdyacencia[22][23]=140;
@@ -660,7 +664,14 @@ public class SitiosFragment extends Fragment {
                 else if(destino == 20){destino = 49;}
 
                 if(origen == destino){
-                    Toast.makeText(context,"El origen y el destino deben ser diferentes", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,"Ya estás aquí XD", Toast.LENGTH_SHORT).show();
+                    Point t = new Point(0,0);
+                    int width = tempBitmap.getWidth() / 1000;
+                    int height = tempBitmap.getHeight() / 655;
+                    imageView = (TouchImageView) view.findViewById(R.id.imageView);
+                    t = listaPuntos.get(origen);
+                    tempCanvas.drawLine(t.x*width,t.y*height,t.x*width+10,t.y*height+10, paint);
+                    imageView.setImageDrawable(new BitmapDrawable(getResources(), tempBitmap));
                 }
                 else {
                     dijkstra asd = new dijkstra(matrizAdyacencia, origen, destino);
