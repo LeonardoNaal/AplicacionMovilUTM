@@ -288,11 +288,12 @@ public String carrer,grup;
             //generate hashMap to store encodedImage and the name
             HashMap<String, String> detail = new HashMap<>();
             detail.put("idPublicacion", idpub);
-            detail.put("tit", titulo);
-            detail.put("imagen", encodeImage);
-            detail.put("contenido", contenido);
-            detail.put("tipo", tip);
             detail.put("codUser", CodUsuario);
+            detail.put("tit", titulo);
+            detail.put("contenido", contenido);
+            detail.put("imagen", encodeImage);
+            detail.put("tipo", tip);
+
             try {
                 //convert this HashMap to encodedUrl to send to php file
                 String dataToSend = hashMapToUrl(detail);
