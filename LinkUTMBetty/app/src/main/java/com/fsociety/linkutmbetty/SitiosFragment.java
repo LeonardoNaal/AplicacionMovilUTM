@@ -110,7 +110,7 @@ public class SitiosFragment extends Fragment {
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificioa);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
                 lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
-                lbldesEd.setText("Centro de información y biblioteca");
+                lbldesEd.setText("Centro de información, biblioteca, aula interactiva TIC y aula magna");
                 break;
             case 1:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificiob);
@@ -188,7 +188,7 @@ public class SitiosFragment extends Fragment {
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificior);
                 imEdi.setImageDrawable(new BitmapDrawable(getResources(), imagenEdificio));
                 lblnomEd.setText(spinnerDestino.getSelectedItem().toString());
-                lbldesEd.setText("CIDU, artes gráficas, VTA Y C-Pro");
+                lbldesEd.setText("CIDU, artes gráficas, CTA Y C-Pro");
                 break;
             case 14:
                 imagenEdificio = BitmapFactory.decodeResource(context.getResources(), R.drawable.edificiot);
@@ -460,7 +460,7 @@ public class SitiosFragment extends Fragment {
         spinnerOrigen = (Spinner) view.findViewById(R.id.spnOrigen);
         String[] array = (getResources().getStringArray(R.array.SitiosPrincipal));
         list = new ArrayList();
-        //region listPrincipal
+        //Lista principal
         list.add(new SpinnerItem(array[0],R.drawable.icon_a));
         list.add(new SpinnerItem(array[1],R.drawable.icon_b));
         list.add(new SpinnerItem(array[2],R.drawable.icon_c));
@@ -482,10 +482,75 @@ public class SitiosFragment extends Fragment {
         list.add(new SpinnerItem(array[18],R.drawable.icon_o));
         list.add(new SpinnerItem(array[19],R.drawable.icon_o));
         list.add(new SpinnerItem(array[20],R.drawable.icon_o));
-        //endregion
-        //for(String nom : array){
-
-        //}
+        //21-26
+        array = (getResources().getStringArray(R.array.EdiA));
+        for(String nom : array){
+            list.add(new SpinnerItem(nom,R.drawable.icon_a));
+        }
+        //27-31
+        array = (getResources().getStringArray(R.array.EdiB));
+        for(String nom : array){
+            list.add(new SpinnerItem(nom,R.drawable.icon_b));
+        }
+        //32-43
+        array = (getResources().getStringArray(R.array.EdiC));
+        for(String nom : array){
+            list.add(new SpinnerItem(nom,R.drawable.icon_c));
+        }//44-46
+        array = (getResources().getStringArray(R.array.EdiE));
+        for(String nom : array){
+            list.add(new SpinnerItem(nom,R.drawable.icon_e));
+        }
+        //47-68
+        array = (getResources().getStringArray(R.array.EdiF));
+        for(String nom : array){
+            list.add(new SpinnerItem(nom,R.drawable.icon_f));
+        }
+        //69-90
+        array = (getResources().getStringArray(R.array.EdiG));
+        for(String nom : array){
+            list.add(new SpinnerItem(nom,R.drawable.icon_g));
+        }
+        //91-98
+        array = (getResources().getStringArray(R.array.EdiH));
+        for(String nom : array){
+            list.add(new SpinnerItem(nom,R.drawable.icon_h));
+        }
+        //99-111
+        array = (getResources().getStringArray(R.array.EdiI));
+        for(String nom : array){
+            list.add(new SpinnerItem(nom,R.drawable.icon_i));
+        }
+        //112-125
+        array = (getResources().getStringArray(R.array.EdiJ));
+        for(String nom : array){
+            list.add(new SpinnerItem(nom,R.drawable.icon_j));
+        }
+        //126-135
+        array = (getResources().getStringArray(R.array.EdiK));
+        for(String nom : array){
+            list.add(new SpinnerItem(nom,R.drawable.icon_k));
+        }
+        //136-154
+        array = (getResources().getStringArray(R.array.EdiM));
+        for(String nom : array){
+            list.add(new SpinnerItem(nom,R.drawable.icon_m));
+        }
+        //155-175
+        array = (getResources().getStringArray(R.array.EdiN));
+        for(String nom : array){
+            list.add(new SpinnerItem(nom,R.drawable.icon_n));
+        }
+        //176-184
+        array = (getResources().getStringArray(R.array.EdiR));
+        for(String nom : array){
+            list.add(new SpinnerItem(nom,R.drawable.icon_r));
+        }
+        //177-202
+        array = (getResources().getStringArray(R.array.EdiT));
+        for(String nom : array){
+            list.add(new SpinnerItem(nom,R.drawable.icon_t));
+        }
         SpinnerAdapter spinnerAdapter = new FilterAdapter(getActivity(),list);
 
         spinnerDestino.setAdapter(spinnerAdapter);
@@ -524,7 +589,66 @@ public class SitiosFragment extends Fragment {
                 int origen;
                 origen = (int)spinnerOrigen.getSelectedItemId();
                 destino = (int)spinnerDestino.getSelectedItemId();
+
+                //21-26
+                if(destino >= 21 && destino <= 26){
+                    destino = 0;
+                }
+                //27-31
+                if(destino >= 27 && destino <= 31){
+                    destino = 1;
+                }
+                //32-43
+                if(destino >= 32 && destino <= 43){
+                    destino = 2;
+                }
+                //44-46
+                if(destino >= 44 && destino <= 46){
+                    destino = 3;
+                }
+                //47-68
+                if(destino >= 47 && destino <= 68){
+                    destino = 4;
+                }
+                //69-90
+                if(destino >= 69 && destino <= 90){
+                    destino = 5;
+                }
+                //91-98
+                if(destino >= 91 && destino <= 98){
+                    destino = 6;
+                }
+                //99-111
+                if(destino >= 99 && destino <= 111){
+                    destino = 7;
+                }
+                //112-125
+                if(destino >= 112 && destino <= 125){
+                    destino = 8;
+                }
+                //126-135
+                if(destino >= 126 && destino <= 135){
+                    destino = 9;
+                }
+                //136-154
+                if(destino >= 136 && destino <= 154){
+                    destino = 10;
+                }
+                //155-175
+                if(destino >= 155 && destino <= 175){
+                    destino = 12;
+                }
+                //176-184
+                if(destino >= 176 && destino <= 184){
+                    destino = 13;
+                }
+                //177-202
+                if(destino >= 177 && destino <= 202){
+                    destino = 14;
+                }
+
                 llenarDatosEdificio(destino);
+
                 if(origen == 17){origen = 19;}
                 else if(origen == 18){origen = 48;}
                 else if(origen == 19){origen = 28;}
